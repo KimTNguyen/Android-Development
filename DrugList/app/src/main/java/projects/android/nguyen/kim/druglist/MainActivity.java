@@ -1,6 +1,12 @@
+/**
+ * This project displays a generic name of a drug, a user will pick a brand name
+ * accordingly from a list of brand name provided.
+ *
+ * @author Kim Nguyen
+ * @version 09-Jan-2017
+ */
 package projects.android.nguyen.kim.druglist;
 
-import android.opengl.EGLExt;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,56 +24,57 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String[] DRUGS = {"z-pak", "azithromycin 250mg",
-            "tri-pak", "azithromycin 500mg", "medrol",
-            "methylprednisolone","soma", "carisoprodol",
-            "peridex", "chlorhexidine", "microbid", "nitrofurantoin",
-            "amoxil", "amoxicillin", "keflex", "cephalexcin", "flonase",
-            "fluticasone", "cheratussin ac", "guaifenesin + codeine",
-            "HCTZ", "hydroclorothyazide"};
-
     private Map<String, String> brandAndGeneric = new HashMap<>();
-    private final ArrayList<String> brandArray = new ArrayList<>();
+    private final ArrayList<String> genericArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        for (int index = 0; index < DRUGS.length; index += 2) {
-            brandArray.add(DRUGS[index]);
-            brandAndGeneric.put(DRUGS[index], DRUGS[index + 1]);
+        brandAndGeneric = initDrugData();
+
+        for (String value:brandAndGeneric.values()) {
+            genericArray.add(value);
         }
 
         pickDrugName();
     }
 
-    protected String generateGeneric() {
-        // Set text view with a random brand name
+    /**
+     * Sets text for the TextView with the random brand name
+     *
+     * @return the random brand name
+     */
+    protected String displayBrandName() {
         Random brandPos = new Random();
-        String genericGenerate = DRUGS[brandPos.nextInt(brandArray.size()) * 2 + 1];
-
         TextView genericView = (TextView) findViewById(R.id.generic);
-        genericView.setText(genericGenerate);
-        return genericGenerate;
+
+        /* Generates a random number from the set of drug name */
+        String brandName = (String) brandAndGeneric.keySet().toArray()[brandPos.nextInt(genericArray.size())];
+
+        genericView.setText(brandName);
+        return brandName;
     }
 
+    /**
+     * Gives feedback right or wrong when the user clicks on the generic name on the list
+     */
     protected void pickDrugName() {
-
-        final String genericGenerate = generateGeneric();
-
+        final String nameGenerated = displayBrandName();
         ListView drugView = (ListView) findViewById(R.id.drug_list);
+        final ArrayAdapter<String> drugAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, genericArray);
 
-        final ArrayAdapter<String> drugAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, brandArray);
         drugView.setAdapter(drugAdapter);
 
         drugView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int brand, long l) {
                 Log.d("position", "the user click on: " + brand);
-                String genericChosen = brandAndGeneric.get(brandArray.get(brand));
+                Log.d("position", "the user click on: " + genericArray.get(brand));
+                Log.d("position", "the user click on: " + brandAndGeneric.get(nameGenerated));
 
-                if (genericChosen.equals(genericGenerate)) {
+                if (brandAndGeneric.get(nameGenerated).equals(genericArray.get(brand))) {
                     Toast.makeText(MainActivity.this, "You are awesome!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, "You suck!", Toast.LENGTH_SHORT).show();
@@ -77,5 +84,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Initializes the drug data in the form of Map data structure
+     *
+     * @return the map of drug's brand name and its generic
+     */
+    private Map<String, String> initDrugData() {
 
+        Map<String, String> drugData = new HashMap<>();
+        drugData.put("z-pak", "azithromycin 250mg");
+        drugData.put("tri-pak", "azithromycin 500mg");
+        drugData.put("medrol", "methylprednisolone");
+        drugData.put("soma", "carisoprodol");
+        drugData.put("peridex", "chlorhexidine");
+        drugData.put("microbid", "nitrofurantoin");
+        drugData.put("amoxil", "amoxicillin");
+        drugData.put("keflex", "cephalexcin");
+        drugData.put("flonase", "fluticasone");
+        drugData.put("cheratussin ac", "guaifenesin + codeine");
+        drugData.put("HCTZ", "hydroclorothyazide");
+
+        return drugData;
+    }
 }

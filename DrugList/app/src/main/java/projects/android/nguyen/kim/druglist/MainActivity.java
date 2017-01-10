@@ -17,26 +17,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Map<String, String> brandAndGeneric = new HashMap<>();
-    private final ArrayList<String> genericArray = new ArrayList<>();
+    final int NO_GENERIC_ON_SCREEN = 5;
+    private Map<String,String> generatedDrugArray = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        brandAndGeneric = initDrugData();
-
-        for (String value:brandAndGeneric.values()) {
-            genericArray.add(value);
-        }
 
         pickDrugName();
     }
@@ -50,8 +43,11 @@ public class MainActivity extends AppCompatActivity {
         Random brandPos = new Random();
         TextView genericView = (TextView) findViewById(R.id.generic);
 
+        Log.d("nameList", generatedDrugArray.keySet().toString());
+
         /* Generates a random number from the set of drug name */
-        String brandName = (String) brandAndGeneric.keySet().toArray()[brandPos.nextInt(genericArray.size())];
+        String brandName = (String) generatedDrugArray.keySet().toArray()[brandPos.nextInt(NO_GENERIC_ON_SCREEN)];
+        Log.d("generatedBrad",brandName);
 
         genericView.setText(brandName);
         return brandName;
@@ -61,20 +57,26 @@ public class MainActivity extends AppCompatActivity {
      * Gives feedback right or wrong when the user clicks on the generic name on the list
      */
     protected void pickDrugName() {
+        generatedDrugArray.clear();
+        generatedDrugArray = generateListDrugs();
         final String nameGenerated = displayBrandName();
         ListView drugView = (ListView) findViewById(R.id.drug_list);
-        final ArrayAdapter<String> drugAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, genericArray);
 
+        Log.d("genericList", generatedDrugArray.values().toString());
+
+        /* Displays a list of random generic name on the screen */
+        ArrayAdapter<String> drugAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, generatedDrugArray.values().toArray(new String[0]));
         drugView.setAdapter(drugAdapter);
 
         drugView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int brand, long l) {
                 Log.d("position", "the user click on: " + brand);
-                Log.d("position", "the user click on: " + genericArray.get(brand));
-                Log.d("position", "the user click on: " + brandAndGeneric.get(nameGenerated));
+                Log.d("position", "the user click on: " + generatedDrugArray.values().toArray()[brand]);
+                Log.d("position", "the user click on: " + generatedDrugArray.get(nameGenerated));
 
-                if (brandAndGeneric.get(nameGenerated).equals(genericArray.get(brand))) {
+                if (generatedDrugArray.get(nameGenerated).equals(generatedDrugArray.values().toArray()[brand])) {
                     Toast.makeText(MainActivity.this, "You are awesome!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, "You suck!", Toast.LENGTH_SHORT).show();
@@ -105,5 +107,25 @@ public class MainActivity extends AppCompatActivity {
         drugData.put("HCTZ", "hydroclorothyazide");
 
         return drugData;
+    }
+
+    /**
+     * Generates random drugs list to appear on the screen
+     *
+     * @return the map of the random key, value drugs'name and its generic
+     */
+    private Map<String,String> generateListDrugs() {
+        Map<String,String> generatedDrugs = new HashMap<>();
+        Map<String, String> brandAndGeneric = initDrugData();
+
+        while (generatedDrugs.size() != NO_GENERIC_ON_SCREEN) {
+            Random randNo = new Random();
+            int randNum = randNo.nextInt(brandAndGeneric.size());
+            generatedDrugs.put((String) brandAndGeneric.keySet().toArray()[randNum],
+                    (String) brandAndGeneric.values().toArray()[randNum]);
+        }
+
+        Log.d("generatedDrugs",generatedDrugs.toString());
+        return generatedDrugs;
     }
 }

@@ -12,8 +12,9 @@
     tools:context="projects.android.nguyen.kim.druglist.MainActivity">
 
     <TextView
-        android:id="@+id/generic"
-        android:text="Generic: "
+        style="@style/BrandNameStyle"
+        android:id="@+id/brand"
+        android:text="@string/BrandTextView"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

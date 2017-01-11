@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DrugList</string>
+    <string name="BrandTextView">Brand: </string>
 </resources>

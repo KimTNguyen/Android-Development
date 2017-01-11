@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
      */
     protected String displayBrandName() {
         Random brandPos = new Random();
-        TextView genericView = (TextView) findViewById(R.id.generic);
+        TextView genericView = (TextView) findViewById(R.id.brand);
 
         Log.d("nameList", generatedDrugArray.keySet().toString());
 

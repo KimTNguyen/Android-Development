@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -94,17 +95,50 @@ public class MainActivity extends AppCompatActivity {
     private Map<String, String> initDrugData() {
 
         Map<String, String> drugData = new HashMap<>();
-        drugData.put("z-pak", "azithromycin 250mg");
-        drugData.put("tri-pak", "azithromycin 500mg");
-        drugData.put("medrol", "methylprednisolone");
-        drugData.put("soma", "carisoprodol");
-        drugData.put("peridex", "chlorhexidine");
-        drugData.put("microbid", "nitrofurantoin");
-        drugData.put("amoxil", "amoxicillin");
-        drugData.put("keflex", "cephalexcin");
-        drugData.put("flonase", "fluticasone");
-        drugData.put("cheratussin ac", "guaifenesin + codeine");
-        drugData.put("HCTZ", "hydroclorothyazide");
+//        drugData.put("z-pak", "azithromycin 250mg");
+//        drugData.put("tri-pak", "azithromycin 500mg");
+//        drugData.put("medrol", "methylprednisolone");
+//        drugData.put("soma", "carisoprodol");
+//        drugData.put("peridex", "chlorhexidine");
+//        drugData.put("microbid", "nitrofurantoin");
+//        drugData.put("amoxil", "amoxicillin");
+//        drugData.put("keflex", "cephalexcin");
+//        drugData.put("flonase", "fluticasone");
+//        drugData.put("cheratussin ac", "guaifenesin + codeine");
+//        drugData.put("HCTZ", "hydroclorothyazide");
+//        drugData.put("glucophage", "metformin");
+//        drugData.put("actos", "pioglitazone");
+//        drugData.put("tamiflu", "oseltamivir");
+//        drugData.put("synthroid", "levothyroxine");
+//        drugData.put("advil", "ibuprofen");
+//        drugData.put("mobic", "meloxicam");
+//        drugData.put("celebrex", "celecoxib");
+//        drugData.put("augmentin", "amoxicillin + clavulanate");
+//        drugData.put("lipitor", "atorvastatin");
+//        drugData.put("zocor", "simvastatin");
+//        drugData.put("crestor", "rosuvastatin");
+//        drugData.put("vytorin", "ezetimibe + simvastatin");
+//        drugData.put("prinivil", "lisinopril");
+//        drugData.put("altace", "ramipril");
+//        drugData.put("vasotec", "enalapril");
+//        drugData.put("vicotin", "hydrocodone");
+//        drugData.put("oxycotin", "oxycodone");
+//        drugData.put("ultram", "tramadol");
+//        drugData.put("tylenol3", "codeine + APAP");
+
+        Scanner scanner = new Scanner(getResources().openRawResource(R.raw.druglist));
+
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] data = line.split("\t");
+            if (data.length >= 2) {
+                drugData.put(data[0],data[1]);
+            }
+        }
+
+        scanner.close();
+
+        Log.d("drug list",drugData.toString());
 
         return drugData;
     }

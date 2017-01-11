@@ -1,0 +1,8 @@
+flonase	fluticasone
+z-pak	azithromycin 250mg
+tri-pak	azithromycin 500mg
+medrol	methylprednisolone
+soma	carisoprodol
+peridex	chlorhexidine
+microbid	nitrofurantoin
+amoxil	amoxicillin

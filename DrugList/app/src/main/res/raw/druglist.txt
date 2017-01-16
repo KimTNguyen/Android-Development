@@ -1,8 +1,8 @@
-flonase	fluticasone
-z-pak	azithromycin 250mg
-tri-pak	azithromycin 500mg
-medrol	methylprednisolone
-soma	carisoprodol
-peridex	chlorhexidine
-microbid	nitrofurantoin
-amoxil	amoxicillin
+flonase	fluticasone	Flonase nasal spray is used to treat nasal congestion, sneezing, runny nose, and itchy or watery eyes caused by seasonal or year-round allergies.	Adults: 2 sprays (50 mcg of fluticasone propionate each) in each nostril once daily. Children aged 4 years and older: 1 spray in each nostril once daily (total daily dose, 100 mcg)
+z-pak	azithromycin 250mg	Azithromycin is an antibiotic that fights bacteria. Azithromycin is used to treat many different types of infections caused by bacteria, such as respiratory infections, skin infections, ear infections, and sexually transmitted diseases.	Take 2 tablets day1 then 1 tablet day 2-5
+tri-pak	azithromycin 500mg	Azithromycin is an antibiotic that fights bacteria. Azithromycin is used to treat many different types of infections caused by bacteria, such as respiratory infections, skin infections, ear infections, and sexually transmitted diseases.	Usage: to be updated
+medrol	methylprednisolone	Treating severe allergies, arthritis, asthma, certain blood disorders, and skin conditions.	Usage: to be updated
+soma	carisoprodol	Soma is a muscle relaxer that works by blocking pain sensations between the nerves and the brain.	The recommended dose of carisoprodol tablets, USP is 250 mg to 350 mg three times a day and at bedtime. The recommended maximum duration of carisoprodol tablets, USP use is up to two or three weeks.
+peridex	chlorhexidine	Treating certain types of gingivitis between dental visits as part of a professional program.	Rinse 15ml for 30 seconds and spit by mouth.
+macrobid	nitrofurantoin	Macrobid is used to treat urinary tract infections.	One 100 mg capsule every 12 hours for seven days.
+amoxil	amoxicillin	Amoxil (amoxicillin) is a penicillin antibiotic that fights bacteria.	Adults: 500 mg every 12 hours or 250 mg every 8 hours. Children > 3 months: 25 mg/kg/day in divided doses every 12 hours or 20 mg/kg/day in divided doses every 8 hours.

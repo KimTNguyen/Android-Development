@@ -8,6 +8,7 @@
 
 package projects.android.nguyen.kim.druglist;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -27,10 +29,13 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
 
     final int NO_GENERIC_ON_SCREEN = 5;
+    final int TABLE_COLUMN = 4;
 
     private Map<String, String> brandAndGeneric = new HashMap<>();
     private Map<String,String> generatedDrugs = new HashMap<>();
+    private Map<String,String> functionAndUsage = new HashMap<>();
     private String brandName = null;
+    private String direction = null;
     private ListView drugView;
 
     @Override
@@ -54,8 +59,10 @@ public class MainActivity extends AppCompatActivity {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] data = line.split("\t");
-            if (data.length >= 2) {
+
+            if (data.length >= TABLE_COLUMN) {
                 brandAndGeneric.put(data[0],data[1]);
+                functionAndUsage.put(data[0], data[2]+"\n"+data[3]);
             }
         }
 
@@ -74,8 +81,12 @@ public class MainActivity extends AppCompatActivity {
                     (String) brandAndGeneric.values().toArray()[randNum]);
         }
 
-        /* Generates a random number from the set of drug name */
-        brandName = (String) generatedDrugs.keySet().toArray()[randNo.nextInt(NO_GENERIC_ON_SCREEN)];
+        /* Generates a random brand name from the set of drug name */
+        int randNum = randNo.nextInt(NO_GENERIC_ON_SCREEN);
+        brandName = (String) generatedDrugs.keySet().toArray()[randNum];
+
+        /* Generates the direction of usage according to the brand displayed */
+        direction = functionAndUsage.get(brandName);
     }
 
     @Override
@@ -101,6 +112,10 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> drugAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, generatedDrugs.values().toArray(new String[0]));
         drugView.setAdapter(drugAdapter);
+
+        /* Displays direction on the screen */
+        TextView directionView = (TextView) findViewById(R.id.direction);
+        directionView.setText(direction);
     }
 
     /**

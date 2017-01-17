@@ -8,7 +8,6 @@
 
 package projects.android.nguyen.kim.druglist;
 
-import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,13 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
-public class MainActivity extends AppCompatActivity {
+public class DrugNameQuizActivity extends AppCompatActivity {
 
     final int NO_GENERIC_ON_SCREEN = 5;
     final int TABLE_COLUMN = 4;
@@ -37,11 +35,12 @@ public class MainActivity extends AppCompatActivity {
     private String brandName = null;
     private String direction = null;
     private ListView drugView;
+    private TextView directionView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_drug_name_quiz);
 
         drugView = (ListView) findViewById(R.id.drug_list);
 
@@ -114,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         drugView.setAdapter(drugAdapter);
 
         /* Displays direction on the screen */
-        TextView directionView = (TextView) findViewById(R.id.direction);
+        directionView = (TextView) findViewById(R.id.direction);
         directionView.setText(direction);
     }
 
@@ -130,9 +129,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("position", "the user click on: " + generatedDrugs.get(brandName));
 
                 if (generatedDrugs.get(brandName).equals(generatedDrugs.values().toArray()[brand])) {
-                    Toast.makeText(MainActivity.this, "You are awesome!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DrugNameQuizActivity.this, "You are awesome!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MainActivity.this, "You suck!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DrugNameQuizActivity.this, "You suck!", Toast.LENGTH_SHORT).show();
                 }
                 generateListDrugs();
                 display();
@@ -145,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("brandName", brandName);
+        outState.putString("direction",direction);
         outState.putSerializable("generatedDrugs", (Serializable) generatedDrugs);
 
         Log.d("generatedBradSave",brandName);
@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState.containsKey("brandName") && savedInstanceState.containsKey("generatedDrugs")) {
             brandName = savedInstanceState.getString("brandName");
+            direction = savedInstanceState.getString("direction");
             generatedDrugs = (HashMap<String, String>) savedInstanceState.getSerializable("generatedDrugs");
             Log.d("onRestoreInstanceState", "onRestoreInstanceState start!");
         }

@@ -1,4 +1,4 @@
-package projects.android.nguyen.kim.druglist;
+package projects.android.nguyen.kim.pharmacyTechPractice;
 
 import org.junit.Test;
 

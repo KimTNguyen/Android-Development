@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">DrugList</string>
-    <string name="BrandTextView">Brand: </string>
-    <string name="Direction">Direction</string>
+    <string name="app_name">PharmacyTechPractice</string>
+    <string name="brand">Brand: </string>
+    <string name="direction">Direction: </string>
+    <string name="add_drug_info">Add Drug</string>
+    <string name="take_quiz">Take Quiz</string>
+    <string name="generic">Generic: </string>
+    <string name="function">Function: </string>
+    <string name="save">Save</string>
+    <string name="clear">Clear</string>
 </resources>

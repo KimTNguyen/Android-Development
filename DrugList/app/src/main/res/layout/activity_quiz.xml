@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="projects.android.nguyen.kim.druglist.DrugNameQuizActivity">
+    tools:context="projects.android.nguyen.kim.pharmacyTechPractice.QuizActivity">
 
     <TextView
         style="@style/BrandNameStyle"
@@ -18,15 +18,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <ListView
+        android:id="@+id/drug_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
+    </ListView>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/direction" />
-
-    <ListView
-        android:id="@+id/drug_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
 
 </LinearLayout>

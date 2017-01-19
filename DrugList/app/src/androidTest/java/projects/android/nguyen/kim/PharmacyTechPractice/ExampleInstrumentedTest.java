@@ -1,4 +1,4 @@
-package projects.android.nguyen.kim.druglist;
+package projects.android.nguyen.kim.pharmacyTechPractice;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("projects.android.nguyen.kim.druglist", appContext.getPackageName());
+        assertEquals("projects.android.nguyen.kim.data", appContext.getPackageName());
     }
 }

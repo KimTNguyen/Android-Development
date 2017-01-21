@@ -38,24 +38,14 @@ public class AddDataActivity extends AppCompatActivity {
             String direction = ((EditText) findViewById(R.id.add_direction)).getText().toString();
 
             if (isEmpty(brand) || isEmpty(generic)) {
-                Toast.makeText(this,"brand is required!",Toast.LENGTH_SHORT).show();
-                Toast.makeText(this,"generic is required!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "brand is required!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "generic is required!", Toast.LENGTH_SHORT).show();
                 clearData(view);
             } else {
                 output.print(brand + REGEX);
                 output.print(generic + REGEX);
-
-                if (isEmpty(function)) {
-                    output.print("to be updated" + REGEX);
-                } else {
-                    output.print(function + REGEX);
-                }
-
-                if (isEmpty(direction)) {
-                    output.println("to be updated");
-                } else {
-                    output.println(direction);
-                }
+                output.print(isEmpty(function) ? "to be updated" + REGEX : function + REGEX);
+                output.println(isEmpty(direction) ? "to be updated" : direction);
             }
 
             clearData(view);

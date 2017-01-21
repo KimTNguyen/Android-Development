@@ -162,6 +162,7 @@ public class QuizActivity extends AppCompatActivity {
                 Log.d("position", "the user click on: " + generatedDrugs.values().toArray()[brand]);
                 Log.d("position", "the user click on: " + generatedDrugs.get(brandName));
 
+                /* Compares the name displayed and the name picked from the list */
                 if (generatedDrugs.get(brandName).equals(generatedDrugs.values().toArray()[brand])) {
                     Toast.makeText(QuizActivity.this, "You are awesome!", Toast.LENGTH_SHORT).show();
                 } else {

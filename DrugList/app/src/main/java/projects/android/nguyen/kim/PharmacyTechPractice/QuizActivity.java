@@ -47,7 +47,14 @@ public class QuizActivity extends AppCompatActivity {
         drugView = (ListView) findViewById(R.id.drug_list);
 
         initDrugData();
-        generateListDrugs();
+        
+        if (brandAndGeneric.size() > 0) {
+            generateListDrugs();
+        } else {
+            finish();
+            Log.d("brandAndGeneric size", "size: " + brandAndGeneric.size());
+            Toast.makeText(this,"data set is empty",Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**

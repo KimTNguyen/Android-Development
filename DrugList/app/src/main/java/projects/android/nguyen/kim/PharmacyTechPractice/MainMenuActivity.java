@@ -22,4 +22,9 @@ public class MainMenuActivity extends AppCompatActivity {
         Intent takeQuizIntent = new Intent(this,QuizActivity.class);
         startActivity(takeQuizIntent);
     }
+
+    public void searchControlledSubstances(View view) {
+        Intent searchDrugsIntent = new Intent(this,ScheduledDrugActivity.class);
+        startActivity(searchDrugsIntent);
+    }
 }

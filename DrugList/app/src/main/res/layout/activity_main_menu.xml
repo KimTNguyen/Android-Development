@@ -22,4 +22,10 @@
         android:layout_height="wrap_content"
         android:text="@string/take_quiz"
         android:onClick="takeQuiz"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search Controlled Substances"
+        android:onClick="searchControlledSubstances" />
 </LinearLayout>

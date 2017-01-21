@@ -16,6 +16,7 @@ public class AddDataActivity extends AppCompatActivity {
 
     static final String DATABASE_FILE = "drug_data.txt";
     static final String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+    private final String REGEX = "\t";
 
     private PrintStream output;
 
@@ -36,27 +37,28 @@ public class AddDataActivity extends AppCompatActivity {
             String function = ((EditText) findViewById(R.id.add_function)).getText().toString();
             String direction = ((EditText) findViewById(R.id.add_direction)).getText().toString();
 
-            if (brand.equals("") || generic.equals("")) {
+            if (isEmpty(brand) || isEmpty(generic)) {
                 Toast.makeText(this,"brand is required!",Toast.LENGTH_SHORT).show();
                 Toast.makeText(this,"generic is required!",Toast.LENGTH_SHORT).show();
                 clearData(view);
             } else {
-                output.print(brand +"\t");
-                output.print(generic +"\t");
+                output.print(brand + REGEX);
+                output.print(generic + REGEX);
 
-                if (function.equals("")) {
-                    output.print("to be updated\t");
+                if (isEmpty(function)) {
+                    output.print("to be updated" + REGEX);
                 } else {
-                    output.print(function +"\t");
+                    output.print(function + REGEX);
                 }
 
-                if (direction.equals("")) {
-                    output.print("to be updated\t");
+                if (isEmpty(direction)) {
+                    output.println("to be updated");
                 } else {
                     output.println(direction);
                 }
             }
 
+            clearData(view);
             output.close();
             Log.d("add_brand",((EditText) findViewById(R.id.add_brand)).getText().toString());
         } catch (FileNotFoundException e){
@@ -64,6 +66,14 @@ public class AddDataActivity extends AppCompatActivity {
         }
 
         Log.d("saveData", "saveData end!");
+    }
+
+    private boolean isEmpty(String str) {
+        if ("".equals(str)) {
+            return true;
+        }
+
+        return false;
     }
 
     public void clearData(View view) {

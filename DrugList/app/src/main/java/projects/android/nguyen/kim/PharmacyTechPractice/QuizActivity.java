@@ -29,7 +29,7 @@ import java.util.Scanner;
 public class QuizActivity extends AppCompatActivity {
 
     final int NO_GENERIC_ON_SCREEN = 5;
-    final int TABLE_COLUMN = 4;
+    final int NO_TABLE_COLUMN = 4;
 
     private Map<String, String> brandAndGeneric = new HashMap<>();
     private Map<String,String> generatedDrugs = new HashMap<>();
@@ -70,7 +70,7 @@ public class QuizActivity extends AppCompatActivity {
                 String[] data = line.split("\t");
                 Log.d("Data", Arrays.toString(data));
 
-                if (data.length >= TABLE_COLUMN) {
+                if (data.length >= NO_TABLE_COLUMN) {
                     brandAndGeneric.put(data[0],data[1]);
                     functionAndUsage.put(data[0], data[2]+"\n"+data[3]);
                 }

@@ -11,7 +11,19 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="projects.android.nguyen.kim.pharmacyTechPractice.ScheduledDrugActivity">
 
+    <!-- EditText for Search -->
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/search_scheduled_drug"
+        android:hint="search scheduled drug"
+        android:inputType="textVisiblePassword" />
+
+    <!-- List of Schedule Drugs -->
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scheduled_drug_list" >
+    </ListView>
+
 </LinearLayout>

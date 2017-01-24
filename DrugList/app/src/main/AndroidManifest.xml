@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddDataActivity" />
-        <activity android:name=".ScheduledDrugActivity"></activity>
+        <activity android:name=".ScheduledDrugActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
     </application>
 
 </manifest>

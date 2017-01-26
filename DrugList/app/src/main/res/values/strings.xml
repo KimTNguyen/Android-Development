@@ -8,4 +8,11 @@
     <string name="function">Function: </string>
     <string name="save">Save</string>
     <string name="clear">Clear</string>
+    <string name="add_pharmacy_abbreviations">Add Pharmacy Abbreviations</string>
+    <string name="add_data">Add Data</string>
+    <string name="abbreviation">Abbreviation:</string>
+    <string name="meaning">Meaning:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

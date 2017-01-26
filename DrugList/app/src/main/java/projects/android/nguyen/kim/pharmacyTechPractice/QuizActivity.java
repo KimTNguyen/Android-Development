@@ -63,7 +63,7 @@ public class QuizActivity extends AppCompatActivity {
     private void initDrugData() {
 
         try {
-            Scanner scanner = new Scanner(openFileInput(AddDataActivity.DATABASE_FILE));
+            Scanner scanner = new Scanner(openFileInput(CommonConstants.DATABASE_FILE));
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();

@@ -13,8 +13,6 @@ import java.io.PrintStream;
 
 public class AddDrugActivity extends AppCompatActivity {
 
-    private final String REGEX = "\t";
-
     private PrintStream output;
 
     @Override
@@ -27,29 +25,32 @@ public class AddDrugActivity extends AppCompatActivity {
         Log.d("function", "onCreate end!");
     }
 
-
-    public void saveData(View view) {
+    public void saveMedData(View view) {
         Log.d("saveData", "saveData start!");
 
         try {
-            output = new PrintStream(openFileOutput(CommonConstants.DATABASE_FILE, MODE_APPEND));
+            output = new PrintStream(openFileOutput(CommonConstants.MED_FILE, MODE_APPEND));
             String brand = ((EditText) findViewById(R.id.add_brand)).getText().toString();
             String generic = ((EditText) findViewById(R.id.add_generic)).getText().toString();
             String function = ((EditText) findViewById(R.id.add_function)).getText().toString();
             String direction = ((EditText) findViewById(R.id.add_direction)).getText().toString();
 
-            if (isEmpty(brand) || isEmpty(generic)) {
+            if (isEmpty(brand)) {
                 Toast.makeText(this, "brand is required!", Toast.LENGTH_SHORT).show();
+            } else if (isEmpty(generic)) {
                 Toast.makeText(this, "generic is required!", Toast.LENGTH_SHORT).show();
-                clearData(view);
             } else {
-                output.print(brand + REGEX);
-                output.print(generic + REGEX);
-                output.print(isEmpty(function) ? "to be updated" + REGEX : function + REGEX);
+                output.print(brand + CommonConstants.REGEX);
+                output.print(generic + CommonConstants.REGEX);
+                output.print(isEmpty(function) ? "to be updated" + CommonConstants.REGEX : function + CommonConstants.REGEX);
                 output.println(isEmpty(direction) ? "to be updated" : direction);
             }
 
-            clearData(view);
+            clearData((EditText) findViewById(R.id.add_brand));
+            clearData((EditText) findViewById(R.id.add_generic));
+            clearData((EditText) findViewById(R.id.add_function));
+            clearData((EditText) findViewById(R.id.add_direction));
+
             output.close();
             Log.d("add_brand",((EditText) findViewById(R.id.add_brand)).getText().toString());
         } catch (FileNotFoundException e){
@@ -59,6 +60,11 @@ public class AddDrugActivity extends AppCompatActivity {
         Log.d("saveData", "saveData end!");
     }
 
+    /**
+     * Compares the string with an empty string
+     * @param str the String to be compared
+     * @return true if the String is empty, false otherwise
+     */
     private boolean isEmpty(String str) {
         if ("".equals(str)) {
             return true;
@@ -67,13 +73,14 @@ public class AddDrugActivity extends AppCompatActivity {
         return false;
     }
 
-    public void clearData(View view) {
+    /**
+     * Sets the EditText field to blank
+     * @param editText the EditText that will be clear
+     */
+    public void clearData(EditText editText) {
         Log.d("clearData", "clearData start!");
 
-        ((EditText) findViewById(R.id.add_brand)).setText("");
-        ((EditText) findViewById(R.id.add_generic)).setText("");
-        ((EditText) findViewById(R.id.add_function)).setText("");
-        ((EditText) findViewById(R.id.add_direction)).setText("");
+        editText.setText("");
 
         Log.d("clearData", "clearData end!");
     }

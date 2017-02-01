@@ -6,5 +6,7 @@ package projects.android.nguyen.kim.pharmacyTechPractice;
 
 public class CommonConstants {
 
-    public static final String DATABASE_FILE = "drug_data.txt";
+    public static final String MED_FILE = "drug_data.txt";
+    public static final String SIG_CODE_FILE = "sig_code.txt";
+    public static final String REGEX = "\t";
 }

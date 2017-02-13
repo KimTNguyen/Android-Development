@@ -26,6 +26,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/test_sig_code"
+        android:onClick="testSigCode"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Search Controlled Substances"
         android:onClick="searchControlledSubstances" />
 </LinearLayout>

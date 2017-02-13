@@ -14,17 +14,22 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void addDrug(View view) {
-        Intent addDrugIntent = new Intent(this,AddDataActivity.class);
+        Intent addDrugIntent = new Intent(this, AddDataActivity.class);
         startActivity(addDrugIntent);
     }
 
     public void takeQuiz(View view) {
-        Intent takeQuizIntent = new Intent(this,QuizActivity.class);
+        Intent takeQuizIntent = new Intent(this, QuizActivity.class);
         startActivity(takeQuizIntent);
     }
 
     public void searchControlledSubstances(View view) {
-        Intent searchDrugsIntent = new Intent(this,ScheduledDrugActivity.class);
+        Intent searchDrugsIntent = new Intent(this, ScheduledDrugActivity.class);
         startActivity(searchDrugsIntent);
+    }
+
+    public void testSigCode(View view) {
+        Intent testSigCodeIntent = new Intent(this, TestSigCodeActivity.class);
+        startActivity(testSigCodeIntent);
     }
 }

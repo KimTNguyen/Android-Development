@@ -62,14 +62,14 @@ public class QuizActivity extends AppCompatActivity {
      */
     private void initDrugData() {
 
-        try {
-            Scanner scanner = new Scanner(openFileInput(CommonConstants.MED_FILE));
+        try (Scanner scanner = new Scanner(openFileInput(CommonConstants.MED_FILE))){
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] data = line.split("\t");
                 Log.d("Data", Arrays.toString(data));
 
+                /* Need to refactor */
                 if (data.length >= NO_TABLE_COLUMN) {
                     brandAndGeneric.put(data[0],data[1]);
                     functionAndUsage.put(data[0], data[2]+"\n"+data[3]);
@@ -79,10 +79,8 @@ public class QuizActivity extends AppCompatActivity {
             Log.d("brandAndGeneric", brandAndGeneric.toString());
             Log.d("functionAndUsage", functionAndUsage.toString());
 
-            scanner.close();
-
         } catch (FileNotFoundException exception) {
-            Log.e("FileNotFoundException", "Cannot open DATABASE_FILE", exception);
+            Log.e("FileNotFoundException", "Cannot open file", exception);
         }
     }
 
@@ -199,5 +197,4 @@ public class QuizActivity extends AppCompatActivity {
         Log.d("generatedBradRestore",brandName);
         Log.d("generatedDrugsRestore",generatedDrugs.toString());
     }
-
 }

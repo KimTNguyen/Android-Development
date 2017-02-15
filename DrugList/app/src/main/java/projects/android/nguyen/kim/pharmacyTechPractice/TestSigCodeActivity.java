@@ -3,9 +3,10 @@ package projects.android.nguyen.kim.pharmacyTechPractice;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,9 +17,10 @@ import java.util.Scanner;
 public class TestSigCodeActivity extends AppCompatActivity {
 
     final int NO_TABLE_COLUMN = 2;
+    final String SPACE = " ";
 
     private Map<String, String> sigCodeMap = new HashMap<>();
-    private String abbreviationText;
+    private String translationText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class TestSigCodeActivity extends AppCompatActivity {
 
                 /* Need to refactor */
                 if (data.length == NO_TABLE_COLUMN) {
-                    sigCodeMap.put(data[0],data[1]);
+                    sigCodeMap.put(data[1],data[0]);
                 }
             }
 
@@ -69,7 +71,7 @@ public class TestSigCodeActivity extends AppCompatActivity {
         Log.d("method", "generateRandAbbreviation start!");
 
         Random rand = new Random();
-        abbreviationText = (String) sigCodeMap.keySet().toArray()[rand.nextInt(sigCodeMap.size())];
+        translationText = (String) sigCodeMap.keySet().toArray()[rand.nextInt(sigCodeMap.size())];
 
         Log.d("method", "generateRandAbbreviation end!");
     }
@@ -78,7 +80,28 @@ public class TestSigCodeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        display(abbreviationText);
+        display(translationText);
+    }
+
+    /**
+     * Checks whether the sig code input match the translation displayed on the screen
+     *
+     * @param view the view on the screen responsible for drawing and event handling
+     */
+    public void checkSigCode(View view) {
+        EditText inputEditText = (EditText) findViewById(R.id.sig);
+        String answer = inputEditText.getText().toString();
+        String correctAnswer = sigCodeMap.get(translationText);
+
+        if (answer.equalsIgnoreCase(correctAnswer)) {
+            Toast.makeText(this,"Well done!",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this,correctAnswer,Toast.LENGTH_SHORT).show();
+        }
+
+        Utils.clearData(inputEditText);
+        generateRandAbbreviation();
+        display(translationText);
     }
 
     /**
@@ -89,7 +112,9 @@ public class TestSigCodeActivity extends AppCompatActivity {
         Log.d("method", "display start!");
 
         TextView abbTextView = (TextView) findViewById(R.id.sig_meaning);
-        abbTextView.setText(" " + text);
+        String textToSet = SPACE + text;
+
+        abbTextView.setText(textToSet);
 
         Log.d("method", "display end!");
     }
@@ -98,13 +123,14 @@ public class TestSigCodeActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putString("abbreviationText", abbreviationText);
+        outState.putString("abbreviationText", translationText);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        abbreviationText = savedInstanceState.getString("abbreviationText");
+        translationText = savedInstanceState.getString("abbreviationText");
     }
+
 }

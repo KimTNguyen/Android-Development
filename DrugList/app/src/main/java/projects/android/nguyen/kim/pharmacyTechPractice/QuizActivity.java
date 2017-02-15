@@ -168,7 +168,6 @@ public class QuizActivity extends AppCompatActivity {
                 }
                 generateListDrugs();
                 display();
-                pickDrugName();
             }
         });
     }

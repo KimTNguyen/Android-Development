@@ -13,7 +13,5 @@
     <string name="abbreviation">Abbreviation:</string>
     <string name="meaning">Meaning:</string>
     <string name="test_sig_code">Test Sig Code</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="check">Check</string>
 </resources>

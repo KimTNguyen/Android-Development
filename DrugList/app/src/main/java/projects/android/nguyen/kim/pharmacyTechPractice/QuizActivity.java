@@ -30,6 +30,9 @@ public class QuizActivity extends AppCompatActivity {
 
     final int NO_GENERIC_ON_SCREEN = 5;
     final int NO_TABLE_COLUMN = 4;
+    final int GENERIC_COLUMN = 1;
+    final int FUNCTION_COLUMN = 2;
+    final int DIRECTION_COLUMN = 3;
 
     private Map<String, String> brandAndGeneric = new HashMap<>();
     private Map<String,String> generatedDrugs = new HashMap<>();
@@ -69,10 +72,9 @@ public class QuizActivity extends AppCompatActivity {
                 String[] data = line.split("\t");
                 Log.d("Data", Arrays.toString(data));
 
-                /* Need to refactor */
                 if (data.length >= NO_TABLE_COLUMN) {
-                    brandAndGeneric.put(data[0],data[1]);
-                    functionAndUsage.put(data[0], data[2]+"\n"+data[3]);
+                    brandAndGeneric.put(data[CommonConstants.KEY_COLUMN],data[GENERIC_COLUMN]);
+                    functionAndUsage.put(data[CommonConstants.KEY_COLUMN], data[FUNCTION_COLUMN]+"\n"+data[DIRECTION_COLUMN]);
                 }
             }
 

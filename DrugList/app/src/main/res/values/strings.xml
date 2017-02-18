@@ -11,7 +11,7 @@
     <string name="add_pharmacy_abbreviations">Add Pharmacy Abbreviations</string>
     <string name="add_data">Add Data</string>
     <string name="abbreviation">Abbreviation:</string>
-    <string name="meaning">Meaning:</string>
     <string name="test_sig_code">Test Sig Code</string>
     <string name="check">Check</string>
+    <string name="translation">Translation:</string>
 </resources>

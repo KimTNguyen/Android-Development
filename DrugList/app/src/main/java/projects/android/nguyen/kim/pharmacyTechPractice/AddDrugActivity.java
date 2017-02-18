@@ -10,7 +10,7 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
-public class AddDrugActivityInterface extends AppCompatActivity implements AddScreenInterface {
+public class AddDrugActivity extends AppCompatActivity implements AddScreenInterface {
 
     private EditText brandEditText;
     private EditText genericEditText;
@@ -46,9 +46,9 @@ public class AddDrugActivityInterface extends AppCompatActivity implements AddSc
             } else if (Utils.isEmpty(generic)) {
                 Toast.makeText(this, "generic is required!", Toast.LENGTH_SHORT).show();
             } else {
-                output.print(brand + CommonConstants.REGEX);
-                output.print(generic + CommonConstants.REGEX);
-                output.print(Utils.isEmpty(function) ? "to be updated" + CommonConstants.REGEX : function + CommonConstants.REGEX);
+                output.print(brand + CommonConstants.REGEX_TAB);
+                output.print(generic + CommonConstants.REGEX_TAB);
+                output.print(Utils.isEmpty(function) ? "to be updated" + CommonConstants.REGEX_TAB : function + CommonConstants.REGEX_TAB);
                 output.println(Utils.isEmpty(direction) ? "to be updated" : direction);
             }
 

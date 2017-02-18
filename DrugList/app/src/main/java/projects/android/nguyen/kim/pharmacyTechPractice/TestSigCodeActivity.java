@@ -17,6 +17,7 @@ import java.util.Scanner;
 public class TestSigCodeActivity extends AppCompatActivity {
 
     final int NO_TABLE_COLUMN = 2;
+    final int TRANSLATION_COLUMN = 1;
     final String SPACE = " ";
 
     private Map<String, String> sigCodeMap = new HashMap<>();
@@ -49,9 +50,8 @@ public class TestSigCodeActivity extends AppCompatActivity {
                 String[] data = line.split("\t");
                 Log.d("Data", Arrays.toString(data));
 
-                /* Need to refactor */
                 if (data.length == NO_TABLE_COLUMN) {
-                    sigCodeMap.put(data[1],data[0]);
+                    sigCodeMap.put(data[CommonConstants.KEY_COLUMN], data[TRANSLATION_COLUMN]);
                 }
             }
 

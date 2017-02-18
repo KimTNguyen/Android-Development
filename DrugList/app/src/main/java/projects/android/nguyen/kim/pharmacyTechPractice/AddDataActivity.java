@@ -14,12 +14,12 @@ public class AddDataActivity extends AppCompatActivity {
     }
 
     public void addDrug(View view) {
-        Intent addDrugIntent = new Intent(this, AddDrugActivityInterface.class);
+        Intent addDrugIntent = new Intent(this, AddDrugActivity.class);
         startActivity(addDrugIntent);
     }
 
     public void addPharmacyAbbreviations(View view) {
-        Intent addAbbreviation = new Intent(this, AddPharmacyAbbreviationsActivityInterface.class);
+        Intent addAbbreviation = new Intent(this, AddPharmacyAbbreviationsActivity.class);
         startActivity(addAbbreviation);
     }
 }

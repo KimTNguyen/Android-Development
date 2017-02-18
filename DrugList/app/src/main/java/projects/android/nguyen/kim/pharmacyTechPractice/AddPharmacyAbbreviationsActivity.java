@@ -10,7 +10,7 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
-public class AddPharmacyAbbreviationsActivityInterface extends AppCompatActivity implements AddScreenInterface {
+public class AddPharmacyAbbreviationsActivity extends AppCompatActivity implements AddScreenInterface {
 
     private EditText sigCodeEditText;
     private EditText meaningEditText;
@@ -33,8 +33,8 @@ public class AddPharmacyAbbreviationsActivityInterface extends AppCompatActivity
             if (Utils.isEmpty(sigCode) || Utils.isEmpty(meaning)) {
                 Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
             } else {
-                output.print(sigCode + CommonConstants.REGEX);
-                output.println(meaning);
+                output.print(meaning + CommonConstants.REGEX_TAB);
+                output.println(sigCode);
             }
 
             clearScreen(view);

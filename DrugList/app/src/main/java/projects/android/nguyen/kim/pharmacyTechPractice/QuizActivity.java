@@ -44,6 +44,8 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("QuizActivity","onCreate start!");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
@@ -58,12 +60,15 @@ public class QuizActivity extends AppCompatActivity {
             Log.d("brandAndGeneric size", "size: " + brandAndGeneric.size());
             Toast.makeText(this,"data set is empty",Toast.LENGTH_SHORT).show();
         }
+
+        Log.d("QuizActivity","onCreate end!");
     }
 
     /**
      * Creates a list of brand and it's generic
      */
     private void initDrugData() {
+        Log.d("QuizActivity","initDrugData start!");
 
         try (Scanner scanner = new Scanner(openFileInput(CommonConstants.MED_FILE))){
 
@@ -84,13 +89,15 @@ public class QuizActivity extends AppCompatActivity {
         } catch (FileNotFoundException exception) {
             Log.e("FileNotFoundException", "Cannot open file", exception);
         }
+
+        Log.d("QuizActivity","initDrugData end!");
     }
 
     /**
      * Generates a list of random generic and a random brand name to appear on the screen
      */
     private void generateListDrugs() {
-        Log.d("generateListDrugs","start generateListDrugs");
+        Log.d("QuizActivity","generateListDrugs start!");
 
         Random randNo = new Random();
 
@@ -115,11 +122,13 @@ public class QuizActivity extends AppCompatActivity {
         /* Generates the direction of usage according to the brand displayed */
         direction = functionAndUsage.get(brandName);
 
-        Log.d("generateListDrugs","end generateListDrugs");
+        Log.d("QuizActivity","generateListDrugs end!");
     }
 
     @Override
     protected void onResume() {
+        Log.d("QuizActivity","onResume start!");
+
         super.onResume();
 
         Log.d("onResume", "onResume start!");
@@ -127,13 +136,15 @@ public class QuizActivity extends AppCompatActivity {
         display();
         pickDrugName();
         Log.d("generatedBradOnResume",brandName);
+
+        Log.d("QuizActivity","onResume end!");
     }
 
     /**
      * Displays brand name and list of generic on the screen
      */
     protected void display() {
-        Log.d("display()", "start display()");
+        Log.d("QuizActivity", "display start!");
 
         TextView genericView = (TextView) findViewById(R.id.brand);
 
@@ -148,13 +159,15 @@ public class QuizActivity extends AppCompatActivity {
         directionView = (TextView) findViewById(R.id.direction);
         directionView.setText(direction);
 
-        Log.d("display()", "end display()");
+        Log.d("QuizActivity", "display end!");
     }
 
     /**
      * Gives feedback right or wrong when the user clicks on the generic name on the list
      */
     protected void pickDrugName() {
+        Log.d("QuizActivity", "pickDrugName start!");
+
         drugView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int brand, long l) {
@@ -172,10 +185,14 @@ public class QuizActivity extends AppCompatActivity {
                 display();
             }
         });
+
+        Log.d("QuizActivity", "pickDrugName end!");
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        Log.d("QuizActivity", "onSaveInstanceState start!");
+
         super.onSaveInstanceState(outState);
         outState.putString("brandName", brandName);
         outState.putString("direction",direction);
@@ -183,10 +200,14 @@ public class QuizActivity extends AppCompatActivity {
 
         Log.d("generatedBradSave",brandName);
         Log.d("generatedDrugsSave",generatedDrugs.toString());
+
+        Log.d("QuizActivity", "onSaveInstanceState end!");
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.d("QuizActivity", "onRestoreInstanceState start!");
+
         super.onRestoreInstanceState(savedInstanceState);
 
         if (savedInstanceState.containsKey("brandName") && savedInstanceState.containsKey("generatedDrugs")) {
@@ -197,5 +218,7 @@ public class QuizActivity extends AppCompatActivity {
         }
         Log.d("generatedBradRestore",brandName);
         Log.d("generatedDrugsRestore",generatedDrugs.toString());
+
+        Log.d("QuizActivity", "onRestoreInstanceState end!");
     }
 }

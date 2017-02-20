@@ -25,6 +25,8 @@ public class TestSigCodeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("TestSigCodeActivity", "onCreate start!");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_sig_code);
         initSigData();
@@ -36,13 +38,15 @@ public class TestSigCodeActivity extends AppCompatActivity {
             Log.d("sigCodeMap size", "size: " + sigCodeMap.size());
             Toast.makeText(this,"data set is empty",Toast.LENGTH_SHORT).show();
         }
+
+        Log.d("TestSigCodeActivity", "onCreate end!");
     }
 
     /**
      * Creates a map of a sig and it's abbreviation accordingly
      */
     private void initSigData() {
-        Log.d("initSigData", "initSigData start!");
+        Log.d("TestSigCodeActivity", "initSigData start!");
 
         try (Scanner scanner = new Scanner(openFileInput(CommonConstants.SIG_CODE_FILE))) {
             while (scanner.hasNextLine()) {
@@ -60,7 +64,8 @@ public class TestSigCodeActivity extends AppCompatActivity {
         }
 
         Log.d("sigCodeMap", sigCodeMap.toString());
-        Log.d("initSigData", "initSigData end!");
+
+        Log.d("TestSigCodeActivity", "initSigData end!");
     }
 
 
@@ -68,19 +73,23 @@ public class TestSigCodeActivity extends AppCompatActivity {
      * Chooses a random text in the key set values of the map
      */
     private void generateRandAbbreviation() {
-        Log.d("method", "generateRandAbbreviation start!");
+        Log.d("TestSigCodeActivity", "generateRandAbbreviation start!");
 
         Random rand = new Random();
         translationText = (String) sigCodeMap.keySet().toArray()[rand.nextInt(sigCodeMap.size())];
 
-        Log.d("method", "generateRandAbbreviation end!");
+        Log.d("TestSigCodeActivity", "generateRandAbbreviation end!");
     }
 
     @Override
     protected void onResume() {
+        Log.d("TestSigCodeActivity", "onResume start!");
+
         super.onResume();
 
         display(translationText);
+
+        Log.d("TestSigCodeActivity", "onResume end!");
     }
 
     /**
@@ -89,6 +98,8 @@ public class TestSigCodeActivity extends AppCompatActivity {
      * @param view the view on the screen responsible for drawing and event handling
      */
     public void checkSigCode(View view) {
+        Log.d("TestSigCodeActivity", "checkSigCode start!");
+
         EditText inputEditText = (EditText) findViewById(R.id.sig);
         String answer = inputEditText.getText().toString();
         String correctAnswer = sigCodeMap.get(translationText);
@@ -102,6 +113,8 @@ public class TestSigCodeActivity extends AppCompatActivity {
         Utils.clearData(inputEditText);
         generateRandAbbreviation();
         display(translationText);
+
+        Log.d("TestSigCodeActivity", "checkSigCode end!");
     }
 
     /**
@@ -109,28 +122,35 @@ public class TestSigCodeActivity extends AppCompatActivity {
      * @param text the text displayed on the screen
      */
     private void display(String text) {
-        Log.d("method", "display start!");
+        Log.d("TestSigCodeActivity", "display start!");
 
         TextView abbTextView = (TextView) findViewById(R.id.sig_meaning);
         String textToSet = SPACE + text;
 
         abbTextView.setText(textToSet);
 
-        Log.d("method", "display end!");
+        Log.d("TestSigCodeActivity", "display end!");
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        Log.d("TestSigCodeActivity", "onSaveInstanceState start!");
+
         super.onSaveInstanceState(outState);
 
         outState.putString("abbreviationText", translationText);
+
+        Log.d("TestSigCodeActivity", "onSaveInstanceState end!");
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.d("TestSigCodeActivity", "onRestoreInstanceState start!");
+
         super.onRestoreInstanceState(savedInstanceState);
 
         translationText = savedInstanceState.getString("abbreviationText");
-    }
 
+        Log.d("TestSigCodeActivity", "onRestoreInstanceState end!");
+    }
 }

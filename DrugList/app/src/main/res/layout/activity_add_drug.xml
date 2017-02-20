@@ -23,7 +23,8 @@
         <EditText
             android:id="@+id/add_brand"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:maxLines="1" />
 
     </LinearLayout>
 
@@ -39,7 +40,8 @@
         <EditText
             android:id="@+id/add_generic"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:maxLines="1"/>
 
     </LinearLayout>
 

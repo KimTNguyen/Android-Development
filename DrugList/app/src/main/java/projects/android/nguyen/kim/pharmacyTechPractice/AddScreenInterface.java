@@ -9,6 +9,18 @@ import java.io.FileNotFoundException;
  */
 
 public interface AddScreenInterface {
+    /**
+     * Clears all the input on the screen
+     *
+     * @param view the current screen
+     */
     public void clearScreen(View view);
+
+    /**
+     * Saves input data into file
+     *
+     * @param view the current screen
+     * @throws FileNotFoundException
+     */
     public void saveData(View view) throws FileNotFoundException;
 }

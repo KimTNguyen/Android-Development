@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -24,14 +23,16 @@ public class AddPharmacyAbbreviationsActivity extends AppCompatActivity implemen
     }
 
     public void saveData(View view) {
-        Log.d("saveSigCode","saveSigCode start!");
+        Log.d("AddAbbreActivity","saveSigCode start!");
         try (PrintStream output = new PrintStream(openFileOutput(CommonConstants.SIG_CODE_FILE, MODE_APPEND))) {
 
-            String sigCode = sigCodeEditText.getText().toString();
-            String meaning = meaningEditText.getText().toString();
+            String sigCode = sigCodeEditText.getText().toString().trim();
+            String meaning = meaningEditText.getText().toString().trim();
 
-            if (Utils.isEmpty(sigCode) || Utils.isEmpty(meaning)) {
-                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+            if (Utils.isEmpty(sigCode)) {
+                sigCodeEditText.setError("sig code is required!");
+            } else if (Utils.isEmpty(meaning)) {
+                meaningEditText.setError("translation is required!");
             } else {
                 output.print(meaning + CommonConstants.REGEX_TAB);
                 output.println(sigCode);
@@ -42,11 +43,17 @@ public class AddPharmacyAbbreviationsActivity extends AppCompatActivity implemen
             Log.e("FileNotFoundException", "Cannot open file", exception);
         }
         clearScreen(view);
-        Log.d("saveSigCode","saveSigCode end!");
+        sigCodeEditText.requestFocus();
+
+        Log.d("AddAbbreActivity","saveSigCode end!");
     }
 
     public void clearScreen(View view) {
+        Log.d("AddAbbreActivity","clearScreen start!");
+
         Utils.clearData(sigCodeEditText);
         Utils.clearData(meaningEditText);
+
+        Log.d("AddAbbreActivity","clearScreen end!");
     }
 }

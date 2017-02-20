@@ -19,7 +19,7 @@ public class AddDrugActivity extends AppCompatActivity implements AddScreenInter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("function", "onCreate start!");
+        Log.d("AddDrugActivity", "onCreate start!");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_drug);
@@ -29,22 +29,22 @@ public class AddDrugActivity extends AppCompatActivity implements AddScreenInter
         functionEditText = (EditText) findViewById(R.id.add_function);
         directionEditText = (EditText) findViewById(R.id.add_direction);
 
-        Log.d("function", "onCreate end!");
+        Log.d("AddDrugActivity", "onCreate end!");
     }
 
     public void saveData(View view) {
-        Log.d("saveData", "saveData start!");
+        Log.d("AddDrugActivity", "saveData start!");
 
         try (PrintStream output = new PrintStream(openFileOutput(CommonConstants.MED_FILE, MODE_APPEND))) {
-            String brand = brandEditText.getText().toString();
-            String generic = genericEditText.getText().toString();
+            String brand = brandEditText.getText().toString().trim();
+            String generic = genericEditText.getText().toString().trim();
             String function = functionEditText.getText().toString();
             String direction = directionEditText.getText().toString();
 
             if (Utils.isEmpty(brand)) {
-                Toast.makeText(this, "brand is required!", Toast.LENGTH_SHORT).show();
+                brandEditText.setError("brand is required!");
             } else if (Utils.isEmpty(generic)) {
-                Toast.makeText(this, "generic is required!", Toast.LENGTH_SHORT).show();
+                genericEditText.setError("generic is required!");
             } else {
                 output.print(brand + CommonConstants.REGEX_TAB);
                 output.print(generic + CommonConstants.REGEX_TAB);
@@ -55,18 +55,23 @@ public class AddDrugActivity extends AppCompatActivity implements AddScreenInter
             Log.d("add_brand",((EditText) findViewById(R.id.add_brand)).getText().toString());
 
             clearScreen(view);
+            brandEditText.requestFocus();
 
         } catch (FileNotFoundException e){
             Log.e("FileNotFoundException", "Cannot open DATABASE_FILE", e);
         }
 
-        Log.d("saveData", "saveData end!");
+        Log.d("AddDrugActivity", "saveData end!");
     }
 
     public void clearScreen(View view) {
+        Log.d("AddDrugActivity", "clearScreen start!");
+
         Utils.clearData(brandEditText);
         Utils.clearData(genericEditText);
         Utils.clearData(functionEditText);
         Utils.clearData(directionEditText);
+
+        Log.d("AddDrugActivity", "clearScreen end!");
     }
 }

@@ -21,20 +21,23 @@ public class ScheduledDrugActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("function", "onCreate start!");
+        Log.d("ScheduledDrugActivity", "onCreate start!");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduled_drug);
         initScheduledDrugList();
         display();
         search();
-        Log.d("function", "onCreate end!");
+
+        Log.d("ScheduledDrugActivity", "onCreate end!");
     }
 
     /**
      * Reads data from the raw file and store them in the scheduledDrugList
      */
     private void initScheduledDrugList() {
-        Log.d("function", "initScheduledDrugList start!");
+        Log.d("ScheduledDrugActivity", "initScheduledDrugList start!");
+
         Scanner scanner = new Scanner(getResources().openRawResource(R.raw.scheduled_drugs));
 
         while (scanner.hasNext()) {
@@ -42,28 +45,29 @@ public class ScheduledDrugActivity extends AppCompatActivity {
         }
 
         Log.d("scheduledDrugList", scheduledDrugList.toString());
-        Log.d("function", "initScheduledDrugList end!");
+
+        Log.d("ScheduledDrugActivity", "initScheduledDrugList end!");
     }
 
     /**
      * Displays the scheduledDrugList on the screen
      */
     private void display() {
-        Log.d("function", "display start!");
+        Log.d("ScheduledDrugActivity", "display start!");
 
         ListView listView = (ListView) findViewById(R.id.scheduled_drug_list);
 
         drugAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, scheduledDrugList);
         listView.setAdapter(drugAdapter);
 
-        Log.d("function", "display end!");
+        Log.d("ScheduledDrugActivity", "display end!");
     }
 
     /**
      * Finds elements matching the input
      */
     private void search() {
-        Log.d("function","search start!");
+        Log.d("ScheduledDrugActivity","search start!");
 
         EditText searchScheduledDrug = (EditText) findViewById(R.id.search_scheduled_drug);
         searchScheduledDrug.addTextChangedListener(new TextWatcher() {
@@ -82,6 +86,7 @@ public class ScheduledDrugActivity extends AppCompatActivity {
 
             }
         });
-        Log.d("function", "search end!");
+
+        Log.d("ScheduledDrugActivity", "search end!");
     }
 }

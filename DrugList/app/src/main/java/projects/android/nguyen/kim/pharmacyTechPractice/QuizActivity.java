@@ -8,6 +8,7 @@
 
 package projects.android.nguyen.kim.pharmacyTechPractice;
 
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,29 +19,26 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.Scanner;
 
 public class QuizActivity extends AppCompatActivity {
 
+    private DrugDbOperations operations;
+    private long records;
+
     final int NO_GENERIC_ON_SCREEN = 5;
-    final int NO_TABLE_COLUMN = 4;
     final int GENERIC_COLUMN = 1;
     final int FUNCTION_COLUMN = 2;
     final int DIRECTION_COLUMN = 3;
 
-    private Map<String, String> brandAndGeneric = new HashMap<>();
     private Map<String,String> generatedDrugs = new HashMap<>();
     private Map<String,String> functionAndUsage = new HashMap<>();
     private String brandName = null;
     private String direction = null;
     private ListView drugView;
-    private TextView directionView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,48 +47,20 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        operations = new DrugDbOperations(getApplicationContext());
         drugView = (ListView) findViewById(R.id.drug_list);
 
-        initDrugData();
-        
-        if (brandAndGeneric.size() > 0) {
+        records = operations.getNoRecords(operations);
+
+        if (records > 0) {
             generateListDrugs();
         } else {
             finish();
-            Log.d("brandAndGeneric size", "size: " + brandAndGeneric.size());
-            Toast.makeText(this,"data set is empty",Toast.LENGTH_SHORT).show();
+            Log.d("brandAndGeneric size", "size: " + records);
+            Toast.makeText(this,"database is empty",Toast.LENGTH_SHORT).show();
         }
 
         Log.d("QuizActivity","onCreate end!");
-    }
-
-    /**
-     * Creates a list of brand and it's generic
-     */
-    private void initDrugData() {
-        Log.d("QuizActivity","initDrugData start!");
-
-        try (Scanner scanner = new Scanner(openFileInput(CommonConstants.MED_FILE))){
-
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] data = line.split("\t");
-                Log.d("Data", Arrays.toString(data));
-
-                if (data.length >= NO_TABLE_COLUMN) {
-                    brandAndGeneric.put(data[CommonConstants.KEY_COLUMN],data[GENERIC_COLUMN]);
-                    functionAndUsage.put(data[CommonConstants.KEY_COLUMN], data[FUNCTION_COLUMN]+"\n"+data[DIRECTION_COLUMN]);
-                }
-            }
-
-            Log.d("brandAndGeneric", brandAndGeneric.toString());
-            Log.d("functionAndUsage", functionAndUsage.toString());
-
-        } catch (FileNotFoundException exception) {
-            Log.e("FileNotFoundException", "Cannot open file", exception);
-        }
-
-        Log.d("QuizActivity","initDrugData end!");
     }
 
     /**
@@ -99,30 +69,44 @@ public class QuizActivity extends AppCompatActivity {
     private void generateListDrugs() {
         Log.d("QuizActivity","generateListDrugs start!");
 
-        Random randNo = new Random();
+        Cursor cursor = operations.getEntries(operations);
+        int randNum;
 
         /* Generate a list of random brand names and its generic */
-        if (brandAndGeneric.size() <= NO_GENERIC_ON_SCREEN) {
-            for (String ele : brandAndGeneric.keySet()) {
-                generatedDrugs.put(ele,brandAndGeneric.get(ele));
+        if (records <= NO_GENERIC_ON_SCREEN) {
+            while(cursor.moveToNext()) {
+                generatedDrugs.put(cursor.getString(CommonConstants.KEY_COLUMN), cursor.getString(GENERIC_COLUMN));
             }
             Log.d("generatedDrugs",generatedDrugs.toString());
         } else {
             while (generatedDrugs.size() != NO_GENERIC_ON_SCREEN) {
-                int randNum = randNo.nextInt(brandAndGeneric.size());
-                generatedDrugs.put((String) brandAndGeneric.keySet().toArray()[randNum],
-                        (String) brandAndGeneric.values().toArray()[randNum]);
+                // unsafe casting
+                randNum = generateRandNumber((int) records);
+                cursor.moveToPosition(randNum);
+                generatedDrugs.put(cursor.getString(CommonConstants.KEY_COLUMN), cursor.getString(GENERIC_COLUMN));
+                functionAndUsage.put(cursor.getString(CommonConstants.KEY_COLUMN), cursor.getString(FUNCTION_COLUMN)+
+                        "\n" + cursor.getString(DIRECTION_COLUMN));
             }
         }
 
         /* Generates a random brand name from the set of drug name */
-        int randNum = randNo.nextInt(generatedDrugs.size());
+        randNum = generateRandNumber(generatedDrugs.size());
         brandName = (String) generatedDrugs.keySet().toArray()[randNum];
 
-        /* Generates the direction of usage according to the brand displayed */
+        /* Gets the direction of usage according to the brand displayed */
         direction = functionAndUsage.get(brandName);
 
         Log.d("QuizActivity","generateListDrugs end!");
+    }
+
+    /**
+     * Generates a random number within the number of records
+     *
+     * @return the random number
+     */
+    private int generateRandNumber(int range) {
+        Random randNo = new Random();
+        return  randNo.nextInt(range);
     }
 
     @Override
@@ -156,7 +140,7 @@ public class QuizActivity extends AppCompatActivity {
         drugView.setAdapter(drugAdapter);
 
         /* Displays direction on the screen */
-        directionView = (TextView) findViewById(R.id.direction);
+        TextView directionView = (TextView) findViewById(R.id.direction);
         directionView.setText(direction);
 
         Log.d("QuizActivity", "display end!");

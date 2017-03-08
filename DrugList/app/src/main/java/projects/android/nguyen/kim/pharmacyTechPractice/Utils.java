@@ -3,6 +3,8 @@ package projects.android.nguyen.kim.pharmacyTechPractice;
 import android.widget.EditText;
 
 /**
+ * Utils contains common use methods.
+ *
  * Created by Kimmy on 2/12/2017.
  */
 

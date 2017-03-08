@@ -1,3 +1,12 @@
+/**
+ * AddDrugActivity gets data from user input then adds the data into the database.
+ *
+ * @author Kim Nguyen
+ * @version 2/12/2017
+ *
+ * Modified by Kim Nguyen on 3/8/2017.
+ */
+
 package projects.android.nguyen.kim.pharmacyTechPractice;
 
 import android.support.v7.app.AppCompatActivity;
@@ -5,10 +14,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
 
 public class AddDrugActivity extends AppCompatActivity implements AddScreenInterface {
 
@@ -32,38 +37,48 @@ public class AddDrugActivity extends AppCompatActivity implements AddScreenInter
         Log.d("AddDrugActivity", "onCreate end!");
     }
 
+    /**
+     * Saves user input data onto the database
+     *
+     * @param view the current screen
+     */
     public void saveData(View view) {
         Log.d("AddDrugActivity", "saveData start!");
 
-        try (PrintStream output = new PrintStream(openFileOutput(CommonConstants.MED_FILE, MODE_APPEND))) {
-            String brand = brandEditText.getText().toString().trim();
-            String generic = genericEditText.getText().toString().trim();
-            String function = functionEditText.getText().toString();
-            String direction = directionEditText.getText().toString();
+        String brand = brandEditText.getText().toString().trim();
+        String generic = genericEditText.getText().toString().trim();
+        String function = functionEditText.getText().toString();
+        String direction = directionEditText.getText().toString();
 
-            if (Utils.isEmpty(brand)) {
-                brandEditText.setError("brand is required!");
-            } else if (Utils.isEmpty(generic)) {
-                genericEditText.setError("generic is required!");
-            } else {
-                output.print(brand + CommonConstants.REGEX_TAB);
-                output.print(generic + CommonConstants.REGEX_TAB);
-                output.print(Utils.isEmpty(function) ? "to be updated" + CommonConstants.REGEX_TAB : function + CommonConstants.REGEX_TAB);
-                output.println(Utils.isEmpty(direction) ? "to be updated" : direction);
-            }
-
-            Log.d("add_brand",((EditText) findViewById(R.id.add_brand)).getText().toString());
-
-            clearScreen(view);
-            brandEditText.requestFocus();
-
-        } catch (FileNotFoundException e){
-            Log.e("FileNotFoundException", "Cannot open DATABASE_FILE", e);
+        /* If brand and generic fields are not empty, insert all field's values into the db,
+        otherwise display error messages on the screen */
+        if (Utils.isEmpty(brand)) {
+            brandEditText.setError("brand is required!");
+        } else if (Utils.isEmpty(generic)) {
+            genericEditText.setError("generic is required!");
+        } else {
+            DrugDbOperations operations = new DrugDbOperations(getApplicationContext());
+            operations.insertEntry(operations, brand, generic,
+                    Utils.isEmpty(function) ? "to be updated" : function,
+                    Utils.isEmpty(direction) ? "to be updated" : direction);
         }
+
+        Log.d("add_brand",((EditText) findViewById(R.id.add_brand)).getText().toString());
+
+        // Clears all the fields
+        clearScreen(view);
+
+        // Moves the focus back to brand field
+        brandEditText.requestFocus();
 
         Log.d("AddDrugActivity", "saveData end!");
     }
 
+    /**
+     * Clears all the user input data
+     *
+     * @param view the current screen
+     */
     public void clearScreen(View view) {
         Log.d("AddDrugActivity", "clearScreen start!");
 

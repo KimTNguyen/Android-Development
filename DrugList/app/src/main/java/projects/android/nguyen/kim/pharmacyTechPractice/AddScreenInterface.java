@@ -5,6 +5,8 @@ import android.view.View;
 import java.io.FileNotFoundException;
 
 /**
+ * AddScreenInterface contains methods which is used on screens that is used to add data into db.
+ *
  * Created by Kimmy on 2/12/2017.
  */
 

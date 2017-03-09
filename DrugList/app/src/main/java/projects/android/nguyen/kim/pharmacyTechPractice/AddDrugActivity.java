@@ -38,7 +38,7 @@ public class AddDrugActivity extends AppCompatActivity implements AddScreenInter
     }
 
     /**
-     * Saves user input data onto the database
+     * Saves user input data into the database
      *
      * @param view the current screen
      */
@@ -82,10 +82,10 @@ public class AddDrugActivity extends AppCompatActivity implements AddScreenInter
     public void clearScreen(View view) {
         Log.d("AddDrugActivity", "clearScreen start!");
 
-        Utils.clearData(brandEditText);
-        Utils.clearData(genericEditText);
-        Utils.clearData(functionEditText);
-        Utils.clearData(directionEditText);
+        Utils.clearEditText(brandEditText);
+        Utils.clearEditText(genericEditText);
+        Utils.clearEditText(functionEditText);
+        Utils.clearEditText(directionEditText);
 
         Log.d("AddDrugActivity", "clearScreen end!");
     }

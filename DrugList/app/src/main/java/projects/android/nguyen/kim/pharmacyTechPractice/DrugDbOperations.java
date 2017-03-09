@@ -11,29 +11,29 @@ import android.util.Log;
 /**
  * DrugDbOperations performs the operations of creating and updating the Drug Database.
  *
- * Created by Kimmy on 3/8/2017.
+ * @author Kim Nguyen
+ * @version 3/8/2017.
  */
 
-public class DrugDbOperations extends SQLiteOpenHelper {
+class DrugDbOperations extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Drug.db";
-
-    private static final String SQL_CREATE_ENTRIES = "CREATE TABLE IF NOT EXISTS " +
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "Drug.db";
+    private static final String SQL_CREATE_DRUG_TABLE = "CREATE TABLE IF NOT EXISTS " +
             TableData.DrugInfo.TABLE_NAME + " (" + TableData.DrugInfo._ID +
-            " INTEGER PRIMARY KEY," + TableData.DrugInfo.COLUMN_NAME_BRAND + " TEXT," +
-            TableData.DrugInfo.COLUMN_NAME_GENERIC + " TEXT," +
+            " INTEGER PRIMARY KEY," + TableData.DrugInfo.COLUMN_NAME_BRAND + " TEXT NOT NULL," +
+            TableData.DrugInfo.COLUMN_NAME_GENERIC + " TEXT NOT NULL," +
             TableData.DrugInfo.COLUMN_NAME_FUNCTION + " TEXT," +
             TableData.DrugInfo.COLUMN_NAME_DOSE + " TEXT)";
 
-    public DrugDbOperations(Context context) {
+    DrugDbOperations(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         Log.d("DrugDbOperations","onCreate start!");
-        sqLiteDatabase.execSQL(SQL_CREATE_ENTRIES);
+        sqLiteDatabase.execSQL(SQL_CREATE_DRUG_TABLE);
         Log.d("DrugDbOperations","onCreate end!");
     }
 
@@ -43,15 +43,15 @@ public class DrugDbOperations extends SQLiteOpenHelper {
     }
 
     /**
-     * Inserts drug data into the table
+     * Inserts the entry into the drug table
      *
-     * @param dbOperations the DrugDbOperations instant
+     * @param dbOperations the DrugDbOperations instance
      * @param brand brand name
      * @param generic generic name
      * @param function the use of the medication
      * @param dose dose form of the medication
      */
-    public void insertEntry(DrugDbOperations dbOperations, String brand, String generic, String function, String dose) {
+    void insertEntry(DrugDbOperations dbOperations, String brand, String generic, String function, String dose) {
         Log.d("DrugDbOperations","insertEntry start!");
 
         // Gets the data repository in write mode
@@ -65,18 +65,18 @@ public class DrugDbOperations extends SQLiteOpenHelper {
         values.put(TableData.DrugInfo.COLUMN_NAME_DOSE, dose);
 
         // Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(TableData.DrugInfo.TABLE_NAME,null,values);
+        db.insert(TableData.DrugInfo.TABLE_NAME, null, values);
 
         Log.d("DrugDbOperations","insertEntry end!");
     }
 
     /**
-     * Retrieves values from database
+     * Selects entries from the drug table
      *
-     * @param dbOperations the DrugDbOperations instant
-     * @return the result set returned by a database query
+     * @param dbOperations the DrugDbOperations instance
+     * @return set of selected entries
      */
-    public Cursor getEntries(DrugDbOperations dbOperations) {
+    Cursor getEntries(DrugDbOperations dbOperations) {
         Log.d("DrugDbOperations","getEntry start!");
 
         // Gets the data repository in read mode
@@ -86,7 +86,8 @@ public class DrugDbOperations extends SQLiteOpenHelper {
                 TableData.DrugInfo.COLUMN_NAME_GENERIC, TableData.DrugInfo.COLUMN_NAME_FUNCTION,
                 TableData.DrugInfo.COLUMN_NAME_DOSE};
 
-        Cursor cursor = db.query(TableData.DrugInfo.TABLE_NAME, columns, null, null, null, null, null);
+        Cursor cursor = db.query(TableData.DrugInfo.TABLE_NAME, columns,
+                null, null, null, null, null);
 
         Log.d("DrugDbOperations","getEntry end!");
 
@@ -100,7 +101,7 @@ public class DrugDbOperations extends SQLiteOpenHelper {
      *
      * @return number of records
      */
-    public long getNoRecords(DrugDbOperations dbOperations) {
+    long getNoRecords(DrugDbOperations dbOperations) {
         // Gets the data repository in read mode
         SQLiteDatabase db = dbOperations.getReadableDatabase();
 

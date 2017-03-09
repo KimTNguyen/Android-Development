@@ -6,10 +6,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
-
-public class AddPharmacyAbbreviationsActivity extends AppCompatActivity implements AddScreenInterface {
+/**
+ * AbbreviationDbOperations get data from users' input and store it into the Abbreviation Database.
+ *
+ * @author Kim Nguyen
+ * @version 2/12/2017.
+ *
+ * Modified by Kim Nguyen 3/9/2017.
+ */
+public class AddPharmacyAbbreviationsActivity extends AppCompatActivity
+        implements AddScreenInterface {
 
     private EditText sigCodeEditText;
     private EditText meaningEditText;
@@ -22,38 +28,45 @@ public class AddPharmacyAbbreviationsActivity extends AppCompatActivity implemen
         meaningEditText = (EditText) findViewById(R.id.meaning);
     }
 
+    /**
+     * Saves user input data into the database
+     *
+     * @param view the current screen
+     */
     public void saveData(View view) {
-        Log.d("AddAbbreActivity","saveSigCode start!");
-        try (PrintStream output = new PrintStream(openFileOutput(CommonConstants.SIG_CODE_FILE, MODE_APPEND))) {
+        Log.d("AddAbbActivity","saveSigCode start!");
 
-            String sigCode = sigCodeEditText.getText().toString().trim();
-            String meaning = meaningEditText.getText().toString().trim();
+        String sigCode = sigCodeEditText.getText().toString().trim();
+        String meaning = meaningEditText.getText().toString().trim();
 
-            if (Utils.isEmpty(sigCode)) {
-                sigCodeEditText.setError("sig code is required!");
-            } else if (Utils.isEmpty(meaning)) {
-                meaningEditText.setError("translation is required!");
-            } else {
-                output.print(meaning + CommonConstants.REGEX_TAB);
-                output.println(sigCode);
-            }
+        if (Utils.isEmpty(sigCode)) {
+            sigCodeEditText.setError("sig code is required!");
+        } else if (Utils.isEmpty(meaning)) {
+            meaningEditText.setError("translation is required!");
+        } else {
+            AbbreviationDbOperations operations =
+                    new AbbreviationDbOperations(getApplicationContext());
 
-            clearScreen(view);
-        } catch (FileNotFoundException exception) {
-            Log.e("FileNotFoundException", "Cannot open file", exception);
+            operations.insertEntry(operations, sigCode, meaning);
         }
+
         clearScreen(view);
         sigCodeEditText.requestFocus();
 
-        Log.d("AddAbbreActivity","saveSigCode end!");
+        Log.d("AddAbbActivity","saveSigCode end!");
     }
 
+    /**
+     * Clears all the user input data
+     *
+     * @param view the current screen
+     */
     public void clearScreen(View view) {
-        Log.d("AddAbbreActivity","clearScreen start!");
+        Log.d("AddAbbActivity","clearScreen start!");
 
-        Utils.clearData(sigCodeEditText);
-        Utils.clearData(meaningEditText);
+        Utils.clearEditText(sigCodeEditText);
+        Utils.clearEditText(meaningEditText);
 
-        Log.d("AddAbbreActivity","clearScreen end!");
+        Log.d("AddAbbActivity","clearScreen end!");
     }
 }

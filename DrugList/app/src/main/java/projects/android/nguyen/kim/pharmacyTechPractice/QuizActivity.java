@@ -81,7 +81,7 @@ public class QuizActivity extends AppCompatActivity {
         } else {
             while (generatedDrugs.size() != NO_GENERIC_ON_SCREEN) {
                 // unsafe casting
-                randNum = generateRandNumber((int) records);
+                randNum = generateRandNumber((int)records);
                 cursor.moveToPosition(randNum);
                 generatedDrugs.put(cursor.getString(CommonConstants.KEY_COLUMN), cursor.getString(GENERIC_COLUMN));
                 functionAndUsage.put(cursor.getString(CommonConstants.KEY_COLUMN), cursor.getString(FUNCTION_COLUMN)+

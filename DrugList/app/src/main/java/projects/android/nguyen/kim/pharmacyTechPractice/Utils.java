@@ -26,7 +26,7 @@ public class Utils {
      * Sets the EditText field to blank
      * @param editText the EditText that will be clear
      */
-    public static void clearData(EditText editText) {
+    public static void clearEditText(EditText editText) {
         editText.setText("");
     }
 }

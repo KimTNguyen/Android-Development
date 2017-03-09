@@ -1,5 +1,6 @@
 package projects.android.nguyen.kim.pharmacyTechPractice;
 
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,21 +8,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.Scanner;
 
+/**
+ * TestSigCodeActivity generates a random translation text, and compares its sig code with the sig
+ * entering by the user
+ *
+ * @author Kim Nguyen
+ * @version 3/9/2017.
+ */
 public class TestSigCodeActivity extends AppCompatActivity {
 
-    final int NO_TABLE_COLUMN = 2;
-    final int TRANSLATION_COLUMN = 1;
-    final String SPACE = " ";
-
-    private Map<String, String> sigCodeMap = new HashMap<>();
     private String translationText;
+    private AbbreviationDbOperations operations;
+    private long entries;
+    private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +30,15 @@ public class TestSigCodeActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_sig_code);
-        initSigData();
 
-        if (sigCodeMap.size() > 0 ) {
+        operations = new AbbreviationDbOperations(getApplicationContext());
+        entries = operations.getNoEntries(operations);
+
+        if (entries > 0 ) {
             generateRandAbbreviation();
         } else {
             finish();
-            Log.d("sigCodeMap size", "size: " + sigCodeMap.size());
+            Log.d("TestSigCodeActivity", "number of sig rows: " + entries);
             Toast.makeText(this,"data set is empty",Toast.LENGTH_SHORT).show();
         }
 
@@ -43,40 +46,17 @@ public class TestSigCodeActivity extends AppCompatActivity {
     }
 
     /**
-     * Creates a map of a sig and it's abbreviation accordingly
-     */
-    private void initSigData() {
-        Log.d("TestSigCodeActivity", "initSigData start!");
-
-        try (Scanner scanner = new Scanner(openFileInput(CommonConstants.SIG_CODE_FILE))) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] data = line.split("\t");
-                Log.d("Data", Arrays.toString(data));
-
-                if (data.length == NO_TABLE_COLUMN) {
-                    sigCodeMap.put(data[CommonConstants.KEY_COLUMN], data[TRANSLATION_COLUMN]);
-                }
-            }
-
-        } catch (FileNotFoundException exception) {
-            Log.e("FileNotFoundException", "Cannot open file", exception);
-        }
-
-        Log.d("sigCodeMap", sigCodeMap.toString());
-
-        Log.d("TestSigCodeActivity", "initSigData end!");
-    }
-
-
-    /**
-     * Chooses a random text in the key set values of the map
+     * Picks a random abbreviation text from the database
      */
     private void generateRandAbbreviation() {
         Log.d("TestSigCodeActivity", "generateRandAbbreviation start!");
 
+        final int TRANSLATION_COLUMN = 1;
+
         Random rand = new Random();
-        translationText = (String) sigCodeMap.keySet().toArray()[rand.nextInt(sigCodeMap.size())];
+        cursor = operations.getEntries(operations);
+        cursor.moveToPosition(rand.nextInt((int) entries));
+        translationText = " " + cursor.getString(TRANSLATION_COLUMN);
 
         Log.d("TestSigCodeActivity", "generateRandAbbreviation end!");
     }
@@ -102,7 +82,7 @@ public class TestSigCodeActivity extends AppCompatActivity {
 
         EditText inputEditText = (EditText) findViewById(R.id.sig);
         String answer = inputEditText.getText().toString();
-        String correctAnswer = sigCodeMap.get(translationText);
+        String correctAnswer = cursor.getString(CommonConstants.KEY_COLUMN);
 
         if (answer.equalsIgnoreCase(correctAnswer)) {
             Toast.makeText(this,"Well done!",Toast.LENGTH_SHORT).show();
@@ -110,7 +90,7 @@ public class TestSigCodeActivity extends AppCompatActivity {
             Toast.makeText(this,correctAnswer,Toast.LENGTH_SHORT).show();
         }
 
-        Utils.clearData(inputEditText);
+        Utils.clearEditText(inputEditText);
         generateRandAbbreviation();
         display(translationText);
 
@@ -125,9 +105,7 @@ public class TestSigCodeActivity extends AppCompatActivity {
         Log.d("TestSigCodeActivity", "display start!");
 
         TextView abbTextView = (TextView) findViewById(R.id.sig_meaning);
-        String textToSet = SPACE + text;
-
-        abbTextView.setText(textToSet);
+        abbTextView.setText(text);
 
         Log.d("TestSigCodeActivity", "display end!");
     }

@@ -51,12 +51,12 @@ public class TestSigCodeActivity extends AppCompatActivity {
     private void generateRandAbbreviation() {
         Log.d("TestSigCodeActivity", "generateRandAbbreviation start!");
 
-        final int TRANSLATION_COLUMN = 1;
+        final int TRANSLATION_COL_INDEX = 1;
 
         Random rand = new Random();
         cursor = operations.getEntries(operations);
         cursor.moveToPosition(rand.nextInt((int) entries));
-        translationText = " " + cursor.getString(TRANSLATION_COLUMN);
+        translationText = " " + cursor.getString(TRANSLATION_COL_INDEX);
 
         Log.d("TestSigCodeActivity", "generateRandAbbreviation end!");
     }
@@ -82,7 +82,7 @@ public class TestSigCodeActivity extends AppCompatActivity {
 
         EditText inputEditText = (EditText) findViewById(R.id.sig);
         String answer = inputEditText.getText().toString();
-        String correctAnswer = cursor.getString(CommonConstants.KEY_COLUMN);
+        String correctAnswer = cursor.getString(CommonConstants.KEY_COL_INDEX);
 
         if (answer.equalsIgnoreCase(correctAnswer)) {
             Toast.makeText(this,"Well done!",Toast.LENGTH_SHORT).show();

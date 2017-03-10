@@ -15,7 +15,7 @@ import android.widget.EditText;
  * Modified by Kim Nguyen 3/9/2017.
  */
 public class AddPharmacyAbbreviationsActivity extends AppCompatActivity
-        implements AddScreenInterface {
+        implements IAddScreen {
 
     private EditText sigCodeEditText;
     private EditText meaningEditText;
@@ -48,10 +48,10 @@ public class AddPharmacyAbbreviationsActivity extends AppCompatActivity
                     new AbbreviationDbOperations(getApplicationContext());
 
             operations.insertEntry(operations, sigCode, meaning);
-        }
 
-        clearScreen(view);
-        sigCodeEditText.requestFocus();
+            clearScreen(view);
+            sigCodeEditText.requestFocus();
+        }
 
         Log.d("AddAbbActivity","saveSigCode end!");
     }

@@ -21,8 +21,7 @@ public class AddDataActivity extends AppCompatActivity {
     public void addDrug(View view) {
         Log.d("AddDataActivity","addDrug start!");
 
-        Intent addDrugIntent = new Intent(this, AddDrugActivity.class);
-        startActivity(addDrugIntent);
+        startActivity(new Intent(this, AddDrugActivity.class));
 
         Log.d("AddDataActivity","addDrug end!");
     }
@@ -30,8 +29,7 @@ public class AddDataActivity extends AppCompatActivity {
     public void addPharmacyAbbreviations(View view) {
         Log.d("AddDataActivity","addPharmacyAbbreviations start!");
 
-        Intent addAbbreviation = new Intent(this, AddPharmacyAbbreviationsActivity.class);
-        startActivity(addAbbreviation);
+        startActivity(new Intent(this, AddPharmacyAbbreviationsActivity.class));
 
         Log.d("AddDataActivity","addPharmacyAbbreviations end!");
     }

@@ -15,7 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-public class AddDrugActivity extends AppCompatActivity implements AddScreenInterface {
+public class AddDrugActivity extends AppCompatActivity implements IAddScreen {
 
     private EditText brandEditText;
     private EditText genericEditText;
@@ -61,15 +61,13 @@ public class AddDrugActivity extends AppCompatActivity implements AddScreenInter
             operations.insertEntry(operations, brand, generic,
                     Utils.isEmpty(function) ? "to be updated" : function,
                     Utils.isEmpty(direction) ? "to be updated" : direction);
+
+            // Clears all the fields
+            clearScreen(view);
+
+            // Moves the focus back to brand field
+            brandEditText.requestFocus();
         }
-
-        Log.d("add_brand",((EditText) findViewById(R.id.add_brand)).getText().toString());
-
-        // Clears all the fields
-        clearScreen(view);
-
-        // Moves the focus back to brand field
-        brandEditText.requestFocus();
 
         Log.d("AddDrugActivity", "saveData end!");
     }

@@ -15,11 +15,7 @@ public class Utils {
      * @return true if the String is empty, false otherwise
      */
     public static boolean isEmpty(String str) {
-        if ("".equals(str)) {
-            return true;
-        }
-
-        return false;
+        return "".equals(str);
     }
 
     /**

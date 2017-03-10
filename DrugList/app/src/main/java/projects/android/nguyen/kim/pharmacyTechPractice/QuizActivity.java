@@ -30,9 +30,9 @@ public class QuizActivity extends AppCompatActivity {
     private long records;
 
     final int NO_GENERIC_ON_SCREEN = 5;
-    final int GENERIC_COLUMN = 1;
-    final int FUNCTION_COLUMN = 2;
-    final int DIRECTION_COLUMN = 3;
+    final int GENERIC_COL_INDEX = 1;
+    final int FUNCTION_COL_INDEX = 2;
+    final int DIRECTION_COL_INDEX = 3;
 
     private Map<String,String> generatedDrugs = new HashMap<>();
     private Map<String,String> functionAndUsage = new HashMap<>();
@@ -75,7 +75,7 @@ public class QuizActivity extends AppCompatActivity {
         /* Generate a list of random brand names and its generic */
         if (records <= NO_GENERIC_ON_SCREEN) {
             while(cursor.moveToNext()) {
-                generatedDrugs.put(cursor.getString(CommonConstants.KEY_COLUMN), cursor.getString(GENERIC_COLUMN));
+                generatedDrugs.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(GENERIC_COL_INDEX));
             }
             Log.d("generatedDrugs",generatedDrugs.toString());
         } else {
@@ -83,9 +83,9 @@ public class QuizActivity extends AppCompatActivity {
                 // unsafe casting
                 randNum = generateRandNumber((int)records);
                 cursor.moveToPosition(randNum);
-                generatedDrugs.put(cursor.getString(CommonConstants.KEY_COLUMN), cursor.getString(GENERIC_COLUMN));
-                functionAndUsage.put(cursor.getString(CommonConstants.KEY_COLUMN), cursor.getString(FUNCTION_COLUMN)+
-                        "\n" + cursor.getString(DIRECTION_COLUMN));
+                generatedDrugs.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(GENERIC_COL_INDEX));
+                functionAndUsage.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(FUNCTION_COL_INDEX)+
+                        "\n" + cursor.getString(DIRECTION_COL_INDEX));
             }
         }
 

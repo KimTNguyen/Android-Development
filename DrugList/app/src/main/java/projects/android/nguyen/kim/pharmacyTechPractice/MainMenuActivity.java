@@ -21,8 +21,7 @@ public class MainMenuActivity extends AppCompatActivity {
     public void addDrug(View view) {
         Log.d("MainMenuActivity","addDrug start!");
 
-        Intent addDrugIntent = new Intent(this, AddDataActivity.class);
-        startActivity(addDrugIntent);
+        startActivity(new Intent(this, AddDataActivity.class));
 
         Log.d("MainMenuActivity","addDrug end!");
     }
@@ -30,8 +29,7 @@ public class MainMenuActivity extends AppCompatActivity {
     public void takeQuiz(View view) {
         Log.d("MainMenuActivity","takeQuiz start!");
 
-        Intent takeQuizIntent = new Intent(this, QuizActivity.class);
-        startActivity(takeQuizIntent);
+        startActivity(new Intent(this, QuizActivity.class));
 
         Log.d("MainMenuActivity","takeQuiz end!");
     }
@@ -39,8 +37,7 @@ public class MainMenuActivity extends AppCompatActivity {
     public void searchControlledSubstances(View view) {
         Log.d("MainMenuActivity","searchControlledSubstances start!");
 
-        Intent searchDrugsIntent = new Intent(this, ScheduledDrugActivity.class);
-        startActivity(searchDrugsIntent);
+        startActivity(new Intent(this, ScheduledDrugActivity.class));
 
         Log.d("MainMenuActivity","searchControlledSubstances end!");
     }
@@ -48,8 +45,7 @@ public class MainMenuActivity extends AppCompatActivity {
     public void testSigCode(View view) {
         Log.d("MainMenuActivity","testSigCode start!");
 
-        Intent testSigCodeIntent = new Intent(this, TestSigCodeActivity.class);
-        startActivity(testSigCodeIntent);
+        startActivity(new Intent(this, TestSigCodeActivity.class));
 
         Log.d("MainMenuActivity","testSigCode end!");
     }

@@ -1,21 +1,25 @@
-package projects.android.nguyen.kim.pharmacyTechPractice.model;
+package projects.android.nguyen.kim.pharmacyTechPractice.logic;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import projects.android.nguyen.kim.pharmacyTechPractice.model.PharmacyAbbreviationModel;
+
 /**
- * PharmacyAbbreviationLogic holds the logic of pharmacy abbreviation operations.
+ * AbbreviationDbLogic holds db related operations.
  *
  * @author Kim Nguyen
- * @version 3/15/2017.
+ * @version 3/16/2017
+ *          <p>
+ *          Modified by Kim Nguyen 3/16/17
  */
 
-public class PharmacyAbbreviationLogic extends AppCompatActivity {
+class AbbreviationDbLogic {
+
     private AbbreviationDbOperations dbOperations;
 
-    public PharmacyAbbreviationLogic(Context context) {
+    AbbreviationDbLogic(Context context) {
         dbOperations = new AbbreviationDbOperations(context);
     }
 
@@ -24,12 +28,12 @@ public class PharmacyAbbreviationLogic extends AppCompatActivity {
      *
      * @param model the instance of PharmacyAbbreviationModel
      */
-    public void insertEntry(PharmacyAbbreviationModel model) {
-        Log.d("AbbreviationLogic","insertEntry start!");
+    void insertEntry(PharmacyAbbreviationModel model) {
+        Log.d("AbbreviationLogic", "insertEntry start!");
 
         dbOperations.insertEntry(dbOperations, model.getSigCode(), model.getMeaning());
 
-        Log.d("AbbreviationLogic","insertEntry end!");
+        Log.d("AbbreviationLogic", "insertEntry end!");
     }
 
     /**
@@ -37,7 +41,7 @@ public class PharmacyAbbreviationLogic extends AppCompatActivity {
      *
      * @return number of entries in the abbreviation table
      */
-    public long getNoEntries() {
+    long getNoEntries() {
         return dbOperations.getNoEntries(dbOperations);
     }
 
@@ -46,7 +50,17 @@ public class PharmacyAbbreviationLogic extends AppCompatActivity {
      *
      * @return set of selected entries
      */
-    public Cursor getEntries() {
+    Cursor getEntries() {
         return dbOperations.getEntries(dbOperations);
+    }
+
+    /**
+     * Selects entries that match the condition
+     *
+     * @param condition condition of the select query
+     * @return the selected entries
+     */
+    Cursor getEntry(String condition) {
+        return dbOperations.getEntry(dbOperations, condition);
     }
 }

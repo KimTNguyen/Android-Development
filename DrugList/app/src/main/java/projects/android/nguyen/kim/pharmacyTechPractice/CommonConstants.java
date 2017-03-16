@@ -7,6 +7,6 @@ package projects.android.nguyen.kim.pharmacyTechPractice;
  * @version 1/25/2017.
  */
 
-class CommonConstants {
-    static final int KEY_COL_INDEX = 0;
+public class CommonConstants {
+    public static final int KEY_COL_INDEX = 0;
 }

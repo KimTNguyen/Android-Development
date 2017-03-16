@@ -6,7 +6,7 @@
  * @version 09-Jan-2017
  */
 
-package projects.android.nguyen.kim.pharmacyTechPractice;
+package projects.android.nguyen.kim.pharmacyTechPractice.controller;
 
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugRelatedLogic;
+import projects.android.nguyen.kim.pharmacyTechPractice.CommonConstants;
+import projects.android.nguyen.kim.pharmacyTechPractice.R;
+import projects.android.nguyen.kim.pharmacyTechPractice.logic.DrugRelatedLogic;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -36,8 +38,8 @@ public class QuizActivity extends AppCompatActivity {
     final int FUNCTION_COL_INDEX = 2;
     final int DIRECTION_COL_INDEX = 3;
 
-    private Map<String,String> generatedDrugs = new HashMap<>();
-    private Map<String,String> functionAndUsage = new HashMap<>();
+    private Map<String, String> generatedDrugs = new HashMap<>();
+    private Map<String, String> functionAndUsage = new HashMap<>();
     private String brandName = null;
     private String direction = null;
     private ListView drugView;
@@ -45,7 +47,7 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("QuizActivity","onCreate start!");
+        Log.d("QuizActivity", "onCreate start!");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
@@ -64,41 +66,41 @@ public class QuizActivity extends AppCompatActivity {
             genericView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getApplicationContext(),functionAndUsage.get(brandName),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), functionAndUsage.get(brandName), Toast.LENGTH_LONG).show();
                 }
             });
         } else {
             finish();
             Log.d("QuizActivity", "No records: " + records);
-            Toast.makeText(this,"database is empty",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "database is empty", Toast.LENGTH_SHORT).show();
         }
 
-        Log.d("QuizActivity","onCreate end!");
+        Log.d("QuizActivity", "onCreate end!");
     }
 
     /**
      * Generates a list of random generic and a random brand name to appear on the screen
      */
     private void generateListDrugs() {
-        Log.d("QuizActivity","generateListDrugs start!");
+        Log.d("QuizActivity", "generateListDrugs start!");
 
         int randNum;
 
         /* Generate a list of random brand names and its generic */
         if (records <= NO_GENERIC_ON_SCREEN) {
-            while(cursor.moveToNext()) {
+            while (cursor.moveToNext()) {
                 generatedDrugs.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(GENERIC_COL_INDEX));
             }
-            Log.d("generatedDrugs",generatedDrugs.toString());
+            Log.d("generatedDrugs", generatedDrugs.toString());
         } else {
             generatedDrugs.clear();
             while (generatedDrugs.size() != NO_GENERIC_ON_SCREEN) {
                 // unsafe casting
-                randNum = generateRandNumber((int)records);
+                randNum = generateRandNumber((int) records);
                 Log.d("QuizActivity", "randNum: " + randNum);
                 cursor.moveToPosition(randNum);
                 generatedDrugs.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(GENERIC_COL_INDEX));
-                functionAndUsage.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(FUNCTION_COL_INDEX)+
+                functionAndUsage.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(FUNCTION_COL_INDEX) +
                         "\n" + cursor.getString(DIRECTION_COL_INDEX));
             }
         }
@@ -110,7 +112,7 @@ public class QuizActivity extends AppCompatActivity {
         /* Gets the direction of usage according to the brand displayed */
         direction = functionAndUsage.get(brandName);
 
-        Log.d("QuizActivity","generateListDrugs end!");
+        Log.d("QuizActivity", "generateListDrugs end!");
     }
 
     /**
@@ -120,12 +122,12 @@ public class QuizActivity extends AppCompatActivity {
      */
     private int generateRandNumber(int range) {
         Random randNo = new Random();
-        return  randNo.nextInt(range);
+        return randNo.nextInt(range);
     }
 
     @Override
     protected void onResume() {
-        Log.d("QuizActivity","onResume start!");
+        Log.d("QuizActivity", "onResume start!");
 
         super.onResume();
 
@@ -133,9 +135,9 @@ public class QuizActivity extends AppCompatActivity {
 
         display();
         pickDrugName();
-        Log.d("generatedBradOnResume",brandName);
+        Log.d("generatedBradOnResume", brandName);
 
-        Log.d("QuizActivity","onResume end!");
+        Log.d("QuizActivity", "onResume end!");
     }
 
     /**
@@ -191,11 +193,11 @@ public class QuizActivity extends AppCompatActivity {
 
         super.onSaveInstanceState(outState);
         outState.putString("brandName", brandName);
-        outState.putString("direction",direction);
+        outState.putString("direction", direction);
         outState.putSerializable("generatedDrugs", (Serializable) generatedDrugs);
 
-        Log.d("generatedBradSave",brandName);
-        Log.d("generatedDrugsSave",generatedDrugs.toString());
+        Log.d("generatedBradSave", brandName);
+        Log.d("generatedDrugsSave", generatedDrugs.toString());
 
         Log.d("QuizActivity", "onSaveInstanceState end!");
     }
@@ -210,10 +212,11 @@ public class QuizActivity extends AppCompatActivity {
             brandName = savedInstanceState.getString("brandName");
             direction = savedInstanceState.getString("direction");
             generatedDrugs = (HashMap<String, String>) savedInstanceState.getSerializable("generatedDrugs");
+            // generatedDrugs = (HashMap<String, String>) savedInstanceState.getSerializable("generatedDrugs");
             Log.d("onRestoreInstanceState", "onRestoreInstanceState start!");
         }
-        Log.d("generatedBradRestore",brandName);
-        Log.d("generatedDrugsRestore",generatedDrugs.toString());
+        Log.d("generatedBradRestore", brandName);
+        Log.d("generatedDrugsRestore", generatedDrugs.toString());
 
         Log.d("QuizActivity", "onRestoreInstanceState end!");
     }

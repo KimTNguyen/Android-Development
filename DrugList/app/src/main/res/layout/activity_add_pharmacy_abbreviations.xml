@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="projects.android.nguyen.kim.pharmacyTechPractice.AddPharmacyAbbreviationActivity">
+    tools:context="projects.android.nguyen.kim.pharmacyTechPractice.controller.AddPharmacyAbbreviationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,16 +52,16 @@
         android:gravity="center">
 
         <Button
+            android:id="@+id/saveDataButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/save"
-            android:onClick="saveData"/>
+            android:text="@string/save" />
 
         <Button
+            android:id="@+id/clearScreanButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/clear"
-            android:onClick="clearScreen"/>
+            android:text="@string/clear" />
 
     </LinearLayout>
 

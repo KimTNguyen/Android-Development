@@ -1,4 +1,4 @@
-package projects.android.nguyen.kim.pharmacyTechPractice.model;
+package projects.android.nguyen.kim.pharmacyTechPractice.logic;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,14 +8,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import projects.android.nguyen.kim.pharmacyTechPractice.model.TableData;
-
 /**
  * AddPharmacyAbbreviationActivity performs the operations of creating, selecting, inserting,
  * and updating the Abbreviation Database.
  *
  * @author Kim Nguyen
- * @version 3/9/2017.
+ * @version 3/9/2017
+ *          <p>
+ *          Modified by Kim Nguyen 3/16/17
  */
 
 class AbbreviationDbOperations extends SQLiteOpenHelper {
@@ -49,11 +49,11 @@ class AbbreviationDbOperations extends SQLiteOpenHelper {
      * Inserts the entry into the abbreviation table
      *
      * @param dbOperations the AbbreviationDbOperations instance
-     * @param sigCode the sig
-     * @param meaning the translation
+     * @param sigCode      the sig
+     * @param meaning      the translation
      */
     void insertEntry(AbbreviationDbOperations dbOperations, String sigCode, String meaning) {
-        Log.d("AbbreviationDbOps","insertEntry start!");
+        Log.d("AbbreviationDbOps", "insertEntry start!");
 
         // Gets the data repository in write mode
         SQLiteDatabase db = dbOperations.getWritableDatabase();
@@ -65,7 +65,7 @@ class AbbreviationDbOperations extends SQLiteOpenHelper {
 
         db.insert(TableData.AbbreviationInfo.TABLE_NAME, null, values);
 
-        Log.d("AbbreviationDbOps","insertEntry end!");
+        Log.d("AbbreviationDbOps", "insertEntry end!");
     }
 
     /**
@@ -96,5 +96,32 @@ class AbbreviationDbOperations extends SQLiteOpenHelper {
         SQLiteDatabase db = dbOperations.getReadableDatabase();
 
         return DatabaseUtils.queryNumEntries(db, TableData.AbbreviationInfo.TABLE_NAME);
+    }
+
+    /**
+     * Selects entries that match the condition
+     *
+     * @param dbOperations the AbbreviationDbOperations instance
+     * @param condition    condition of the select query
+     * @return the selected entries
+     */
+    Cursor getEntry(AbbreviationDbOperations dbOperations, String condition) {
+        Log.d("AbbreviationDbOps", "getEntry start!");
+
+        // Gets the data repository in reading mode
+        SQLiteDatabase db = dbOperations.getReadableDatabase();
+
+        String[] colums = {TableData.AbbreviationInfo.COLUMN_SIG_CODE,
+                TableData.AbbreviationInfo.COLUMN_NAME_TRANSLATION};
+
+        Cursor cursor = db.query(TableData.AbbreviationInfo.TABLE_NAME, colums,
+                TableData.AbbreviationInfo.COLUMN_NAME_TRANSLATION + " = '" + condition.trim() + "'",
+                null, null, null, null);
+
+        cursor.moveToFirst();
+
+        Log.d("AbbreviationDbOps", "getEntry end!");
+
+        return cursor;
     }
 }

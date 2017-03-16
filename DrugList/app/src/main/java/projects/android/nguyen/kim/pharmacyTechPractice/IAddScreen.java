@@ -4,11 +4,11 @@ import android.view.View;
 
 /**
  * IAddScreen contains methods which is used on screens that is used to add data into db.
- *
+ * <p>
  * Created by Kimmy on 2/12/2017.
  */
 
-interface IAddScreen {
+public interface IAddScreen {
     /**
      * Clears all the input on the screen
      *

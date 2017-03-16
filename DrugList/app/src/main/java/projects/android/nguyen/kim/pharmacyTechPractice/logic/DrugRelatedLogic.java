@@ -1,11 +1,11 @@
-package projects.android.nguyen.kim.pharmacyTechPractice.model;
+package projects.android.nguyen.kim.pharmacyTechPractice.logic;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
 
 /**
  * DrugRelatedLogic holds the logic of anything related to medication operations.

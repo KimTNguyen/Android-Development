@@ -1,4 +1,4 @@
-package projects.android.nguyen.kim.pharmacyTechPractice.model;
+package projects.android.nguyen.kim.pharmacyTechPractice.logic;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,7 +12,9 @@ import android.util.Log;
  * DrugDbOperations performs the operations of creating and updating the Drug Database.
  *
  * @author Kim Nguyen
- * @version 3/8/2017.
+ * @version 3/8/2017
+ *          <p>
+ *          Modified by Kim Nguyen 3/16/17
  */
 
 class DrugDbOperations extends SQLiteOpenHelper {
@@ -32,9 +34,9 @@ class DrugDbOperations extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        Log.d("DrugDbOperations","onCreate start!");
+        Log.d("DrugDbOperations", "onCreate start!");
         sqLiteDatabase.execSQL(SQL_CREATE_DRUG_TABLE);
-        Log.d("DrugDbOperations","onCreate end!");
+        Log.d("DrugDbOperations", "onCreate end!");
     }
 
     @Override
@@ -46,13 +48,13 @@ class DrugDbOperations extends SQLiteOpenHelper {
      * Inserts the entry into the drug table
      *
      * @param dbOperations the DrugDbOperations instance
-     * @param brand brand name
-     * @param generic generic name
-     * @param function the use of the medication
-     * @param dose dose form of the medication
+     * @param brand        brand name
+     * @param generic      generic name
+     * @param function     the use of the medication
+     * @param dose         dose form of the medication
      */
     void insertEntry(DrugDbOperations dbOperations, String brand, String generic, String function, String dose) {
-        Log.d("DrugDbOperations","insertEntry start!");
+        Log.d("DrugDbOperations", "insertEntry start!");
 
         // Gets the data repository in write mode
         SQLiteDatabase db = dbOperations.getWritableDatabase();
@@ -67,7 +69,7 @@ class DrugDbOperations extends SQLiteOpenHelper {
         // Insert the new row, returning the primary key value of the new row
         db.insert(TableData.DrugInfo.TABLE_NAME, null, values);
 
-        Log.d("DrugDbOperations","insertEntry end!");
+        Log.d("DrugDbOperations", "insertEntry end!");
     }
 
     /**
@@ -77,7 +79,7 @@ class DrugDbOperations extends SQLiteOpenHelper {
      * @return set of selected entries
      */
     Cursor getEntries(DrugDbOperations dbOperations) {
-        Log.d("DrugDbOperations","getEntry start!");
+        Log.d("DrugDbOperations", "getEntry start!");
 
         // Gets the data repository in read mode
         SQLiteDatabase db = dbOperations.getReadableDatabase();
@@ -89,7 +91,7 @@ class DrugDbOperations extends SQLiteOpenHelper {
         Cursor cursor = db.query(TableData.DrugInfo.TABLE_NAME, columns,
                 null, null, null, null, null);
 
-        Log.d("DrugDbOperations","getEntry end!");
+        Log.d("DrugDbOperations", "getEntry end!");
 
         return cursor;
     }
@@ -98,7 +100,6 @@ class DrugDbOperations extends SQLiteOpenHelper {
      * Retrieves number of records in the database
      *
      * @param dbOperations the DrugDbOperations instant
-     *
      * @return number of records
      */
     long getNoRecords(DrugDbOperations dbOperations) {

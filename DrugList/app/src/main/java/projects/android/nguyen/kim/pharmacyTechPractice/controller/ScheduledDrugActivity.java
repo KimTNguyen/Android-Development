@@ -1,4 +1,4 @@
-package projects.android.nguyen.kim.pharmacyTechPractice;
+package projects.android.nguyen.kim.pharmacyTechPractice.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import projects.android.nguyen.kim.pharmacyTechPractice.R;
 
 public class ScheduledDrugActivity extends AppCompatActivity {
 
@@ -55,7 +57,8 @@ public class ScheduledDrugActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.scheduled_drug_list);
 
-        drugAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, scheduledDrugList);
+        drugAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+                scheduledDrugList);
         listView.setAdapter(drugAdapter);
 
         Log.d("ScheduledDrugActivity", "display end!");
@@ -65,7 +68,7 @@ public class ScheduledDrugActivity extends AppCompatActivity {
      * Finds elements matching the input
      */
     private void search() {
-        Log.d("ScheduledDrugActivity","search start!");
+        Log.d("ScheduledDrugActivity", "search start!");
 
         EditText searchScheduledDrug = (EditText) findViewById(R.id.search_scheduled_drug);
         searchScheduledDrug.addTextChangedListener(new TextWatcher() {

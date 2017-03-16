@@ -3,11 +3,11 @@
  *
  * @author Kim Nguyen
  * @version 2/12/2017
- *
- * Modified by Kim Nguyen on 3/8/2017.
+ * <p>
+ * Modified by Kim Nguyen on 3/8/2017
  */
 
-package projects.android.nguyen.kim.pharmacyTechPractice;
+package projects.android.nguyen.kim.pharmacyTechPractice.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,8 +15,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import projects.android.nguyen.kim.pharmacyTechPractice.IAddScreen;
+import projects.android.nguyen.kim.pharmacyTechPractice.R;
+import projects.android.nguyen.kim.pharmacyTechPractice.Utils;
 import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
-import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugRelatedLogic;
+import projects.android.nguyen.kim.pharmacyTechPractice.logic.DrugRelatedLogic;
 
 public class AddDrugActivity extends AppCompatActivity implements IAddScreen {
 

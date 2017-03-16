@@ -1,4 +1,4 @@
-package projects.android.nguyen.kim.pharmacyTechPractice.model;
+package projects.android.nguyen.kim.pharmacyTechPractice.logic;
 
 import android.provider.BaseColumns;
 
@@ -11,7 +11,8 @@ import android.provider.BaseColumns;
 
 final class TableData {
 
-    private TableData() {}
+    private TableData() {
+    }
 
     static class DrugInfo implements BaseColumns {
         static final String TABLE_NAME = "drug";

@@ -15,6 +15,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
+import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugRelatedLogic;
+
 public class AddDrugActivity extends AppCompatActivity implements IAddScreen {
 
     private EditText brandEditText;
@@ -57,10 +60,15 @@ public class AddDrugActivity extends AppCompatActivity implements IAddScreen {
         } else if (Utils.isEmpty(generic)) {
             genericEditText.setError("generic is required!");
         } else {
-            DrugDbOperations operations = new DrugDbOperations(getApplicationContext());
-            operations.insertEntry(operations, brand, generic,
-                    Utils.isEmpty(function) ? "to be updated" : function,
-                    Utils.isEmpty(direction) ? "to be updated" : direction);
+            DrugModel drugModel = new DrugModel();
+            drugModel.setBrand(brand);
+            drugModel.setGeneric(generic);
+            drugModel.setFunction(Utils.isEmpty(function) ? "to be updated" : function);
+            drugModel.setDirection(Utils.isEmpty(direction) ? "to be updated" : direction);
+
+            DrugRelatedLogic logic = new DrugRelatedLogic(getApplicationContext());
+            logic.insertEntry(drugModel);
+            Log.d("AddDrugActivity", "No entries: " + logic.getNoRecords());
 
             // Clears all the fields
             clearScreen(view);

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Random;
 
+import projects.android.nguyen.kim.pharmacyTechPractice.model.PharmacyAbbreviationLogic;
+
 /**
  * TestSigCodeActivity generates a random translation text, and compares its sig code with the sig
  * entering by the user
@@ -20,7 +22,7 @@ import java.util.Random;
 public class TestSigCodeActivity extends AppCompatActivity {
 
     private String translationText;
-    private AbbreviationDbOperations operations;
+    private PharmacyAbbreviationLogic logic;
     private long entries;
     private Cursor cursor;
 
@@ -31,8 +33,8 @@ public class TestSigCodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_sig_code);
 
-        operations = new AbbreviationDbOperations(getApplicationContext());
-        entries = operations.getNoEntries(operations);
+        logic = new PharmacyAbbreviationLogic(getApplicationContext());
+        entries = logic.getNoEntries();
 
         if (entries > 0 ) {
             generateRandAbbreviation();
@@ -54,7 +56,7 @@ public class TestSigCodeActivity extends AppCompatActivity {
         final int TRANSLATION_COL_INDEX = 1;
 
         Random rand = new Random();
-        cursor = operations.getEntries(operations);
+        cursor = logic.getEntries();
         cursor.moveToPosition(rand.nextInt((int) entries));
         translationText = " " + cursor.getString(TRANSLATION_COL_INDEX);
 

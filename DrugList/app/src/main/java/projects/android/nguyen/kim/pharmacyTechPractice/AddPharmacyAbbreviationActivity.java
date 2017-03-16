@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import projects.android.nguyen.kim.pharmacyTechPractice.model.PharmacyAbbreviationModel;
+import projects.android.nguyen.kim.pharmacyTechPractice.model.PharmacyAbbreviationLogic;
+
 /**
  * AbbreviationDbOperations get data from users' input and store it into the Abbreviation Database.
  *
@@ -14,7 +17,7 @@ import android.widget.EditText;
  *
  * Modified by Kim Nguyen 3/9/2017.
  */
-public class AddPharmacyAbbreviationsActivity extends AppCompatActivity
+public class AddPharmacyAbbreviationActivity extends AppCompatActivity
         implements IAddScreen {
 
     private EditText sigCodeEditText;
@@ -44,10 +47,13 @@ public class AddPharmacyAbbreviationsActivity extends AppCompatActivity
         } else if (Utils.isEmpty(meaning)) {
             meaningEditText.setError("translation is required!");
         } else {
-            AbbreviationDbOperations operations =
-                    new AbbreviationDbOperations(getApplicationContext());
+            PharmacyAbbreviationModel sigCodeModel = new PharmacyAbbreviationModel();
+            sigCodeModel.setSigCode(sigCode);
+            sigCodeModel.setMeaning(meaning);
 
-            operations.insertEntry(operations, sigCode, meaning);
+            PharmacyAbbreviationLogic logic = new PharmacyAbbreviationLogic(getApplicationContext());
+            logic.insertEntry(sigCodeModel);
+            Log.d("AddAbbActivity", "No entries: " + logic.getNoEntries());
 
             clearScreen(view);
             sigCodeEditText.requestFocus();

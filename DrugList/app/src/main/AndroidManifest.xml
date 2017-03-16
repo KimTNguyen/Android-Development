@@ -21,7 +21,7 @@
             android:name=".ScheduledDrugActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".AddDrugActivity" />
-        <activity android:name=".AddPharmacyAbbreviationsActivity" />
+        <activity android:name=".AddPharmacyAbbreviationActivity" />
         <activity android:name=".TestSigCodeActivity"></activity>
     </application>
 

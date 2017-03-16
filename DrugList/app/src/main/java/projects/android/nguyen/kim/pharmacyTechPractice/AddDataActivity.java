@@ -29,7 +29,7 @@ public class AddDataActivity extends AppCompatActivity {
     public void addPharmacyAbbreviations(View view) {
         Log.d("AddDataActivity","addPharmacyAbbreviations start!");
 
-        startActivity(new Intent(this, AddPharmacyAbbreviationsActivity.class));
+        startActivity(new Intent(this, AddPharmacyAbbreviationActivity.class));
 
         Log.d("AddDataActivity","addPharmacyAbbreviations end!");
     }

@@ -24,9 +24,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugRelatedLogic;
+
 public class QuizActivity extends AppCompatActivity {
 
-    private DrugDbOperations operations;
+    private Cursor cursor;
     private long records;
 
     final int NO_GENERIC_ON_SCREEN = 5;
@@ -39,6 +41,7 @@ public class QuizActivity extends AppCompatActivity {
     private String brandName = null;
     private String direction = null;
     private ListView drugView;
+    private TextView genericView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +50,26 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        operations = new DrugDbOperations(getApplicationContext());
+        DrugRelatedLogic logic = new DrugRelatedLogic(getApplicationContext());
         drugView = (ListView) findViewById(R.id.drug_list);
+        genericView = (TextView) findViewById(R.id.brand);
 
-        records = operations.getNoRecords(operations);
+        records = logic.getNoRecords();
 
         if (records > 0) {
+            cursor = logic.getEntries();
             generateListDrugs();
+
+            // Shows hint when the user clicks on brand name TextView
+            genericView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getApplicationContext(),functionAndUsage.get(brandName),Toast.LENGTH_LONG).show();
+                }
+            });
         } else {
             finish();
-            Log.d("brandAndGeneric size", "size: " + records);
+            Log.d("QuizActivity", "No records: " + records);
             Toast.makeText(this,"database is empty",Toast.LENGTH_SHORT).show();
         }
 
@@ -69,7 +82,6 @@ public class QuizActivity extends AppCompatActivity {
     private void generateListDrugs() {
         Log.d("QuizActivity","generateListDrugs start!");
 
-        Cursor cursor = operations.getEntries(operations);
         int randNum;
 
         /* Generate a list of random brand names and its generic */
@@ -79,9 +91,11 @@ public class QuizActivity extends AppCompatActivity {
             }
             Log.d("generatedDrugs",generatedDrugs.toString());
         } else {
+            generatedDrugs.clear();
             while (generatedDrugs.size() != NO_GENERIC_ON_SCREEN) {
                 // unsafe casting
                 randNum = generateRandNumber((int)records);
+                Log.d("QuizActivity", "randNum: " + randNum);
                 cursor.moveToPosition(randNum);
                 generatedDrugs.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(GENERIC_COL_INDEX));
                 functionAndUsage.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(FUNCTION_COL_INDEX)+
@@ -129,8 +143,6 @@ public class QuizActivity extends AppCompatActivity {
      */
     protected void display() {
         Log.d("QuizActivity", "display start!");
-
-        TextView genericView = (TextView) findViewById(R.id.brand);
 
         genericView.setText(brandName);
 
@@ -205,4 +217,5 @@ public class QuizActivity extends AppCompatActivity {
 
         Log.d("QuizActivity", "onRestoreInstanceState end!");
     }
+
 }

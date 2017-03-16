@@ -1,4 +1,4 @@
-package projects.android.nguyen.kim.pharmacyTechPractice;
+package projects.android.nguyen.kim.pharmacyTechPractice.model;
 
 import android.content.ContentValues;
 import android.content.Context;

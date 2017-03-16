@@ -1,4 +1,4 @@
-package projects.android.nguyen.kim.pharmacyTechPractice;
+package projects.android.nguyen.kim.pharmacyTechPractice.model;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,8 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import projects.android.nguyen.kim.pharmacyTechPractice.model.TableData;
+
 /**
- * AddPharmacyAbbreviationsActivity performs the operations of creating, selecting, inserting,
+ * AddPharmacyAbbreviationActivity performs the operations of creating, selecting, inserting,
  * and updating the Abbreviation Database.
  *
  * @author Kim Nguyen

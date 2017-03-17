@@ -10,6 +10,7 @@ import projects.android.nguyen.kim.pharmacyTechPractice.R;
 
 public class AddDataActivity extends AppCompatActivity {
 
+    private static final String TAG = "AddDataActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("AddDataActivity", "onCreate start!");
@@ -17,7 +18,7 @@ public class AddDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_data);
 
-        Log.d("AddDataActivity", "onCreate end!");
+        Log.d(TAG, "onCreate end!");
     }
 
     public void addDrug(View view) {
@@ -25,14 +26,14 @@ public class AddDataActivity extends AppCompatActivity {
 
         startActivity(new Intent(this, AddDrugActivity.class));
 
-        Log.d("AddDataActivity", "addDrug end!");
+        Log.d(TAG, "addDrug end!");
     }
 
     public void addPharmacyAbbreviations(View view) {
-        Log.d("AddDataActivity", "addPharmacyAbbreviations start!");
+        Log.d(TAG, "addPharmacyAbbreviations start!");
 
         startActivity(new Intent(this, AddPharmacyAbbreviationActivity.class));
 
-        Log.d("AddDataActivity", "addPharmacyAbbreviations end!");
+        Log.d(TAG, "addPharmacyAbbreviations end!");
     }
 }

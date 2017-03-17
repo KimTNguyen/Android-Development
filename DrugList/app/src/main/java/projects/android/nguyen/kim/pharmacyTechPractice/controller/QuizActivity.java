@@ -29,8 +29,8 @@ import projects.android.nguyen.kim.pharmacyTechPractice.logic.QuizLogic;
 
 public class QuizActivity extends AppCompatActivity {
 
+    private static final String TAG = "QuizActivity";
     private QuizLogic logic;
-
     private Map<String, String> generatedDrugs = new HashMap<>();
     private ListView drugView;
     private TextView genericView;
@@ -39,7 +39,7 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("QuizActivity", "onCreate start!");
+        Log.d(TAG, "onCreate start!");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
@@ -64,7 +64,7 @@ public class QuizActivity extends AppCompatActivity {
             Toast.makeText(this, "database is empty", Toast.LENGTH_SHORT).show();
         }
 
-        Log.d("QuizActivity", "onCreate end!");
+        Log.d(TAG, "onCreate end!");
     }
 
     private void setListDrugs() {
@@ -79,7 +79,7 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        Log.d("QuizActivity", "onResume start!");
+        Log.d(TAG, "onResume start!");
 
         super.onResume();
 
@@ -89,14 +89,14 @@ public class QuizActivity extends AppCompatActivity {
         pickDrugName();
         Log.d("generatedBradOnResume", brandName);
 
-        Log.d("QuizActivity", "onResume end!");
+        Log.d(TAG, "onResume end!");
     }
 
     /**
      * Displays brand name and list of generic on the screen
      */
     protected void display() {
-        Log.d("QuizActivity", "display start!");
+        Log.d(TAG, "display start!");
 
         genericView.setText(brandName);
 
@@ -109,14 +109,14 @@ public class QuizActivity extends AppCompatActivity {
         TextView directionView = (TextView) findViewById(R.id.direction);
         directionView.setText(direction);
 
-        Log.d("QuizActivity", "display end!");
+        Log.d(TAG, "display end!");
     }
 
     /**
      * Gives feedback right or wrong when the user clicks on the generic name on the list
      */
     private void pickDrugName() {
-        Log.d("QuizActivity", "pickDrugName start!");
+        Log.d(TAG, "pickDrugName start!");
 
         drugView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -137,12 +137,12 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        Log.d("QuizActivity", "pickDrugName end!");
+        Log.d(TAG, "pickDrugName end!");
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        Log.d("QuizActivity", "onSaveInstanceState start!");
+        Log.d(TAG, "onSaveInstanceState start!");
 
         super.onSaveInstanceState(outState);
         outState.putString("brandName", brandName);
@@ -152,12 +152,12 @@ public class QuizActivity extends AppCompatActivity {
         Log.d("generatedBradSave", brandName);
         Log.d("generatedDrugsSave", generatedDrugs.toString());
 
-        Log.d("QuizActivity", "onSaveInstanceState end!");
+        Log.d(TAG, "onSaveInstanceState end!");
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        Log.d("QuizActivity", "onRestoreInstanceState start!");
+        Log.d(TAG, "onRestoreInstanceState start!");
 
         super.onRestoreInstanceState(savedInstanceState);
 
@@ -171,7 +171,7 @@ public class QuizActivity extends AppCompatActivity {
         Log.d("generatedBradRestore", brandName);
         Log.d("generatedDrugsRestore", generatedDrugs.toString());
 
-        Log.d("QuizActivity", "onRestoreInstanceState end!");
+        Log.d(TAG, "onRestoreInstanceState end!");
     }
 
 }

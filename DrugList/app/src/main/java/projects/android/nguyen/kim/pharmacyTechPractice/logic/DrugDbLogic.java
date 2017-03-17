@@ -15,6 +15,7 @@ import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
  */
 
 public class DrugDbLogic extends AppCompatActivity {
+    private static final String TAG = "DrugDbLogic";
     private DrugDbOperations dbOperations;
 
     public DrugDbLogic(Context context) {
@@ -25,12 +26,12 @@ public class DrugDbLogic extends AppCompatActivity {
      * Inserts the entry into the drug table
      */
     public void insertEntry(DrugModel model) {
-        Log.d("DrugDbLogic", "insertEntry start!");
+        Log.d(TAG, "insertEntry start!");
 
         dbOperations.insertEntry(dbOperations, model.getBrand(), model.getGeneric(),
                 model.getFunction(), model.getDirection());
 
-        Log.d("DrugDbLogic", "insertEntry end!");
+        Log.d(TAG, "insertEntry end!");
     }
 
     /**

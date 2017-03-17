@@ -13,6 +13,7 @@ import projects.android.nguyen.kim.pharmacyTechPractice.model.PharmacyAbbreviati
  */
 
 public class AddPharmacyAbbreviationLogic {
+    private static final String TAG = "AddAbbreviationLogic";
     private AbbreviationDbLogic dbLogic;
 
     public AddPharmacyAbbreviationLogic(Context context) {
@@ -27,14 +28,14 @@ public class AddPharmacyAbbreviationLogic {
      * @param model   the PharmacyAbbreviationModel instance
      */
     public void saveData(String sigCode, String meaning, PharmacyAbbreviationModel model) {
-        Log.d("AddAbbreviationLogic", "saveSigCode start!");
+        Log.d(TAG, "saveSigCode start!");
 
         model.setSigCode(sigCode);
         model.setMeaning(meaning);
 
         dbLogic.insertEntry(model);
-        Log.d("AddAbbreviationLogic", "No entries: " + dbLogic.getNoEntries());
+        Log.d(TAG, "No entries: " + dbLogic.getNoEntries());
 
-        Log.d("AddAbbreviationLogic", "saveSigCode end!");
+        Log.d(TAG, "saveSigCode end!");
     }
 }

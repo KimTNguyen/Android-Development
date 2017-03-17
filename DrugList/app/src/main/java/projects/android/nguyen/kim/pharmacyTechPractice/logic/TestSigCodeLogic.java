@@ -17,6 +17,7 @@ import projects.android.nguyen.kim.pharmacyTechPractice.CommonConstants;
  *          Modified by Kim Nguyen 3/16/2017
  */
 public class TestSigCodeLogic {
+    private static final String TAG = "TestSigCodeLogic";
     private AbbreviationDbLogic dbLogic;
 
     public TestSigCodeLogic(Context context) {
@@ -27,12 +28,12 @@ public class TestSigCodeLogic {
      * Picks a random abbreviation text from the database
      */
     public String generateRandAbbreviation() {
-        Log.d("AbbreviationLogic", "generateRandAbbreviation start!");
+        Log.d(TAG, "generateRandAbbreviation start!");
 
         long entries = dbLogic.getNoEntries();
         String translationText = "";
 
-        Log.d("AbbreviationLogic", "number of sig rows: " + entries);
+        Log.d(TAG, "number of sig rows: " + entries);
 
         if (entries > 0) {
             final int TRANSLATION_COL_INDEX = 1;
@@ -43,7 +44,7 @@ public class TestSigCodeLogic {
             translationText = " " + cursor.getString(TRANSLATION_COL_INDEX);
         }
 
-        Log.d("AbbreviationLogic", "generateRandAbbreviation end!");
+        Log.d(TAG, "generateRandAbbreviation end!");
 
         return translationText;
     }

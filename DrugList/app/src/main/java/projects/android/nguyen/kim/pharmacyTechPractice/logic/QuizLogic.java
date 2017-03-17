@@ -18,11 +18,8 @@ import projects.android.nguyen.kim.pharmacyTechPractice.CommonConstants;
  */
 
 public class QuizLogic {
+    private static final String TAG = "QuizLogic";
     private DrugDbLogic logic;
-    private final int NO_GENERIC_ON_SCREEN = 5;
-    private final int GENERIC_COL_INDEX = 1;
-    private final int FUNCTION_COL_INDEX = 2;
-    private final int DIRECTION_COL_INDEX = 3;
 
     private Map<String, String> functionAndUsage = new HashMap<>();
     private Map<String, String> generatedDrugs = new HashMap<>();
@@ -36,7 +33,12 @@ public class QuizLogic {
      * Generates a list of random generic and a random brand name to appear on the screen
      */
     public void generateListDrugs() {
-        Log.d("QuizActivity", "generateListDrugs start!");
+        Log.d(TAG, "generateListDrugs start!");
+
+        final int NO_GENERIC_ON_SCREEN = 5;
+        final int GENERIC_COL_INDEX = 1;
+        final int FUNCTION_COL_INDEX = 2;
+        final int DIRECTION_COL_INDEX = 3;
 
         Cursor cursor = logic.getEntries();
         long records = logic.getNoRecords();
@@ -53,7 +55,7 @@ public class QuizLogic {
                 while (generatedDrugs.size() != NO_GENERIC_ON_SCREEN) {
                     // unsafe casting
                     randNum = generateRandNumber((int) records);
-                    Log.d("QuizActivity", "randNum: " + randNum);
+                    Log.d(TAG, "randNum: " + randNum);
                     cursor.moveToPosition(randNum);
                     generatedDrugs.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(GENERIC_COL_INDEX));
                     functionAndUsage.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(FUNCTION_COL_INDEX) +
@@ -62,7 +64,7 @@ public class QuizLogic {
             }
         }
 
-        Log.d("QuizActivity", "generateListDrugs end!");
+        Log.d(TAG, "generateListDrugs end!");
     }
 
     /**

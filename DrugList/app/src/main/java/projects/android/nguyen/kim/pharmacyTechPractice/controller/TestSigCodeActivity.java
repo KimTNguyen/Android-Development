@@ -24,12 +24,13 @@ import projects.android.nguyen.kim.pharmacyTechPractice.logic.TestSigCodeLogic;
  */
 public class TestSigCodeActivity extends AppCompatActivity {
 
+    private static final String TAG = "TestSigCodeActivity";
     private String translationText;
     private TestSigCodeLogic logic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("TestSigCodeActivity", "onCreate start!");
+        Log.d(TAG, "onCreate start!");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_sig_code);
@@ -62,7 +63,7 @@ public class TestSigCodeActivity extends AppCompatActivity {
             Toast.makeText(this, "data set is empty", Toast.LENGTH_SHORT).show();
         }
 
-        Log.d("TestSigCodeActivity", "onCreate end!");
+        Log.d(TAG, "onCreate end!");
     }
 
     /**
@@ -71,44 +72,44 @@ public class TestSigCodeActivity extends AppCompatActivity {
      * @param text the text displayed on the screen
      */
     private void display(String text) {
-        Log.d("TestSigCodeActivity", "display start!");
+        Log.d(TAG, "display start!");
 
         TextView abbTextView = (TextView) findViewById(R.id.sig_meaning);
         abbTextView.setText(text);
 
-        Log.d("TestSigCodeActivity", "display end!");
+        Log.d(TAG, "display end!");
     }
 
     @Override
     protected void onResume() {
-        Log.d("TestSigCodeActivity", "onResume start!");
+        Log.d(TAG, "onResume start!");
 
         super.onResume();
 
         display(translationText);
 
-        Log.d("TestSigCodeActivity", "onResume end!");
+        Log.d(TAG, "onResume end!");
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        Log.d("TestSigCodeActivity", "onSaveInstanceState start!");
+        Log.d(TAG, "onSaveInstanceState start!");
 
         super.onSaveInstanceState(outState);
 
         outState.putString("abbreviationText", translationText);
 
-        Log.d("TestSigCodeActivity", "onSaveInstanceState end!");
+        Log.d(TAG, "onSaveInstanceState end!");
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        Log.d("TestSigCodeActivity", "onRestoreInstanceState start!");
+        Log.d(TAG, "onRestoreInstanceState start!");
 
         super.onRestoreInstanceState(savedInstanceState);
 
         translationText = savedInstanceState.getString("abbreviationText");
 
-        Log.d("TestSigCodeActivity", "onRestoreInstanceState end!");
+        Log.d(TAG, "onRestoreInstanceState end!");
     }
 }

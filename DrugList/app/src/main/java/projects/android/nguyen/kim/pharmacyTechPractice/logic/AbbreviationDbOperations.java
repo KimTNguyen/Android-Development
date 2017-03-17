@@ -19,6 +19,7 @@ import android.util.Log;
  */
 
 class AbbreviationDbOperations extends SQLiteOpenHelper {
+    private static final String TAG = "AbbreviationDbOps";
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Abbreviation.db";
     private static final String SQL_CREATE_ABBREVIATION_TABLE = "CREATE TABLE IF NOT EXISTS " +
@@ -34,11 +35,11 @@ class AbbreviationDbOperations extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        Log.d("AbbreviationDbOps", "onCreate start!");
+        Log.d(TAG, "onCreate start!");
 
         sqLiteDatabase.execSQL(SQL_CREATE_ABBREVIATION_TABLE);
 
-        Log.d("AbbreviationDbOps", "onCreate end!");
+        Log.d(TAG, "onCreate end!");
     }
 
     @Override
@@ -54,7 +55,7 @@ class AbbreviationDbOperations extends SQLiteOpenHelper {
      * @param meaning      the translation
      */
     void insertEntry(AbbreviationDbOperations dbOperations, String sigCode, String meaning) {
-        Log.d("AbbreviationDbOps", "insertEntry start!");
+        Log.d(TAG, "insertEntry start!");
 
         // Gets the data repository in write mode
         SQLiteDatabase db = dbOperations.getWritableDatabase();
@@ -66,7 +67,7 @@ class AbbreviationDbOperations extends SQLiteOpenHelper {
 
         db.insert(TableData.AbbreviationInfo.TABLE_NAME, null, values);
 
-        Log.d("AbbreviationDbOps", "insertEntry end!");
+        Log.d(TAG, "insertEntry end!");
     }
 
     /**
@@ -76,7 +77,7 @@ class AbbreviationDbOperations extends SQLiteOpenHelper {
      * @return set of selected entries
      */
     Cursor getEntries(AbbreviationDbOperations dbOperations) {
-        Log.d("AbbreviationDbOps", "getEntries start!");
+        Log.d(TAG, "getEntries start!");
 
         // Gets the data repository in reading mode
         SQLiteDatabase db = dbOperations.getReadableDatabase();
@@ -87,7 +88,7 @@ class AbbreviationDbOperations extends SQLiteOpenHelper {
         Cursor cursor = db.query(TableData.AbbreviationInfo.TABLE_NAME, colums,
                 null, null, null, null, null);
 
-        Log.d("AbbreviationDbOps", "getEntries end!");
+        Log.d(TAG, "getEntries end!");
 
         return cursor;
     }
@@ -107,7 +108,7 @@ class AbbreviationDbOperations extends SQLiteOpenHelper {
      * @return the selected entries
      */
     Cursor getEntry(AbbreviationDbOperations dbOperations, String condition) {
-        Log.d("AbbreviationDbOps", "getEntry start!");
+        Log.d(TAG, "getEntry start!");
 
         // Gets the data repository in reading mode
         SQLiteDatabase db = dbOperations.getReadableDatabase();
@@ -121,7 +122,7 @@ class AbbreviationDbOperations extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
 
-        Log.d("AbbreviationDbOps", "getEntry end!");
+        Log.d(TAG, "getEntry end!");
 
         return cursor;
     }

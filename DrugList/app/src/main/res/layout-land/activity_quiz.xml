@@ -18,8 +18,9 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/direction" />
+            android:layout_height="match_parent"
+            android:id="@+id/direction"
+            android:background="@color/common_action_bar_splitter"/>
 
     </LinearLayout>
 

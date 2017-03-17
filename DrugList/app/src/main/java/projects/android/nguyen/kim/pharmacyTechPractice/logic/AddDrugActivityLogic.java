@@ -14,6 +14,7 @@ import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
  */
 
 public class AddDrugActivityLogic {
+    private static final String TAG = "AddDrugActivity";
     private DrugDbLogic logic;
 
     public AddDrugActivityLogic(Context context) {
@@ -31,7 +32,7 @@ public class AddDrugActivityLogic {
      */
     public void saveData(String brand, String generic, String function,
                          String direction, DrugModel drugModel) {
-        Log.d("AddDrugActivity", "saveData start!");
+        Log.d(TAG, "saveData start!");
 
         drugModel.setBrand(brand);
         drugModel.setGeneric(generic);
@@ -39,8 +40,8 @@ public class AddDrugActivityLogic {
         drugModel.setDirection(Utils.isEmpty(direction) ? "to be updated" : direction);
 
         logic.insertEntry(drugModel);
-        Log.d("AddDrugActivity", "No entries: " + logic.getNoRecords());
+        Log.d(TAG, "No entries: " + logic.getNoRecords());
 
-        Log.d("AddDrugActivity", "saveData end!");
+        Log.d(TAG, "saveData end!");
     }
 }

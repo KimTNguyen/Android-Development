@@ -25,11 +25,14 @@ import projects.android.nguyen.kim.pharmacyTechPractice.model.PharmacyAbbreviati
 public class AddPharmacyAbbreviationActivity extends AppCompatActivity
         implements IAddScreen {
 
+    private static final String TAG = "AddAbbActivity";
     private EditText sigCodeEditText;
     private EditText meaningEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate start!");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pharmacy_abbreviations);
         sigCodeEditText = (EditText) findViewById(R.id.sig_code);
@@ -65,6 +68,8 @@ public class AddPharmacyAbbreviationActivity extends AppCompatActivity
                 clearScreen(view);
             }
         });
+
+        Log.d(TAG, "onCreate end!");
     }
 
     /**
@@ -73,11 +78,11 @@ public class AddPharmacyAbbreviationActivity extends AppCompatActivity
      * @param view the current screen
      */
     public void clearScreen(View view) {
-        Log.d("AddAbbActivity", "clearScreen start!");
+        Log.d(TAG, "clearScreen start!");
 
         Utils.clearEditText(sigCodeEditText);
         Utils.clearEditText(meaningEditText);
 
-        Log.d("AddAbbActivity", "clearScreen end!");
+        Log.d(TAG, "clearScreen end!");
     }
 }

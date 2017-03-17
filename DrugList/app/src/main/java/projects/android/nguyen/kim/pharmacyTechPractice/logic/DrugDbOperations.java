@@ -18,7 +18,7 @@ import android.util.Log;
  */
 
 class DrugDbOperations extends SQLiteOpenHelper {
-
+    private static final String TAG = "DrugDbOperations";
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Drug.db";
     private static final String SQL_CREATE_DRUG_TABLE = "CREATE TABLE IF NOT EXISTS " +
@@ -34,9 +34,9 @@ class DrugDbOperations extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        Log.d("DrugDbOperations", "onCreate start!");
+        Log.d(TAG, "onCreate start!");
         sqLiteDatabase.execSQL(SQL_CREATE_DRUG_TABLE);
-        Log.d("DrugDbOperations", "onCreate end!");
+        Log.d(TAG, "onCreate end!");
     }
 
     @Override
@@ -54,7 +54,7 @@ class DrugDbOperations extends SQLiteOpenHelper {
      * @param dose         dose form of the medication
      */
     void insertEntry(DrugDbOperations dbOperations, String brand, String generic, String function, String dose) {
-        Log.d("DrugDbOperations", "insertEntry start!");
+        Log.d(TAG, "insertEntry start!");
 
         // Gets the data repository in write mode
         SQLiteDatabase db = dbOperations.getWritableDatabase();
@@ -69,7 +69,7 @@ class DrugDbOperations extends SQLiteOpenHelper {
         // Insert the new row, returning the primary key value of the new row
         db.insert(TableData.DrugInfo.TABLE_NAME, null, values);
 
-        Log.d("DrugDbOperations", "insertEntry end!");
+        Log.d(TAG, "insertEntry end!");
     }
 
     /**
@@ -79,7 +79,7 @@ class DrugDbOperations extends SQLiteOpenHelper {
      * @return set of selected entries
      */
     Cursor getEntries(DrugDbOperations dbOperations) {
-        Log.d("DrugDbOperations", "getEntry start!");
+        Log.d(TAG, "getEntry start!");
 
         // Gets the data repository in read mode
         SQLiteDatabase db = dbOperations.getReadableDatabase();
@@ -91,7 +91,7 @@ class DrugDbOperations extends SQLiteOpenHelper {
         Cursor cursor = db.query(TableData.DrugInfo.TABLE_NAME, columns,
                 null, null, null, null, null);
 
-        Log.d("DrugDbOperations", "getEntry end!");
+        Log.d(TAG, "getEntry end!");
 
         return cursor;
     }

@@ -24,6 +24,7 @@ import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
 
 public class AddDrugActivity extends AppCompatActivity implements IAddScreen {
 
+    private static final String TAG = "AddDrugActivity";
     private EditText brandEditText;
     private EditText genericEditText;
     private EditText functionEditText;
@@ -31,7 +32,7 @@ public class AddDrugActivity extends AppCompatActivity implements IAddScreen {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("AddDrugActivity", "onCreate start!");
+        Log.d(TAG, "onCreate start!");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_drug);
@@ -79,7 +80,7 @@ public class AddDrugActivity extends AppCompatActivity implements IAddScreen {
             }
         });
 
-        Log.d("AddDrugActivity", "onCreate end!");
+        Log.d(TAG, "onCreate end!");
     }
 
     /**
@@ -88,13 +89,13 @@ public class AddDrugActivity extends AppCompatActivity implements IAddScreen {
      * @param view the current screen
      */
     public void clearScreen(View view) {
-        Log.d("AddDrugActivity", "clearScreen start!");
+        Log.d(TAG, "clearScreen start!");
 
         Utils.clearEditText(brandEditText);
         Utils.clearEditText(genericEditText);
         Utils.clearEditText(functionEditText);
         Utils.clearEditText(directionEditText);
 
-        Log.d("AddDrugActivity", "clearScreen end!");
+        Log.d(TAG, "clearScreen end!");
     }
 }

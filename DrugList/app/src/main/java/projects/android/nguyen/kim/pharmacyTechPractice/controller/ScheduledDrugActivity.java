@@ -16,12 +16,13 @@ import projects.android.nguyen.kim.pharmacyTechPractice.R;
 
 public class ScheduledDrugActivity extends AppCompatActivity {
 
+    private static final String TAG = "ScheduledDrugActivity";
     private ArrayAdapter<String> drugAdapter;
     private ArrayList<String> scheduledDrugList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("ScheduledDrugActivity", "onCreate start!");
+        Log.d(TAG, "onCreate start!");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduled_drug);
@@ -29,14 +30,14 @@ public class ScheduledDrugActivity extends AppCompatActivity {
         display();
         search();
 
-        Log.d("ScheduledDrugActivity", "onCreate end!");
+        Log.d(TAG, "onCreate end!");
     }
 
     /**
      * Reads data from the raw file and store them in the scheduledDrugList
      */
     private void initScheduledDrugList() {
-        Log.d("ScheduledDrugActivity", "initScheduledDrugList start!");
+        Log.d(TAG, "initScheduledDrugList start!");
 
         Scanner scanner = new Scanner(getResources().openRawResource(R.raw.scheduled_drugs));
 
@@ -44,16 +45,16 @@ public class ScheduledDrugActivity extends AppCompatActivity {
             scheduledDrugList.add(scanner.nextLine());
         }
 
-        Log.d("scheduledDrugList", scheduledDrugList.toString());
+        Log.d(TAG, "scheduled drug list: " + scheduledDrugList.toString());
 
-        Log.d("ScheduledDrugActivity", "initScheduledDrugList end!");
+        Log.d(TAG, "initScheduledDrugList end!");
     }
 
     /**
      * Displays the scheduledDrugList on the screen
      */
     private void display() {
-        Log.d("ScheduledDrugActivity", "display start!");
+        Log.d(TAG, "display start!");
 
         ListView listView = (ListView) findViewById(R.id.scheduled_drug_list);
 
@@ -61,14 +62,14 @@ public class ScheduledDrugActivity extends AppCompatActivity {
                 scheduledDrugList);
         listView.setAdapter(drugAdapter);
 
-        Log.d("ScheduledDrugActivity", "display end!");
+        Log.d(TAG, "display end!");
     }
 
     /**
      * Finds elements matching the input
      */
     private void search() {
-        Log.d("ScheduledDrugActivity", "search start!");
+        Log.d(TAG, "search start!");
 
         EditText searchScheduledDrug = (EditText) findViewById(R.id.search_scheduled_drug);
         searchScheduledDrug.addTextChangedListener(new TextWatcher() {
@@ -88,6 +89,6 @@ public class ScheduledDrugActivity extends AppCompatActivity {
             }
         });
 
-        Log.d("ScheduledDrugActivity", "search end!");
+        Log.d(TAG, "search end!");
     }
 }

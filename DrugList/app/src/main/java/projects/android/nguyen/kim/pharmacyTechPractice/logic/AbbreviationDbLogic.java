@@ -17,6 +17,7 @@ import projects.android.nguyen.kim.pharmacyTechPractice.model.PharmacyAbbreviati
 
 class AbbreviationDbLogic {
 
+    private static final String TAG = "AbbreviationDbLogic";
     private AbbreviationDbOperations dbOperations;
 
     AbbreviationDbLogic(Context context) {
@@ -29,11 +30,11 @@ class AbbreviationDbLogic {
      * @param model the instance of PharmacyAbbreviationModel
      */
     void insertEntry(PharmacyAbbreviationModel model) {
-        Log.d("AbbreviationLogic", "insertEntry start!");
+        Log.d(TAG, "insertEntry start!");
 
         dbOperations.insertEntry(dbOperations, model.getSigCode(), model.getMeaning());
 
-        Log.d("AbbreviationLogic", "insertEntry end!");
+        Log.d(TAG, "insertEntry end!");
     }
 
     /**

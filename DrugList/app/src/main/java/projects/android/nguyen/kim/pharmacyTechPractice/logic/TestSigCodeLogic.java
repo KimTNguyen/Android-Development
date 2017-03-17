@@ -9,14 +9,13 @@ import java.util.Random;
 import projects.android.nguyen.kim.pharmacyTechPractice.CommonConstants;
 
 /**
- * TestSigCodeLogic holds the logic of test sig code screen.
+ * TestSigCodeLogic holds the logic of the test sig code screen.
  *
  * @author Kim Nguyen
  * @version 3/15/2017
  *          <p>
  *          Modified by Kim Nguyen 3/16/2017
  */
-
 public class TestSigCodeLogic {
     private AbbreviationDbLogic dbLogic;
 

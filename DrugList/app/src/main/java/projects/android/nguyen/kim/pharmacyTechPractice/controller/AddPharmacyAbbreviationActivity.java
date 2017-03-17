@@ -34,8 +34,8 @@ public class AddPharmacyAbbreviationActivity extends AppCompatActivity
         setContentView(R.layout.activity_add_pharmacy_abbreviations);
         sigCodeEditText = (EditText) findViewById(R.id.sig_code);
         meaningEditText = (EditText) findViewById(R.id.meaning);
-        Button saveDataButton = (Button) findViewById(R.id.saveDataButton);
-        Button clearScreenButton = (Button) findViewById(R.id.clearScreanButton);
+        Button saveDataButton = (Button) findViewById(R.id.saveSigDataButton);
+        Button clearScreenButton = (Button) findViewById(R.id.clearAddSigScreanButton);
 
         saveDataButton.setOnClickListener(new View.OnClickListener() {
             @Override

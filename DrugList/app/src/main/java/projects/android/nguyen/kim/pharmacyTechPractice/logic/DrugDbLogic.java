@@ -8,16 +8,16 @@ import android.util.Log;
 import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
 
 /**
- * DrugRelatedLogic holds the logic of anything related to medication operations.
+ * DrugDbLogic holds the logic of anything related to medication operations.
  *
  * @author Kim Nguyen
  * @version 3/15/2017.
  */
 
-public class DrugRelatedLogic extends AppCompatActivity {
+public class DrugDbLogic extends AppCompatActivity {
     private DrugDbOperations dbOperations;
 
-    public DrugRelatedLogic(Context context) {
+    public DrugDbLogic(Context context) {
         dbOperations = new DrugDbOperations(context);
     }
 
@@ -25,12 +25,12 @@ public class DrugRelatedLogic extends AppCompatActivity {
      * Inserts the entry into the drug table
      */
     public void insertEntry(DrugModel model) {
-        Log.d("DrugRelatedLogic", "insertEntry start!");
+        Log.d("DrugDbLogic", "insertEntry start!");
 
         dbOperations.insertEntry(dbOperations, model.getBrand(), model.getGeneric(),
                 model.getFunction(), model.getDirection());
 
-        Log.d("DrugRelatedLogic", "insertEntry end!");
+        Log.d("DrugDbLogic", "insertEntry end!");
     }
 
     /**

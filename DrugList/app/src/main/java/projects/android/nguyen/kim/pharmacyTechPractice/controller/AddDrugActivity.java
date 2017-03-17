@@ -13,13 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import projects.android.nguyen.kim.pharmacyTechPractice.IAddScreen;
 import projects.android.nguyen.kim.pharmacyTechPractice.R;
 import projects.android.nguyen.kim.pharmacyTechPractice.Utils;
+import projects.android.nguyen.kim.pharmacyTechPractice.logic.AddDrugActivityLogic;
 import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
-import projects.android.nguyen.kim.pharmacyTechPractice.logic.DrugRelatedLogic;
 
 public class AddDrugActivity extends AppCompatActivity implements IAddScreen {
 
@@ -40,47 +41,45 @@ public class AddDrugActivity extends AppCompatActivity implements IAddScreen {
         functionEditText = (EditText) findViewById(R.id.add_function);
         directionEditText = (EditText) findViewById(R.id.add_direction);
 
+        Button saveDataButton = (Button) findViewById(R.id.savaDrugDataButton);
+        Button clearScreenButton = (Button) findViewById(R.id.clearAddDrugScreenButton);
+
+        saveDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String brand = brandEditText.getText().toString().trim();
+                String generic = genericEditText.getText().toString().trim();
+
+                /* If brand and generic fields are not empty, insert all field's values into the db,
+                otherwise display error messages on the screen */
+                if (Utils.isEmpty(brand)) {
+                    brandEditText.setError("brand is required!");
+                } else if (Utils.isEmpty(generic)) {
+                    genericEditText.setError("generic is required!");
+                } else {
+                    AddDrugActivityLogic logic = new AddDrugActivityLogic(getApplicationContext());
+                    DrugModel drugModel = new DrugModel();
+
+                    logic.saveData(brand, generic, functionEditText.getText().toString(),
+                            directionEditText.getText().toString(), drugModel);
+
+                    // Clears all the fields
+                    clearScreen(view);
+
+                    // Moves the focus back to brand field
+                    brandEditText.requestFocus();
+                }
+            }
+        });
+
+        clearScreenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clearScreen(view);
+            }
+        });
+
         Log.d("AddDrugActivity", "onCreate end!");
-    }
-
-    /**
-     * Saves user input data into the database
-     *
-     * @param view the current screen
-     */
-    public void saveData(View view) {
-        Log.d("AddDrugActivity", "saveData start!");
-
-        String brand = brandEditText.getText().toString().trim();
-        String generic = genericEditText.getText().toString().trim();
-        String function = functionEditText.getText().toString();
-        String direction = directionEditText.getText().toString();
-
-        /* If brand and generic fields are not empty, insert all field's values into the db,
-        otherwise display error messages on the screen */
-        if (Utils.isEmpty(brand)) {
-            brandEditText.setError("brand is required!");
-        } else if (Utils.isEmpty(generic)) {
-            genericEditText.setError("generic is required!");
-        } else {
-            DrugModel drugModel = new DrugModel();
-            drugModel.setBrand(brand);
-            drugModel.setGeneric(generic);
-            drugModel.setFunction(Utils.isEmpty(function) ? "to be updated" : function);
-            drugModel.setDirection(Utils.isEmpty(direction) ? "to be updated" : direction);
-
-            DrugRelatedLogic logic = new DrugRelatedLogic(getApplicationContext());
-            logic.insertEntry(drugModel);
-            Log.d("AddDrugActivity", "No entries: " + logic.getNoRecords());
-
-            // Clears all the fields
-            clearScreen(view);
-
-            // Moves the focus back to brand field
-            brandEditText.requestFocus();
-        }
-
-        Log.d("AddDrugActivity", "saveData end!");
     }
 
     /**

@@ -52,13 +52,13 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/saveDataButton"
+            android:id="@+id/saveSigDataButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save" />
 
         <Button
-            android:id="@+id/clearScreanButton"
+            android:id="@+id/clearAddSigScreanButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/clear" />

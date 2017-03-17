@@ -30,7 +30,6 @@ public class QuizLogic {
 
     public QuizLogic(Context context) {
         logic = new DrugDbLogic(context);
-        generateListDrugs();
     }
 
     /**

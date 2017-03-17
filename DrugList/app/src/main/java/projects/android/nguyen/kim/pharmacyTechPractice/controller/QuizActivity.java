@@ -48,9 +48,7 @@ public class QuizActivity extends AppCompatActivity {
         genericView = (TextView) findViewById(R.id.brand);
 
         logic = new QuizLogic(getApplicationContext());
-
-        generatedDrugs = logic.getGeneratedDrugs();
-
+        setListDrugs();
         if (generatedDrugs.size() > 0) {
             setBrandAndDirection();
 
@@ -67,6 +65,11 @@ public class QuizActivity extends AppCompatActivity {
         }
 
         Log.d("QuizActivity", "onCreate end!");
+    }
+
+    private void setListDrugs() {
+        logic.generateListDrugs();
+        generatedDrugs = logic.getGeneratedDrugs();
     }
 
     private void setBrandAndDirection() {
@@ -128,8 +131,7 @@ public class QuizActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(QuizActivity.this, "You suck!", Toast.LENGTH_SHORT).show();
                 }
-                logic.generateListDrugs();
-                generatedDrugs = logic.getGeneratedDrugs();
+                setListDrugs();
                 setBrandAndDirection();
                 display();
             }

@@ -24,8 +24,9 @@ class AbbreviationDbOperations extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ABBREVIATION_TABLE = "CREATE TABLE IF NOT EXISTS " +
             TableData.AbbreviationInfo.TABLE_NAME + "(" +
             TableData.AbbreviationInfo.COLUMN_SIG_CODE +
-            " TEXT PRIMARY KEY," + TableData.AbbreviationInfo.COLUMN_NAME_TRANSLATION +
-            " TEXT NOT NULL)WITHOUT ROWID";
+            " TEXT," + TableData.AbbreviationInfo.COLUMN_NAME_TRANSLATION +
+            " TEXT, " + "PRIMARY KEY (" + TableData.AbbreviationInfo.COLUMN_SIG_CODE + ", " +
+            TableData.AbbreviationInfo.COLUMN_NAME_TRANSLATION + ") WITHOUT ROWID";
 
     AbbreviationDbOperations(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

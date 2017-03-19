@@ -11,12 +11,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="projects.android.nguyen.kim.pharmacyTechPractice.controller.QuizActivity">
 
-    <TextView
-        style="@style/BrandNameStyle"
-        android:id="@+id/brand"
-        android:gravity="center"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/brand"
+            style="@style/BrandNameStyle"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/help_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/help"
+            android:layout_weight="6" />
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/drug_list"
@@ -30,6 +45,8 @@
         android:layout_height="match_parent"
         android:layout_weight="2"
         android:id="@+id/direction"
-        android:background="@color/common_action_bar_splitter" />
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorWhite"
+        android:padding="@dimen/activity_horizontal_margin"/>
 
 </LinearLayout>

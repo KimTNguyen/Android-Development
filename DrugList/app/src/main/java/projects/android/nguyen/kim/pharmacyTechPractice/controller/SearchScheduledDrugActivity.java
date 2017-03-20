@@ -14,9 +14,9 @@ import java.util.Scanner;
 
 import projects.android.nguyen.kim.pharmacyTechPractice.R;
 
-public class ScheduledDrugActivity extends AppCompatActivity {
+public class SearchScheduledDrugActivity extends AppCompatActivity {
 
-    private static final String TAG = "ScheduledDrugActivity";
+    private static final String TAG = "SearchScheduledDrugActivity";
     private ArrayAdapter<String> drugAdapter;
     private ArrayList<String> scheduledDrugList = new ArrayList<>();
 
@@ -80,7 +80,7 @@ public class ScheduledDrugActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                ScheduledDrugActivity.this.drugAdapter.getFilter().filter(charSequence);
+                SearchScheduledDrugActivity.this.drugAdapter.getFilter().filter(charSequence);
             }
 
             @Override

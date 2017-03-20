@@ -41,7 +41,7 @@ public class MainMenuActivity extends AppCompatActivity {
     public void searchControlledSubstances(View view) {
         Log.d(TAG, "searchControlledSubstances start!");
 
-        startActivity(new Intent(this, ScheduledDrugActivity.class));
+        startActivity(new Intent(this, SearchScheduledDrugActivity.class));
 
         Log.d(TAG, "searchControlledSubstances end!");
     }

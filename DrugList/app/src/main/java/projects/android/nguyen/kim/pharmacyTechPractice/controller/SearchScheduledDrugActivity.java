@@ -14,9 +14,15 @@ import java.util.Scanner;
 
 import projects.android.nguyen.kim.pharmacyTechPractice.R;
 
+/**
+ * SearchScheduledDrugActivity allows the user to check whether a brand or generic is scheduled.
+ *
+ * @author Kim Nguyen
+ * @version 20-March-2017
+ */
 public class SearchScheduledDrugActivity extends AppCompatActivity {
 
-    private static final String TAG = "SearchScheduledDrugActivity";
+    private static final String TAG = "ScheduledDrugActivity";
     private ArrayAdapter<String> drugAdapter;
     private ArrayList<String> scheduledDrugList = new ArrayList<>();
 

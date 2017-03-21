@@ -11,6 +11,7 @@ import projects.android.nguyen.kim.pharmacyTechPractice.R;
 public class AddDataActivity extends AppCompatActivity {
 
     private static final String TAG = "AddDataActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("AddDataActivity", "onCreate start!");

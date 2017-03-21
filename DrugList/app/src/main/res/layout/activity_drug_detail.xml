@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_quiz_hint"
+    android:id="@+id/activity_drug_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,11 +9,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="projects.android.nguyen.kim.pharmacyTechPractice.controller.QuizHintActivity">
+    tools:context="projects.android.nguyen.kim.pharmacyTechPractice.controller.DrugDetailActivity">
 
-    <TextView
-        android:id="@+id/quiz_hint"
+    <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center" />
+        android:name="projects.android.nguyen.kim.pharmacyTechPractice.controller.DrugDetailFragment"
+        android:id="@+id/drug_details_fragment"
+        tools:layout="@layout/activity_drug_detail" />
+
 </LinearLayout>

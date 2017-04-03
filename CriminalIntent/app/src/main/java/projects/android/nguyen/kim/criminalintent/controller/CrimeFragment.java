@@ -13,29 +13,25 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
-import java.util.Locale;
-
 import projects.android.nguyen.kim.criminalintent.R;
 import projects.android.nguyen.kim.criminalintent.model.Crime;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by Kimmy on 3/31/2017.
  */
+
 public class CrimeFragment extends Fragment {
 
     private Crime mCrime;
-    private EditText mTitleField;
-    private Button mDateButton;
-    private CheckBox mSolvedCheckBox;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
-        mTitleField = (EditText) v.findViewById(R.id.crime_title);
-        mDateButton = (Button) v.findViewById(R.id.crime_date);
-        mSolvedCheckBox = (CheckBox) v.findViewById(R.id.crime_solved);
+        EditText mTitleField = (EditText) v.findViewById(R.id.crime_title);
+        Button mDateButton = (Button) v.findViewById(R.id.crime_date);
+        CheckBox mSolvedCheckBox = (CheckBox) v.findViewById(R.id.crime_solved);
 
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -54,7 +50,7 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mDateButton.setText(DateFormat.getLongDateFormat(v.getContext()).format(mCrime.getDate()).toString());
+        mDateButton.setText(DateFormat.getLongDateFormat(v.getContext()).format(mCrime.getDate()));
         mDateButton.setEnabled(false);
 
         mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -67,13 +63,6 @@ public class CrimeFragment extends Fragment {
         return v;
 
     }
-
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        mCrime = new Crime();
-//    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

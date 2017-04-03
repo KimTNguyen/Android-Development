@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import projects.android.nguyen.kim.criminalintent.R;
 
+/**
+ * Created by Kimmy on 3/31/2017.
+ */
+
 public abstract class SingleFragmentActivity extends AppCompatActivity {
     protected abstract Fragment createFragment();
 

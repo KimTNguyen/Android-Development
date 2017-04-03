@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Kimmy on 3/22/2017.
+ * Created by Kimmy on 3/31/2017.
  */
 
 public class Crime {
@@ -12,6 +12,7 @@ public class Crime {
     private String mTitle;
     private boolean mSolved;
     private Date mDate;
+    private boolean mRequirespolice;
 
     public Crime() {
         // Generates unique identifier
@@ -49,5 +50,13 @@ public class Crime {
 
     public void setSolved(boolean solved) {
         this.mSolved = solved;
+    }
+
+    public boolean isRequiresPolice() {
+        return mRequirespolice;
+    }
+
+    public void setRequiresPolice(boolean requiredPolice) {
+        mRequirespolice = requiredPolice;
     }
 }

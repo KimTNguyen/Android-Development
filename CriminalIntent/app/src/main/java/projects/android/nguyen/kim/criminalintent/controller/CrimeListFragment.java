@@ -42,6 +42,7 @@ public class CrimeListFragment extends Fragment {
     private class CrimeHolder extends RecyclerView.ViewHolder {
         private TextView mTitleTextView;
         private TextView mDateTextView;
+        Button mCallPoliceButton;
         private Crime mCrime;
 
         private CrimeHolder(int res, LayoutInflater inflater, ViewGroup parent) {
@@ -49,11 +50,19 @@ public class CrimeListFragment extends Fragment {
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
             mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
+            mCallPoliceButton = (Button) itemView.findViewById(R.id.crime_requires_police_button);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(getActivity(), mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            mCallPoliceButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getActivity(), "call police", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -63,22 +72,9 @@ public class CrimeListFragment extends Fragment {
             mTitleTextView.setText(mCrime.getTitle());
             mDateTextView.setText(mCrime.getDate().toString());
         }
-    }
 
-    private class CrimeHolderRequiredPolice extends CrimeHolder {
-        Button mCallPoliceButton;
-
-        private CrimeHolderRequiredPolice(int res, LayoutInflater inflater, ViewGroup parent) {
-            super(res, inflater, parent);
-
-            mCallPoliceButton = (Button) itemView.findViewById(R.id.crime_requires_police_button);
-
-            mCallPoliceButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(getActivity(), "call police", Toast.LENGTH_SHORT).show();
-                }
-            });
+        private void activatedCallButton(int status) {
+            mCallPoliceButton.setVisibility(status);
         }
     }
 
@@ -96,11 +92,15 @@ public class CrimeListFragment extends Fragment {
         public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
 
-            if (viewType == MISDEMEANOR) {
-                return new CrimeHolder(R.layout.list_item_crime, layoutInflater, parent);
-            }
-            return new CrimeHolderRequiredPolice(R.layout.list_item_crime_requires_police, layoutInflater, parent);
+            CrimeHolder holder = new CrimeHolder(R.layout.list_item_crime, layoutInflater, parent);
 
+            if (viewType == MISDEMEANOR) {
+                holder.activatedCallButton(View.GONE);
+            } else {
+                holder.activatedCallButton(View.VISIBLE);
+            }
+
+            return holder;
         }
 
         @Override
@@ -116,12 +116,7 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public int getItemViewType(int position) {
-            if (mCrimes.get(position).isRequiresPolice())
-            {
-                return MISDEMEANOR;
-            } else {
-                return FELONY;
-            }
+            return mCrimes.get(position).isRequiresPolice() ? FELONY : MISDEMEANOR;
         }
     }
 

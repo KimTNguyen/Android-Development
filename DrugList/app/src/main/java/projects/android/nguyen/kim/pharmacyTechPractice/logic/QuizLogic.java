@@ -48,6 +48,8 @@ public class QuizLogic {
             if (records <= NO_GENERIC_ON_SCREEN) {
                 while (cursor.moveToNext()) {
                     generatedDrugs.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(GENERIC_COL_INDEX));
+                    functionAndUsage.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(FUNCTION_COL_INDEX) +
+                            "\n" + cursor.getString(DIRECTION_COL_INDEX));
                 }
                 Log.d("generatedDrugs", generatedDrugs.toString());
             } else {

@@ -12,7 +12,6 @@ public class Crime {
     private String mTitle;
     private boolean mSolved;
     private Date mDate;
-    private boolean mRequirespolice;
 
     public Crime() {
         // Generates unique identifier
@@ -50,13 +49,5 @@ public class Crime {
 
     public void setSolved(boolean solved) {
         this.mSolved = solved;
-    }
-
-    public boolean isRequiresPolice() {
-        return mRequirespolice;
-    }
-
-    public void setRequiresPolice(boolean requiredPolice) {
-        mRequirespolice = requiredPolice;
     }
 }

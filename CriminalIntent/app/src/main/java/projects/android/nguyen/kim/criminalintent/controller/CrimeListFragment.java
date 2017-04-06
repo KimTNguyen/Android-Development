@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +42,7 @@ public class CrimeListFragment extends Fragment {
     private class CrimeHolder extends RecyclerView.ViewHolder {
         private TextView mTitleTextView;
         private TextView mDateTextView;
-        Button mCallPoliceButton;
+        private ImageView mSolvedImageView;
         private Crime mCrime;
 
         private CrimeHolder(int res, LayoutInflater inflater, ViewGroup parent) {
@@ -50,7 +50,7 @@ public class CrimeListFragment extends Fragment {
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
             mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
-            mCallPoliceButton = (Button) itemView.findViewById(R.id.crime_requires_police_button);
+            mSolvedImageView = (ImageView) itemView.findViewById(R.id.crime_solved);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -59,7 +59,7 @@ public class CrimeListFragment extends Fragment {
                 }
             });
 
-            mCallPoliceButton.setOnClickListener(new View.OnClickListener() {
+            mSolvedImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(getActivity(), "call police", Toast.LENGTH_SHORT).show();
@@ -71,18 +71,13 @@ public class CrimeListFragment extends Fragment {
             mCrime = crime;
             mTitleTextView.setText(mCrime.getTitle());
             mDateTextView.setText(mCrime.getDate().toString());
-        }
-
-        private void activatedCallButton(int status) {
-            mCallPoliceButton.setVisibility(status);
+            mSolvedImageView.setVisibility(mCrime.isSolved() ? View.VISIBLE : View.GONE);
         }
     }
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
 
         private List<Crime> mCrimes;
-        private static final int MISDEMEANOR = 0;
-        private static final int FELONY = 1;
 
         CrimeAdapter(List<Crime> crimes) {
             mCrimes = crimes;
@@ -92,15 +87,7 @@ public class CrimeListFragment extends Fragment {
         public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
 
-            CrimeHolder holder = new CrimeHolder(R.layout.list_item_crime, layoutInflater, parent);
-
-            if (viewType == MISDEMEANOR) {
-                holder.activatedCallButton(View.GONE);
-            } else {
-                holder.activatedCallButton(View.VISIBLE);
-            }
-
-            return holder;
+            return new CrimeHolder(R.layout.list_item_crime, layoutInflater, parent);
         }
 
         @Override
@@ -114,10 +101,6 @@ public class CrimeListFragment extends Fragment {
             return mCrimes.size();
         }
 
-        @Override
-        public int getItemViewType(int position) {
-            return mCrimes.get(position).isRequiresPolice() ? FELONY : MISDEMEANOR;
-        }
     }
 
     private void updateUI() {

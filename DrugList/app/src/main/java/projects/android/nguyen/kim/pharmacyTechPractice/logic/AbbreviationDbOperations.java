@@ -27,7 +27,7 @@ class AbbreviationDbOperations extends SQLiteOpenHelper {
             TableData.AbbreviationInfo.COLUMN_SIG_CODE +
             " TEXT," + TableData.AbbreviationInfo.COLUMN_NAME_TRANSLATION +
             " TEXT, " + "PRIMARY KEY (" + TableData.AbbreviationInfo.COLUMN_SIG_CODE + ", " +
-            TableData.AbbreviationInfo.COLUMN_NAME_TRANSLATION + ") WITHOUT ROWID";
+            TableData.AbbreviationInfo.COLUMN_NAME_TRANSLATION + "))";
 
     AbbreviationDbOperations(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

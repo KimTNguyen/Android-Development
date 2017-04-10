@@ -10,12 +10,33 @@ package projects.android.nguyen.kim.pharmacyTechPractice.model;
 public class DrugModel {
     private String brand;
     private String generic;
-    private String function;
-    private String direction;
+    private String doseForm;
+    private String commonUses;
+    private String sideEffects;
+    private String comments;
+    private String scheduled;
 
-    public String getBrand() {
-        return brand;
+    public String getScheduled() { return scheduled; }
+
+    public void setScheduled(String scheduled) {
+        this.scheduled = scheduled;
     }
+
+    public String getDoseForm() { return doseForm; }
+
+    public void setDoseForm(String doseForm) {
+        this.doseForm = doseForm;
+    }
+
+    public String getSideEffects() {
+        return sideEffects;
+    }
+
+    public void setSideEffects(String sideEffects) {
+        this.sideEffects = sideEffects;
+    }
+
+    public String getBrand() { return brand; }
 
     public void setBrand(String brand) {
         this.brand = brand;
@@ -29,19 +50,19 @@ public class DrugModel {
         this.generic = generic;
     }
 
-    public String getFunction() {
-        return function;
+    public String getCommonUses() {
+        return commonUses;
     }
 
-    public void setFunction(String function) {
-        this.function = function;
+    public void setCommonUses(String function) {
+        this.commonUses = function;
     }
 
-    public String getDirection() {
-        return direction;
+    public String getComments() {
+        return comments;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }

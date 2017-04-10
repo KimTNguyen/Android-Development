@@ -12,6 +12,8 @@ import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
  *
  * @author Kim Nguyen
  * @version 3/15/2017.
+ *
+ * Modified by Kim Nguyen on 04/09/2017
  */
 
 public class DrugDbLogic extends AppCompatActivity {
@@ -28,8 +30,8 @@ public class DrugDbLogic extends AppCompatActivity {
     public void insertEntry(DrugModel model) {
         Log.d(TAG, "insertEntry start!");
 
-        dbOperations.insertEntry(dbOperations, model.getBrand(), model.getGeneric(),
-                model.getFunction(), model.getDirection());
+        dbOperations.insertEntry(dbOperations, model.getBrand(), model.getGeneric(), model.getScheduled(),
+                model.getDoseForm(), model.getCommonUses(), model.getSideEffects(), model.getComments());
 
         Log.d(TAG, "insertEntry end!");
     }

@@ -15,13 +15,27 @@ import projects.android.nguyen.kim.pharmacyTechPractice.CommonConstants;
  *
  * @author Kim Nguyen
  * @version 3/16/2017
+ *
+ * Modified by Kim Nguyen on 04/09/2017
  */
 
 public class QuizLogic {
     private static final String TAG = "QuizLogic";
+    private static final int NO_GENERIC_ON_SCREEN = 5;
+    private static final int GENERIC_COL_INDEX = 1;
+    private static final int SCHEDULED_COL_INDEX = 2;
+    private static final int DOSE_FORMS_COL_INDEX = 3;
+    private static final int FUNCTION_COL_INDEX = 4;
+    private static final int SIDE_EFFECTS_COL_INDEX = 5;
+    private static final int COMMENTS_COL_INDEX = 6;
+
     private DrugDbLogic logic;
 
-    private Map<String, String> functionAndUsage = new HashMap<>();
+    private Map<String, String> doseForms = new HashMap<>();
+    private Map<String, String> scheduled = new HashMap<>();
+    private Map<String, String> comments = new HashMap<>();
+    private Map<String, String> function = new HashMap<>();
+    private Map<String, String> sideEffects = new HashMap<>();
     private Map<String, String> generatedDrugs = new HashMap<>();
     private int randNum;
 
@@ -35,11 +49,6 @@ public class QuizLogic {
     public void generateListDrugs() {
         Log.d(TAG, "generateListDrugs start!");
 
-        final int NO_GENERIC_ON_SCREEN = 5;
-        final int GENERIC_COL_INDEX = 1;
-        final int FUNCTION_COL_INDEX = 2;
-        final int DIRECTION_COL_INDEX = 3;
-
         Cursor cursor = logic.getEntries();
         long records = logic.getNoRecords();
 
@@ -47,9 +56,7 @@ public class QuizLogic {
             /* Generate a list of random brand names and its generic */
             if (records <= NO_GENERIC_ON_SCREEN) {
                 while (cursor.moveToNext()) {
-                    generatedDrugs.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(GENERIC_COL_INDEX));
-                    functionAndUsage.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(FUNCTION_COL_INDEX) +
-                            "\n" + cursor.getString(DIRECTION_COL_INDEX));
+                    setInfo(cursor);
                 }
                 Log.d("generatedDrugs", generatedDrugs.toString());
             } else {
@@ -59,9 +66,7 @@ public class QuizLogic {
                     randNum = generateRandNumber((int) records);
                     Log.d(TAG, "randNum: " + randNum);
                     cursor.moveToPosition(randNum);
-                    generatedDrugs.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(GENERIC_COL_INDEX));
-                    functionAndUsage.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(FUNCTION_COL_INDEX) +
-                            "\n" + cursor.getString(DIRECTION_COL_INDEX));
+                    setInfo(cursor);
                 }
             }
         }
@@ -79,20 +84,23 @@ public class QuizLogic {
         return randNo.nextInt(range);
     }
 
-    /**
-     * Gets the map of generated brand, its function and usage
-     *
-     * @return the map of brand and its function and usage
-     */
-    public Map<String, String> getFunctionAndUsage() { return functionAndUsage; }
-
+    private void setInfo(Cursor cursor) {
+        generatedDrugs.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(GENERIC_COL_INDEX));
+        doseForms.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(DOSE_FORMS_COL_INDEX));
+        scheduled.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(SCHEDULED_COL_INDEX));
+        comments.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(COMMENTS_COL_INDEX));
+        function.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(FUNCTION_COL_INDEX));
+        sideEffects.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(SIDE_EFFECTS_COL_INDEX));
+    }
 
     /**
      * Gets the map of generated brand and its generic
      *
-     * @return the map of generated brand and its generic
+     * @return the pair generated brand and its generic
      */
-    public Map<String, String> getGeneratedDrugs() { return generatedDrugs; }
+    public Map<String, String> getGeneratedDrugs() {
+        return generatedDrugs;
+    }
 
     /**
      * Generates a random brand name
@@ -102,5 +110,50 @@ public class QuizLogic {
     public String generateBrandName() {
         randNum = generateRandNumber(generatedDrugs.size());
         return (String) generatedDrugs.keySet().toArray()[randNum];
+    }
+
+    /**
+     * Gets the map of generated brand and its dose forms
+     *
+     * @return the pair generated brand and its dose forms
+     */
+    public Map<String, String> getDoseForms() {
+        return doseForms;
+    }
+
+    /**
+     * Gets the map of generated brand and its scheduled
+     *
+     * @return the pair generated brand and its scheduled
+     */
+    public Map<String, String> getScheduled() {
+        return scheduled;
+    }
+
+    /**
+     * Gets the map of generated brand and its comments
+     *
+     * @return the pair generated brand and its comments
+     */
+    public Map<String, String> getComments() {
+        return comments;
+    }
+
+    /**
+     * Gets the map of generated brand and its function
+     *
+     * @return the pair generated brand and its function
+     */
+    public Map<String, String> getFunction() {
+        return function;
+    }
+
+    /**
+     * Gets the map of generated brand and its side effects
+     *
+     * @return the pair generated brand and its side effects
+     */
+    public Map<String, String> getSideEffects() {
+        return sideEffects;
     }
 }

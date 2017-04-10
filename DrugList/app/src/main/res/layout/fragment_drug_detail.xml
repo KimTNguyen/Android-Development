@@ -1,17 +1,92 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="projects.android.nguyen.kim.pharmacyTechPractice.controller.DrugDetailFragment">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="projects.android.nguyen.kim.pharmacyTechPractice.controller.DrugDetailFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:id="@+id/direction"
         android:background="@color/colorPrimaryDark"
-        android:textColor="@color/colorWhite"
-        android:padding="@dimen/activity_horizontal_margin"/>
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dose_form"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingBottom="@dimen/activity_horizontal_margin"/>
+
+        <TextView
+            android:id="@+id/dose_form"
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/common_uses"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingBottom="@dimen/activity_horizontal_margin"/>
+
+        <TextView
+            android:id="@+id/common_uses"
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/side_effects"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingBottom="@dimen/activity_horizontal_margin"/>
+
+        <TextView
+            android:id="@+id/side_effects"
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/comments"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingBottom="@dimen/activity_horizontal_margin"/>
+
+        <TextView
+            android:id="@+id/comments"
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+</ScrollView>

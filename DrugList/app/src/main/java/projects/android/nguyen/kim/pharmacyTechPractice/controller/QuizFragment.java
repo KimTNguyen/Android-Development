@@ -31,12 +31,16 @@ import projects.android.nguyen.kim.pharmacyTechPractice.logic.QuizLogic;
  * @version 20-March-2017
  *
  * Modified by Kim Nguyen on 03/21/2017
+ * Modified by Kim Nguyen on 04/9/2017
  */
 public class QuizFragment extends Fragment {
 
     private static final String TAG = "QuizFragment";
     private static final String BRAND_SAVE_TAG = "brandName";
-    private static final String DIRECTION_SAVE_TAG = "direction";
+    private static final String DOSE_FORMS_SAVE_TAG = "doseForm";
+    private static final String FUNCTION_SAVE_TAG = "function";
+    private static final String SIDE_EFFECTS_TAG = "sideEffects";
+    private static final String COMMENTS_TAG = "comments";
     private static final String CORRECT_ANSWER_SAVE_TAG = "correctAnswer";
     private static final String GENERATED_LIST_DRUGS_SAVE_TAG = "generatedDrugs";
 
@@ -47,7 +51,10 @@ public class QuizFragment extends Fragment {
     private QuizLogic logic;
     private Map<String, String> generatedDrugs = new HashMap<>();
     private String brandName = null;
-    private String direction = null;
+    private String doseForm = null;
+    private String function = null;
+    private String sideEffects = null;
+    private String comments = null;
     private String correctAnswer = null;
 
     @Override
@@ -78,7 +85,10 @@ public class QuizFragment extends Fragment {
             setDrugInfo();
             if (savedInstanceState != null) {
                 brandName = savedInstanceState.getString(BRAND_SAVE_TAG);
-                direction = savedInstanceState.getString(DIRECTION_SAVE_TAG);
+                doseForm = savedInstanceState.getString(DOSE_FORMS_SAVE_TAG);
+                function = savedInstanceState.getString(FUNCTION_SAVE_TAG);
+                sideEffects = savedInstanceState.getString(SIDE_EFFECTS_TAG);
+                comments = savedInstanceState.getString(COMMENTS_TAG);
                 correctAnswer = savedInstanceState.getString(CORRECT_ANSWER_SAVE_TAG);
                 generatedDrugs = (HashMap<String, String>)
                         savedInstanceState.getSerializable(GENERATED_LIST_DRUGS_SAVE_TAG);
@@ -95,7 +105,10 @@ public class QuizFragment extends Fragment {
 
     private void setDrugInfo() {
         brandName = logic.generateBrandName();
-        direction = logic.getFunctionAndUsage().get(brandName);
+        doseForm = logic.getDoseForms().get(brandName);
+        function = logic.getFunction().get(brandName);
+        sideEffects = logic.getSideEffects().get(brandName);
+        comments = logic.getComments().get(brandName);
         correctAnswer = generatedDrugs.get(brandName);
     }
 
@@ -119,24 +132,6 @@ public class QuizFragment extends Fragment {
         });
 
 
-        /* In landscape mode, shows function and direction on the same screen, otherwise, only shows
-         * function and direction when the user click on brand name TextView
-         */
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            brandView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, DrugDetailActivity.class);
-                    intent.putExtra(DrugDetailFragment.EXTRA_DRUG_DETAILS, direction);
-                    startActivity(intent);
-                }
-            });
-        } else {
-            DrugDetailFragment fragment = (DrugDetailFragment) getActivity().getFragmentManager().findFragmentById(R.id.drug_details_fragment);
-            fragment.display(direction);
-        }
-
-
         Log.d("generatedBradOnResume", brandName);
 
         Log.d(TAG, "onResume end!");
@@ -154,6 +149,26 @@ public class QuizFragment extends Fragment {
         ArrayAdapter<String> drugAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1, generatedDrugs.values().toArray(new String[0]));
         drugView.setAdapter(drugAdapter);
+
+        /* In landscape mode, shows function and direction on the same screen, otherwise, only shows
+         * function and direction when the user click on brand name TextView
+         */
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            brandView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, DrugDetailActivity.class);
+                    intent.putExtra(DrugDetailFragment.EXTRA_DOSE_FORM, doseForm);
+                    intent.putExtra(DrugDetailFragment.EXTRA_FUNCTION, function);
+                    intent.putExtra(DrugDetailFragment.EXTRA_SIDE_EFFECT, sideEffects);
+                    intent.putExtra(DrugDetailFragment.EXTRA_COMMENTS, comments);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            DrugDetailFragment fragment = (DrugDetailFragment) getActivity().getFragmentManager().findFragmentById(R.id.drug_details_fragment);
+            fragment.display(doseForm, function, sideEffects, comments);
+        }
 
         Log.d(TAG, "display end!");
     }
@@ -182,7 +197,7 @@ public class QuizFragment extends Fragment {
                 setDrugInfo();
                 display();
             }
-        });
+        }) ;
 
         Log.d(TAG, "pickDrugName end!");
     }
@@ -193,7 +208,10 @@ public class QuizFragment extends Fragment {
 
         super.onSaveInstanceState(outState);
         outState.putString(BRAND_SAVE_TAG, brandName);
-        outState.putString(DIRECTION_SAVE_TAG, direction);
+        outState.putString(DOSE_FORMS_SAVE_TAG, doseForm);
+        outState.putString(FUNCTION_SAVE_TAG, function);
+        outState.putString(SIDE_EFFECTS_TAG, sideEffects);
+        outState.putString(COMMENTS_TAG, comments);
         outState.putString(CORRECT_ANSWER_SAVE_TAG, correctAnswer);
         outState.putSerializable(GENERATED_LIST_DRUGS_SAVE_TAG, (Serializable) generatedDrugs);
 

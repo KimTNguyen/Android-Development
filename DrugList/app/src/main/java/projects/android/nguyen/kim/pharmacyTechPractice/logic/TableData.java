@@ -7,6 +7,8 @@ import android.provider.BaseColumns;
  *
  * @author Kim Nguyen
  * @version 3/8/2017.
+ *
+ * Modified by Kim Nguyen on 04/09/2017
  */
 
 final class TableData {
@@ -18,8 +20,11 @@ final class TableData {
         static final String TABLE_NAME = "drug";
         static final String COLUMN_NAME_BRAND = "brand";
         static final String COLUMN_NAME_GENERIC = "generic";
+        static final String COLUMN_NAME_SCHEDULED = "scheduled";
+        static final String COLUMN_NAME_DOSE_FORMS = "doseForm";
         static final String COLUMN_NAME_FUNCTION = "function";
-        static final String COLUMN_NAME_DOSE = "dose";
+        static final String COLUMN_NAME_SIDE_EFFECTS = "sideEffects";
+        static final String COLUMN_NAME_COMMENTS = "comments";
     }
 
     static class AbbreviationInfo implements BaseColumns {

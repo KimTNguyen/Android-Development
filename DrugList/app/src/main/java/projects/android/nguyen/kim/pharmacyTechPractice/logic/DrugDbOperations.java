@@ -14,7 +14,8 @@ import android.util.Log;
  * @author Kim Nguyen
  * @version 3/8/2017
  *          <p>
- *          Modified by Kim Nguyen 3/16/17
+ *          Modified by Kim Nguyen on 03/16/17
+ *          Modified by Kim Nguyen on 04/09/2017
  */
 
 class DrugDbOperations extends SQLiteOpenHelper {
@@ -25,8 +26,11 @@ class DrugDbOperations extends SQLiteOpenHelper {
             TableData.DrugInfo.TABLE_NAME + " (" + TableData.DrugInfo._ID +
             " INTEGER PRIMARY KEY," + TableData.DrugInfo.COLUMN_NAME_BRAND + " TEXT NOT NULL," +
             TableData.DrugInfo.COLUMN_NAME_GENERIC + " TEXT NOT NULL," +
+            TableData.DrugInfo.COLUMN_NAME_SCHEDULED + " TEXT NOT NULL," +
+            TableData.DrugInfo.COLUMN_NAME_DOSE_FORMS + " TEXT NOT NULL," +
             TableData.DrugInfo.COLUMN_NAME_FUNCTION + " TEXT," +
-            TableData.DrugInfo.COLUMN_NAME_DOSE + " TEXT)";
+            TableData.DrugInfo.COLUMN_NAME_SIDE_EFFECTS + " TEXT," +
+            TableData.DrugInfo.COLUMN_NAME_COMMENTS + " TEXT)";
 
     DrugDbOperations(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -50,10 +54,12 @@ class DrugDbOperations extends SQLiteOpenHelper {
      * @param dbOperations the DrugDbOperations instance
      * @param brand        brand name
      * @param generic      generic name
+     * @param doseForms    route to take the medication
      * @param function     the use of the medication
-     * @param dose         dose form of the medication
+     * @param comments     comments on the medication
      */
-    void insertEntry(DrugDbOperations dbOperations, String brand, String generic, String function, String dose) {
+    void insertEntry(DrugDbOperations dbOperations, String brand, String generic, String scheduled,
+                     String doseForms, String function, String sideEffects, String comments) {
         Log.d(TAG, "insertEntry start!");
 
         // Gets the data repository in write mode
@@ -63,8 +69,11 @@ class DrugDbOperations extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(TableData.DrugInfo.COLUMN_NAME_BRAND, brand);
         values.put(TableData.DrugInfo.COLUMN_NAME_GENERIC, generic);
+        values.put(TableData.DrugInfo.COLUMN_NAME_SCHEDULED, scheduled);
+        values.put(TableData.DrugInfo.COLUMN_NAME_DOSE_FORMS, doseForms);
         values.put(TableData.DrugInfo.COLUMN_NAME_FUNCTION, function);
-        values.put(TableData.DrugInfo.COLUMN_NAME_DOSE, dose);
+        values.put(TableData.DrugInfo.COLUMN_NAME_SIDE_EFFECTS, sideEffects);
+        values.put(TableData.DrugInfo.COLUMN_NAME_COMMENTS, comments);
 
         // Insert the new row, returning the primary key value of the new row
         db.insert(TableData.DrugInfo.TABLE_NAME, null, values);
@@ -85,8 +94,9 @@ class DrugDbOperations extends SQLiteOpenHelper {
         SQLiteDatabase db = dbOperations.getReadableDatabase();
 
         String[] columns = {TableData.DrugInfo.COLUMN_NAME_BRAND,
-                TableData.DrugInfo.COLUMN_NAME_GENERIC, TableData.DrugInfo.COLUMN_NAME_FUNCTION,
-                TableData.DrugInfo.COLUMN_NAME_DOSE};
+                TableData.DrugInfo.COLUMN_NAME_GENERIC, TableData.DrugInfo.COLUMN_NAME_SCHEDULED,
+                TableData.DrugInfo.COLUMN_NAME_DOSE_FORMS, TableData.DrugInfo.COLUMN_NAME_FUNCTION,
+                TableData.DrugInfo.COLUMN_NAME_SIDE_EFFECTS, TableData.DrugInfo.COLUMN_NAME_COMMENTS};
 
         Cursor cursor = db.query(TableData.DrugInfo.TABLE_NAME, columns,
                 null, null, null, null, null);

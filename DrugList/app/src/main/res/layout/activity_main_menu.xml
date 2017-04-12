@@ -30,8 +30,8 @@
         android:onClick="testSigCode"/>
 
     <Button
+        android:id="@+id/search_drug"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search Controlled Substances"
-        android:onClick="searchControlledSubstances" />
+        android:text="Search Drugs"/>
 </LinearLayout>

@@ -18,11 +18,12 @@
         </activity>
         <activity android:name=".controller.AddDataActivity" />
         <activity
-            android:name=".controller.ScheduledDrugActivity"
+            android:name=".controller.DrugListActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".controller.AddDrugActivity" />
         <activity android:name=".controller.AddPharmacyAbbreviationActivity" />
         <activity android:name=".controller.TestSigCodeActivity" />
+        <activity android:name=".controller.DrugDetailActivity" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -30,9 +31,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity android:name=".controller.QuizHintActivity" />
-        <activity android:name=".controller.DrugDetailActivity"></activity>
     </application>
 
 </manifest>

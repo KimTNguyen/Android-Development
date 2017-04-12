@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import projects.android.nguyen.kim.pharmacyTechPractice.R;
 
@@ -18,6 +19,14 @@ public class MainMenuActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        Button searchDrug = (Button) findViewById(R.id.search_drug);
+        searchDrug.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication(), DrugListActivity.class));
+            }
+        });
 
         Log.d(TAG, "onCreate end!");
     }
@@ -36,14 +45,6 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(new Intent(this, QuizActivity.class));
 
         Log.d(TAG, "takeQuiz end!");
-    }
-
-    public void searchControlledSubstances(View view) {
-        Log.d(TAG, "searchControlledSubstances start!");
-
-        startActivity(new Intent(this, SearchScheduledDrugActivity.class));
-
-        Log.d(TAG, "searchControlledSubstances end!");
     }
 
     public void testSigCode(View view) {

@@ -1,7 +1,5 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="projects.android.nguyen.kim.pharmacyTechPractice.controller.DrugListFragment">
-
-</FrameLayout>
+<android.support.v7.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drug_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />

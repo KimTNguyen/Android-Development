@@ -16,7 +16,7 @@ import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
  * Modified by Kim Nguyen on 04/09/2017
  */
 
-public class DrugDbLogic extends AppCompatActivity {
+public class DrugDbLogic {
     private static final String TAG = "DrugDbLogic";
     private DrugDbOperations dbOperations;
 

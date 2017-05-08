@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import projects.android.nguyen.kim.pharmacyTechPractice.CommonConstants;
 import projects.android.nguyen.kim.pharmacyTechPractice.R;
 import projects.android.nguyen.kim.pharmacyTechPractice.Utils;
 import projects.android.nguyen.kim.pharmacyTechPractice.logic.AddDrugActivityLogic;
@@ -41,11 +42,10 @@ public class AddDrugActivity extends AppCompatActivity {
     private static final String EYE_DROP = "eye drop";
     private static final String IMPLANT = "implant";
     private static final String VAGINAL = "vaginal";
-    private static final String I = "I";
-    private static final String II = "II";
-    private static final String III = "III";
-    private static final String IV = "IV";
-    private static final String NONE = "NONE";
+    private static final String SCHEDULED_I = "I";
+    private static final String SCHEDULED_II = "II";
+    private static final String SCHEDULED_III = "III";
+    private static final String SCHEDULED_IV = "IV";
 
     private EditText brandEditText;
     private EditText genericEditText;
@@ -172,15 +172,15 @@ public class AddDrugActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (checkedId == R.id.one) {
-                    scheduled = I;
+                    scheduled = SCHEDULED_I;
                 } else if (checkedId == R.id.two) {
-                    scheduled = II;
+                    scheduled = SCHEDULED_II;
                 } else if (checkedId == R.id.three) {
-                    scheduled = III;
+                    scheduled = SCHEDULED_III;
                 } else if (checkedId == R.id.four) {
-                    scheduled = IV;
+                    scheduled = SCHEDULED_IV;
                 } else if (checkedId == R.id.none) {
-                    scheduled = NONE;
+                    scheduled = CommonConstants.NONE_CONTROLLED_SUBSTANCES;
                 }
             }
         });

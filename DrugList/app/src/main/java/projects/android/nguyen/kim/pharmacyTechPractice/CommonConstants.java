@@ -9,4 +9,5 @@ package projects.android.nguyen.kim.pharmacyTechPractice;
 
 public class CommonConstants {
     public static final int KEY_COL_INDEX = 0;
+    public static final String NONE_CONTROLLED_SUBSTANCES = "NONE";
 }

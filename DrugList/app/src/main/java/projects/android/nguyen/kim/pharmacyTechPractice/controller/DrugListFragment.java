@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import projects.android.nguyen.kim.pharmacyTechPractice.CommonConstants;
 import projects.android.nguyen.kim.pharmacyTechPractice.R;
 import projects.android.nguyen.kim.pharmacyTechPractice.logic.DrugLab;
 import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
@@ -77,6 +78,8 @@ public class DrugListFragment extends Fragment {
             brandTextView.setText(this.drug.getBrand());
             genericTextView.setText(this.drug.getGeneric());
             scheduledTextView.setText(this.drug.getScheduled());
+            scheduledTextView.setVisibility(drug.getScheduled().equalsIgnoreCase
+                    (CommonConstants.NONE_CONTROLLED_SUBSTANCES)? View.GONE : View.VISIBLE);
         }
     }
 

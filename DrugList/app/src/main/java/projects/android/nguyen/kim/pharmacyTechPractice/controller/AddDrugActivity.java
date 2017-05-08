@@ -264,7 +264,9 @@ public class AddDrugActivity extends AppCompatActivity {
         boolean checked = ((CheckBox) view).isChecked();
 
         if (checked) {
-            route.add(obj);
+            if (!route.contains(obj)) {
+                route.add(obj);
+            }
         } else {
             route.remove(obj);
         }

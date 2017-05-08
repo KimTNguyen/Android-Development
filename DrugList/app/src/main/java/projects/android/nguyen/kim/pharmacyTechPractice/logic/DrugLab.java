@@ -57,7 +57,7 @@ public class DrugLab {
             final int SCHEDULED = 2;
 
             DrugModel drug = new DrugModel();
-            String[] line = scanner.nextLine().split("\t");
+            String[] line = scanner.nextLine().split("\\t");
             drug.setBrand(line[NAME]);
             drug.setGeneric(line[GENERIC]);
             drug.setScheduled(line[SCHEDULED]);

@@ -1,10 +1,9 @@
-/**
+/*
  * QuizActivity provides a list of drug's generic for the user to match with the brand name displayed
  * accordingly.
  *
  * @author Kim Nguyen
  * @version 09-Jan-2017
- * <p>
  * Modified by Kim Nguyen on 3/16/17
  * Modified by Kim Nguyen on 3/20/17
  */

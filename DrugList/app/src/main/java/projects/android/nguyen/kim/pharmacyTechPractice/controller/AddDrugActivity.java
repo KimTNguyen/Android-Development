@@ -6,6 +6,7 @@
  * <p>
  * Modified by Kim Nguyen on 3/8/2017
  * Modified by Kim Nguyen on 4/9/2017
+ * Modified by Kim Nguyen on 5/9/2017
  */
 
 package projects.android.nguyen.kim.pharmacyTechPractice.controller;
@@ -26,26 +27,11 @@ import java.util.ArrayList;
 import projects.android.nguyen.kim.pharmacyTechPractice.CommonConstants;
 import projects.android.nguyen.kim.pharmacyTechPractice.R;
 import projects.android.nguyen.kim.pharmacyTechPractice.Utils;
-import projects.android.nguyen.kim.pharmacyTechPractice.logic.AddDrugActivityLogic;
 import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
 
 public class AddDrugActivity extends AppCompatActivity {
 
     private static final String TAG = "AddDrugActivity";
-    private static final String BY_MOUTH = "PO";
-    private static final String SUPPOSITORY = "SUPP";
-    private static final String INHALATION = "oral inhalation";
-    private static final String INJECTION = "INJ";
-    private static final String NASAL_SPRAY = "nasal spray";
-    private static final String AEROSOL = "aerosol";
-    private static final String TOPICALLY = "TOP";
-    private static final String EYE_DROP = "eye drop";
-    private static final String IMPLANT = "implant";
-    private static final String VAGINAL = "vaginal";
-    private static final String SCHEDULED_I = "I";
-    private static final String SCHEDULED_II = "II";
-    private static final String SCHEDULED_III = "III";
-    private static final String SCHEDULED_IV = "IV";
 
     private EditText brandEditText;
     private EditText genericEditText;
@@ -101,70 +87,70 @@ public class AddDrugActivity extends AppCompatActivity {
         byMouthCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actOnCheckBox(v, BY_MOUTH);
+                actOnCheckBox(v, CommonConstants.BY_MOUTH);
             }
         });
 
         suppositoryCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actOnCheckBox(v, SUPPOSITORY);
+                actOnCheckBox(v, CommonConstants.SUPPOSITORY);
             }
         });
 
         inhalationCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actOnCheckBox(v, INHALATION);
+                actOnCheckBox(v, CommonConstants.INHALATION);
             }
         });
 
         injectionCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actOnCheckBox(v, INJECTION);
+                actOnCheckBox(v, CommonConstants.INJECTION);
             }
         });
 
         nasalSprayCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actOnCheckBox(v, NASAL_SPRAY);
+                actOnCheckBox(v, CommonConstants.NASAL_SPRAY);
             }
         });
 
         aerosolCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actOnCheckBox(v, AEROSOL);
+                actOnCheckBox(v, CommonConstants.AEROSOL);
             }
         });
 
         topicallyCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actOnCheckBox(v, TOPICALLY);
+                actOnCheckBox(v, CommonConstants.TOPICALLY);
             }
         });
 
         eyeDropCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actOnCheckBox(v, EYE_DROP);
+                actOnCheckBox(v, CommonConstants.EYE_DROP);
             }
         });
 
         implantCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actOnCheckBox(v, IMPLANT);
+                actOnCheckBox(v, CommonConstants.IMPLANT);
             }
         });
 
         vaginalCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actOnCheckBox(v, VAGINAL);
+                actOnCheckBox(v, CommonConstants.VAGINAL);
             }
         });
 
@@ -172,13 +158,13 @@ public class AddDrugActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (checkedId == R.id.one) {
-                    scheduled = SCHEDULED_I;
+                    scheduled = CommonConstants.SCHEDULED_I;
                 } else if (checkedId == R.id.two) {
-                    scheduled = SCHEDULED_II;
+                    scheduled = CommonConstants.SCHEDULED_II;
                 } else if (checkedId == R.id.three) {
-                    scheduled = SCHEDULED_III;
+                    scheduled = CommonConstants.SCHEDULED_III;
                 } else if (checkedId == R.id.four) {
-                    scheduled = SCHEDULED_IV;
+                    scheduled = CommonConstants.SCHEDULED_IV;
                 } else if (checkedId == R.id.none) {
                     scheduled = CommonConstants.NONE_CONTROLLED_SUBSTANCES;
                 }
@@ -203,13 +189,13 @@ public class AddDrugActivity extends AppCompatActivity {
                 } else if (scheduled == null) {
                     Toast.makeText(getApplication(), "Scheduled is required!", Toast.LENGTH_SHORT).show();
                 } else {
-                    AddDrugActivityLogic logic = new AddDrugActivityLogic(getApplicationContext());
                     DrugModel drugModel = new DrugModel();
 
-                    logic.saveData(brand, generic, scheduled, route.toString(),
+                    Utils.addDrug(brand, generic, scheduled, route.toString(),
                             functionEditText.getText().toString(),
                             sideEffectsEditText.getText().toString(),
-                            commentsEditText.getText().toString(), drugModel);
+                            commentsEditText.getText().toString(), getApplicationContext(),
+                            drugModel);
 
                     // Clears all the fields
                     clearScreen(view);

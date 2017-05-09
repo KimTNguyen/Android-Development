@@ -7,7 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Scanner;
+
+import projects.android.nguyen.kim.pharmacyTechPractice.CommonConstants;
 import projects.android.nguyen.kim.pharmacyTechPractice.R;
+import projects.android.nguyen.kim.pharmacyTechPractice.Utils;
+import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -19,6 +24,8 @@ public class MainMenuActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        DBPreparation();
 
         Button searchDrug = (Button) findViewById(R.id.search_drug);
         searchDrug.setOnClickListener(new View.OnClickListener() {
@@ -53,5 +60,25 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(new Intent(this, TestSigCodeActivity.class));
 
         Log.d(TAG, "testSigCode end!");
+    }
+
+    private void DBPreparation() {
+        Log.d(TAG, "saveDataToDB start!");
+
+        Scanner scanner = new Scanner(this.getResources().openRawResource(R.raw.scheduled_drugs));
+
+        while (scanner.hasNext()) {
+            final int NAME = 0;
+            final int GENERIC = 1;
+            final int SCHEDULED = 2;
+
+            DrugModel drug = new DrugModel();
+            String[] line = scanner.nextLine().split("\\t");
+
+            Utils.addDrug(line[NAME], line[GENERIC], line[SCHEDULED], CommonConstants.BY_MOUTH, "",
+                    "", "", this, drug);
+        }
+
+        Log.d(TAG, "saveDataToDB end!");
     }
 }

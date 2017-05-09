@@ -1,19 +1,20 @@
 package projects.android.nguyen.kim.pharmacyTechPractice.logic;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-import projects.android.nguyen.kim.pharmacyTechPractice.R;
+import projects.android.nguyen.kim.pharmacyTechPractice.CommonConstants;
 import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
 
 /**
  * Drug Lab is a singleton class responsible for generating a list of drugs.
  *
  * Created by Kimmy on 4/10/2017.
+ * Modified by Kim Nguyen on 5/9/2017
  */
 
 public class DrugLab {
@@ -24,7 +25,7 @@ public class DrugLab {
 
     private DrugLab(Context context) {
         drugList = new ArrayList<>();
-        initDrugList(context);
+        getDataFromDB(context);
     }
 
     public static DrugLab get(Context context) {
@@ -39,34 +40,30 @@ public class DrugLab {
         return drugList;
     }
 
-    public void setDrugList(List<DrugModel> drugList) {
-        this.drugList = drugList;
-    }
+//    private void setDrugList(List<DrugModel> drugList) {
+//        this.drugList = drugList;
+//    }
 
     /**
-     * Reads data from the raw file and store them in the scheduledDrugList
+     * Reads data from the DB
      */
-    private void initDrugList(Context context) {
-        Log.d(TAG, "initDrugList start!");
+    private void getDataFromDB(Context context) {
+        DrugDbLogic logic = new DrugDbLogic(context);
+        Cursor cursor = logic.getEntries();
 
-        Scanner scanner = new Scanner(context.getResources().openRawResource(R.raw.scheduled_drugs));
-
-        while (scanner.hasNext()) {
-            final int NAME = 0;
-            final int GENERIC = 1;
-            final int SCHEDULED = 2;
-
+        while (cursor.moveToNext()) {
             DrugModel drug = new DrugModel();
-            String[] line = scanner.nextLine().split("\\t");
-            drug.setBrand(line[NAME]);
-            drug.setGeneric(line[GENERIC]);
-            drug.setScheduled(line[SCHEDULED]);
+            drug.setBrand(cursor.getString(CommonConstants.KEY_COL_INDEX));
+            drug.setGeneric(cursor.getString(CommonConstants.GENERIC_COL_INDEX));
+            drug.setScheduled(cursor.getString(CommonConstants.SCHEDULED_COL_INDEX));
+            drug.setDoseForm(cursor.getString(CommonConstants.DOSE_FORMS_COL_INDEX));
+            drug.setCommonUses(cursor.getString(CommonConstants.FUNCTION_COL_INDEX));
+            drug.setComments(cursor.getString(CommonConstants.COMMENTS_COL_INDEX));
+            drug.setSideEffects(cursor.getString(CommonConstants.SIDE_EFFECTS_COL_INDEX));
+
             drugList.add(drug);
         }
 
         Log.d(TAG, "scheduled drug list: " + drugList.toString());
-
-        Log.d(TAG, "initDrugList end!");
     }
-
 }

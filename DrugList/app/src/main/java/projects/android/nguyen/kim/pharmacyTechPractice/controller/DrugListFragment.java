@@ -23,11 +23,11 @@ import projects.android.nguyen.kim.pharmacyTechPractice.model.DrugModel;
  *
  * @author Kim Nguyen
  * @version 04/12/2017
+ * Modified by Kim Nguyen on 5/9/2017
  */
 public class DrugListFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private DrugAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,8 +46,7 @@ public class DrugListFragment extends Fragment {
     private void updateUI() {
         DrugLab drugLab = DrugLab.get(getActivity());
         List<DrugModel> drugs = drugLab.getDrugList();
-
-        adapter = new DrugAdapter(drugs);
+        DrugAdapter adapter = new DrugAdapter(drugs);
         recyclerView.setAdapter(adapter);
     }
 
@@ -58,7 +57,7 @@ public class DrugListFragment extends Fragment {
         private TextView scheduledTextView;
         private DrugModel drug;
 
-        public DrugHolder(LayoutInflater inflater, ViewGroup parent) {
+        DrugHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_drug, parent, false));
 
             brandTextView = (TextView) itemView.findViewById(R.id.brand);
@@ -73,7 +72,7 @@ public class DrugListFragment extends Fragment {
             Toast.makeText(getActivity(), drug.getBrand() + " clicked", Toast.LENGTH_SHORT).show();
         }
 
-        public void bind(DrugModel drug) {
+        void bind(DrugModel drug) {
             this.drug = drug;
             brandTextView.setText(this.drug.getBrand());
             genericTextView.setText(this.drug.getGeneric());
@@ -87,7 +86,7 @@ public class DrugListFragment extends Fragment {
 
         private List<DrugModel> drugs;
 
-        public DrugAdapter(List<DrugModel> drugs) {
+        DrugAdapter(List<DrugModel> drugs) {
             this.drugs = drugs;
         }
 

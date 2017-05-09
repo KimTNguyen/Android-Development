@@ -17,17 +17,12 @@ import projects.android.nguyen.kim.pharmacyTechPractice.CommonConstants;
  * @version 3/16/2017
  *
  * Modified by Kim Nguyen on 04/09/2017
+ * Modified by Kim Nguyen on 05/09/2017
  */
 
 public class QuizLogic {
     private static final String TAG = "QuizLogic";
     private static final int NO_GENERIC_ON_SCREEN = 5;
-    private static final int GENERIC_COL_INDEX = 1;
-    private static final int SCHEDULED_COL_INDEX = 2;
-    private static final int DOSE_FORMS_COL_INDEX = 3;
-    private static final int FUNCTION_COL_INDEX = 4;
-    private static final int SIDE_EFFECTS_COL_INDEX = 5;
-    private static final int COMMENTS_COL_INDEX = 6;
 
     private DrugDbLogic logic;
 
@@ -85,12 +80,18 @@ public class QuizLogic {
     }
 
     private void setInfo(Cursor cursor) {
-        generatedDrugs.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(GENERIC_COL_INDEX));
-        doseForms.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(DOSE_FORMS_COL_INDEX));
-        scheduled.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(SCHEDULED_COL_INDEX));
-        comments.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(COMMENTS_COL_INDEX));
-        function.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(FUNCTION_COL_INDEX));
-        sideEffects.put(cursor.getString(CommonConstants.KEY_COL_INDEX), cursor.getString(SIDE_EFFECTS_COL_INDEX));
+        generatedDrugs.put(cursor.getString(CommonConstants.KEY_COL_INDEX),
+                cursor.getString(CommonConstants.GENERIC_COL_INDEX));
+        doseForms.put(cursor.getString(CommonConstants.KEY_COL_INDEX),
+                cursor.getString(CommonConstants.DOSE_FORMS_COL_INDEX));
+        scheduled.put(cursor.getString(CommonConstants.KEY_COL_INDEX),
+                cursor.getString(CommonConstants.SCHEDULED_COL_INDEX));
+        comments.put(cursor.getString(CommonConstants.KEY_COL_INDEX),
+                cursor.getString(CommonConstants.COMMENTS_COL_INDEX));
+        function.put(cursor.getString(CommonConstants.KEY_COL_INDEX),
+                cursor.getString(CommonConstants.FUNCTION_COL_INDEX));
+        sideEffects.put(cursor.getString(CommonConstants.KEY_COL_INDEX),
+                cursor.getString(CommonConstants.SIDE_EFFECTS_COL_INDEX));
     }
 
     /**
